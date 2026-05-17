@@ -7,7 +7,8 @@
 %        for Formal Argumentation" (2014)
 
 :- use_module(library(lists)).
-:- [generated_af].  % automatisch generierte Argumente und Angriffe
+:- ( current_prolog_flag(af_source, F) -> true ; F = generated_af_ukp ),
+   consult(F).
 
 % HILFSFUNKTIONEN ----------------------------------------------
 
@@ -62,7 +63,7 @@ complete(Set) :-
 %% char_fn(+In, -Out): ein Schritt der charakteristischen Funktion
 char_fn(In, Out) :-
     all_args(All),
-    findall(X, ( member(X, All), defended(X, In) ), Out).
+    findall(X, (member(X, All), defended(X, In)), Out).
 
 %% grounded_extension(-Ext): berechnet Fixpunkt ab leerer Menge
 grounded_extension(Ext) :-
@@ -90,21 +91,40 @@ stable(Set) :-
         (member(X, All), \+ member(X, Set)), attacks(Set, X)
     ).
 
+subset([], _).
+subset([H|T], Set) :-
+    member(H, Set),
+    subset(T, Set).
+
 %  8. PREFERRED EXTENSIONS ----------------------------------------------
 %  Maximale admissible Mengen (bzgl. Inklusion)
 %  Naive Enumeration via Powerset — für kleine AFs ausreichend
 
-preferred(Set) :-
-    admissible(Set),
-    msort(Set, SSet),
-    \+ ( admissible(Bigger),
-         msort(Bigger, SBigger),
-         subset(SSet, SBigger),
-         SSet \== SBigger ).
+show_preferred :-
+    all_args(All),
+    %alle admissible Sets sammeln
+    findall(SS,
+        (cf_subsets(All, S), sort(S, SS), admissible(SS)),
+        Adm),
+    sort(Adm, AdmSorted),
+    write('=== Preferred Extensions ==='), nl,
+    % Schritt 2: nur maximale ausgeben
+    forall(
+        (member(E, AdmSorted),
+         \+ (member(Bigger, AdmSorted),
+             subset(E, Bigger),
+             E \== Bigger)),
+        (write(E), nl)
+    ).
 
-%% subset/2: prüft ob jedes Element von A auch in B ist
-subset([], _).
-subset([H|T], B) :- member(H, B), subset(T, B).
+%  9. CONFLICT-FREE SUBSET GENERATOR (ersetzt powerset)
+
+cf_subsets([], []).
+cf_subsets([_|T], S) :-
+    cf_subsets(T, S).
+cf_subsets([H|T], [H|S]) :-
+    cf_subsets(T, S),
+    \+ (member(X, S), (att(H, X) ; att(X, H))).
 
 
 %  9. POWERSET-HILFSPRÄDIKAT (für Enumeration)
@@ -112,26 +132,27 @@ subset([H|T], B) :- member(H, B), subset(T, B).
 powerset([], [[]]).
 powerset([H|T], PS) :-
     powerset(T, PS1),
-    findall(S, ( member(S0, PS1), (S = S0 ; S = [H|S0]) ), PS).
+    findall(S, (member(S0, PS1), (S = S0 ; S = [H|S0])), PS).
 
 
-%  10. ABFRAGE-HELFER  (für interaktive Tests) -------------------------------
+%  10. ABFRAGE-HELFER -------------------------------
 
 %% Alle admissible Sets ausgeben
 show_admissible :-
     all_args(All),
-    powerset(All, PS),
-    write('=== Admissible Sets ==='), nl,
-    forall((member(S, PS), sort(S, SS), admissible(SS)),
-            (write(SS), nl)).
+    forall(
+        (cf_subsets(All, S), sort(S, SS), admissible(SS)),
+        (write(SS), nl)
+    ).
+    
 
 %% Alle complete Extensions ausgeben
 show_complete :-
     all_args(All),
-    powerset(All, PS),
-    write('=== Complete Extensions ==='), nl,
-    forall((member(S, PS), sort(S, SS), complete(SS)),
-            (write(SS), nl)).
+    forall(
+        (cf_subsets(All, S), sort(S, SS), complete(SS)),
+        (write(SS), nl)
+    ).
 
 %% Grounded Extension ausgeben
 show_grounded :-
@@ -144,22 +165,14 @@ show_stable :-
     all_args(All),
     powerset(All, PS),
     write('=== Stable Extensions ==='), nl,
-    forall((member(S, PS), sort(S, SS), stable(SS)),
-            (write(SS), nl)).
+    forall((member(S, PS), stable(S)),
+            (sort(S, SS), write(SS), nl)).
 
-%% Alle preferred Extensions ausgeben
-show_preferred :-
-    all_args(All),
-    powerset(All, PS),
-    write('=== Preferred Extensions ==='), nl,
-    forall( ( member(S, PS), sort(S, SS), preferred(SS) ),
-            ( write(SS), nl ) ).
 
 %% Alles auf einmal
 show_all :-
 
-    show_admissible, nl,
     show_complete,   nl,
     show_grounded,   nl,
     show_stable,     nl,
-    show_preferred.
+    show_preferred,  nl.
