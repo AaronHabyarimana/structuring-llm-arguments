@@ -1,18 +1,11 @@
 """
 compare.py  —  Freie LLM-Bewertung vs. formale Dung-Semantik
 
-Forschungsfrage:
-    Stimmt die intuitive Bewertung eines LLMs mit den formal
-    verteidigbaren Argumenten (Preferred/Grounded Extension) überein?
-
 Pipeline:
     1. AF laden (args + attacks aus .pl-Datei)
     2. Dung-Semantik via Prolog  → formale Extensions
     3. LLM bewertet dieselben Argumente frei
     4. Vergleich: Überschneidung, Abweichungen, Interpretation
-
-Aufruf:
-    python compare.py
 """
 
 import json
@@ -39,11 +32,11 @@ MODEL = "GPT OSS 120B"
 AF_FILES = ["generated_af_ukp", "generated_af_llm"]
 
 
-# ── AF laden ────────────────────────────────────────────────────
+#AF laden
 
 def load_af(af_file: str) -> tuple[list[dict], list[tuple[str, str]]]:
     """Liest arg/1 und att/2 Fakten aus einer .pl-Datei."""
-    text = (CODE_DIR / f"{af_file}.pl").read_text(encoding="utf-8")
+    text = (CODE_DIR / "output" / f"{af_file}.pl").read_text(encoding="utf-8")
     args = [
         {"id": m.group(1), "stance": m.group(2), "text": m.group(3).strip()}
         for m in re.finditer(r"arg\((\w+)\)\.\s*%\s*\[(\w+)\]\s*(.+)", text)
@@ -55,10 +48,10 @@ def load_af(af_file: str) -> tuple[list[dict], list[tuple[str, str]]]:
     return args, atts
 
 
-# ── Prolog ──────────────────────────────────────────────────────
+#Prolog
 
 def run_prolog(af_file: str, goal: str) -> str:
-    init = f"set_prolog_flag(af_source,{af_file}),consult('prolog.pl'),{goal},halt."
+    init = f"set_prolog_flag(af_source,'output/{af_file}'),consult('prolog.pl'),{goal},halt."
     r = subprocess.run(
         [SWIPL, "-g", init, "-t", "halt"],
         capture_output=True, text=True,
@@ -83,7 +76,7 @@ def parse_sets(output: str, header: str) -> list[list[str]]:
     return sets
 
 
-# ── Freie LLM-Bewertung ─────────────────────────────────────────
+#Freie LLM Bewertung
 
 FREE_EVAL_PROMPT = """You are a debate analyst evaluating arguments on "{topic}".
 
@@ -130,7 +123,7 @@ def llm_free_eval(args: list[dict], topic: str) -> list[str]:
     return []
 
 
-# ── Vergleich ────────────────────────────────────────────────────
+#Vergleiche
 
 def jaccard(a: set, b: set) -> float:
     return len(a & b) / len(a | b) if a | b else 1.0
@@ -153,7 +146,6 @@ def compare(formal: set[str], llm: set[str]) -> None:
     print(f"  Recall    (Formal→LLM)  : {recall:.2f}")
 
 
-# ── Hauptprogramm ────────────────────────────────────────────────
 
 if __name__ == "__main__":
     sep = "=" * 60

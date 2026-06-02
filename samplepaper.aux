@@ -1,0 +1,61 @@
+\relax 
+\citation{dung1995}
+\citation{pollock1992}
+\citation{dung1995}
+\@writefile{toc}{\contentsline {title}{Structuring LLM Arguments:\unskip \ \ignorespaces  A Typed Attack Candidate Approach\unskip \ \ignorespaces  for Dung Abstract Argumentation Frameworks}{1}{}\protected@file@percent }
+\@writefile{toc}{\authcount {1}}
+\@writefile{toc}{\contentsline {author}{A. Habyarimana}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
+\citation{pollock1992}
+\citation{modgil2014}
+\citation{stab2014}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Dung Abstract Argumentation Frameworks}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Attack Typology}{2}{}\protected@file@percent }
+\newlabel{sec:taxonomy}{{2.2}{2}{}{subsection.2.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces UKP corpus statistics for \emph  {Nuclear Energy}.}}{3}{}\protected@file@percent }
+\newlabel{tab:ukp}{{1}{3}{}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Dataset: UKP Sentential Argument Mining Corpus}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Pipeline}{3}{}\protected@file@percent }
+\newlabel{sec:pipeline}{{3}{3}{}{section.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Full pipeline from raw text to formal Dung extensions.}}{3}{}\protected@file@percent }
+\newlabel{fig:pipeline}{{1}{3}{}{figure.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Argument Atomisation}}{4}{}\protected@file@percent }
+\newlabel{alg:atomise}{{1}{4}{}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Step 0a/b: Argument Acquisition}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{UKP source.}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{LLM source.}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Step 0c: Argument Atomisation}{4}{}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Typed Attack Candidate Extraction}}{5}{}\protected@file@percent }
+\newlabel{alg:extract}{{2}{5}{}{algorithm.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Step 1: Typed Attack Candidate Extraction}{5}{}\protected@file@percent }
+\newlabel{sec:extraction}{{3.3}{5}{}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Batching.}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why typed candidates?}{5}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Example filter outcomes from the nuclear energy run (10 UKP arguments, 30 atoms after atomisation).}}{6}{}\protected@file@percent }
+\newlabel{tab:filter}{{2}{6}{}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Step 2: Confidence Filtering and Verification}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Step 3a: Collapsing to Dung}{6}{}\protected@file@percent }
+\newlabel{sec:collapsing}{{3.5}{6}{}{subsection.3.5}{}}
+\citation{cerutti2014}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Step 3b: Prolog Solver}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Example Run: Nuclear Energy}{7}{}\protected@file@percent }
+\newlabel{sec:example}{{4}{7}{}{section.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Attack type distribution — nuclear energy run (30 atoms, 425 evaluated pairs).}}{8}{}\protected@file@percent }
+\newlabel{tab:types}{{3}{8}{}{table.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Attack statistics.}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formal result.}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Design Decisions and Open Questions}{8}{}\protected@file@percent }
+\newlabel{sec:design}{{5}{8}{}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{No cross-stance filter.}{8}{}\protected@file@percent }
+\bibcite{dung1995}{1}
+\bibcite{pollock1992}{2}
+\bibcite{modgil2014}{3}
+\bibcite{cerutti2014}{4}
+\bibcite{stab2014}{5}
+\bibcite{kramer2021}{6}
+\bibcite{alfano2026}{7}
+\@writefile{toc}{\contentsline {paragraph}{Confidence calibration.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Batch size vs.\ fallback rate.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scalability.}{9}{}\protected@file@percent }
+\gdef \@abspage@last{9}
