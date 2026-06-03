@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex samplepaper"] 1780425734.16078 "samplepaper.aux" "samplepaper.bbl" "samplepaper" 1780425741.20059 0
+["bibtex samplepaper"] 1780486354.26281 "samplepaper.aux" "samplepaper.bbl" "samplepaper" 1780486361.49697 0
   "./references.bib" 1780425215 1895 ae15548f9b6d3031f96714e722737679 ""
   "./splncs04.bst" 1780081944 32146 aadf770ded437d161532035219ea6f45 ""
-  "samplepaper.aux" 1780425738 5736 8c05f2e4a53cd6eee34c2838a21d39cf "pdflatex"
+  "samplepaper.aux" 1780486358 5736 8c05f2e4a53cd6eee34c2838a21d39cf "pdflatex"
   (generated)
   "samplepaper.bbl"
   "samplepaper.blg"
   (rewritten before read)
-["pdflatex"] 1780425735.12 "c:/Users/habya/OneDrive/Dokumente/Aaron/Uni/Bachelorarbeit/Bachelorarbeit-1/IJCLR/samplepaper.tex" "samplepaper.pdf" "samplepaper" 1780425741.20232 0
+["pdflatex"] 1780486355.37945 "c:/Users/habya/OneDrive/Dokumente/Aaron/Uni/Bachelorarbeit/Bachelorarbeit-1/IJCLR/samplepaper.tex" "samplepaper.pdf" "samplepaper" 1780486361.49873 0
   "C:/Users/habya/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1780336945 486070 6c97f56df703a8bce18f5ae706f3f9f3 ""
   "C:/Users/habya/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx0900.pk" 1780082010 22504 d5d671c275a6b5b706712d83b32de196 ""
   "C:/Users/habya/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1750032568 25420 8032dbb422338d36a176908269932a96 ""
@@ -209,12 +209,12 @@
   "C:/Users/habya/AppData/Local/Programs/MiKTeX/tex/latex/tools/multicol.sty" 1730400552 32879 f4cfa2226c995da5b04a89ee47abf182 ""
   "C:/Users/habya/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/habya/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/habya/OneDrive/Dokumente/Aaron/Uni/Bachelorarbeit/Bachelorarbeit-1/IJCLR/samplepaper.tex" 1780425707 22821 12219965c7f228b67e15353091ddf667 ""
+  "c:/Users/habya/OneDrive/Dokumente/Aaron/Uni/Bachelorarbeit/Bachelorarbeit-1/IJCLR/samplepaper.tex" 1780486336 22939 d1b89a00a393c8f10ccc220869d6b65b ""
   "llncs.cls" 1780081944 43402 5fb5a2dc40571aa40f3d199c00cbb986 ""
-  "samplepaper.aux" 1780425738 5736 8c05f2e4a53cd6eee34c2838a21d39cf "pdflatex"
-  "samplepaper.bbl" 1780425734 1103 22367c5ad446d6277a57efe9a44ecdc3 "bibtex samplepaper"
-  "samplepaper.out" 1780425738 594 2deaeac46e202fb992d4916de096356f "pdflatex"
-  "samplepaper.tex" 1780425707 22821 12219965c7f228b67e15353091ddf667 ""
+  "samplepaper.aux" 1780486358 5736 8c05f2e4a53cd6eee34c2838a21d39cf "pdflatex"
+  "samplepaper.bbl" 1780486355 1103 22367c5ad446d6277a57efe9a44ecdc3 "bibtex samplepaper"
+  "samplepaper.out" 1780486358 594 2deaeac46e202fb992d4916de096356f "pdflatex"
+  "samplepaper.tex" 1780486336 22939 d1b89a00a393c8f10ccc220869d6b65b ""
   (generated)
   "samplepaper.aux"
   "samplepaper.log"

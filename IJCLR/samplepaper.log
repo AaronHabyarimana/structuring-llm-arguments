@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.12)  2 JUN 2026 20:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.12)  3 JUN 2026 13:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -706,7 +706,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\\' on input line 56.
 
 
-Overfull \hbox (7.43321pt too wide) in paragraph at lines 58--71
+Overfull \hbox (7.43321pt too wide) in paragraph at lines 58--68
 \T1/cmr/m/n/9 treat-ing at-tack de-tec-tion as a bi-nary clas-si-fi-ca-tion task, the sys-tem prompts
  []
 
@@ -715,7 +715,7 @@ Overfull \hbox (7.43321pt too wide) in paragraph at lines 58--71
 [1
 
 {C:/Users/habya/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Overfull \hbox (24.39684pt too wide) in paragraph at lines 118--120
+Overfull \hbox (24.39684pt too wide) in paragraph at lines 115--117
 []\T1/cmr/bx/n/10 Preferred ex-ten-sions: \T1/cmr/m/n/10 max-i-mal ad-mis-si-ble sets (conflict-free and self-defending).
  []
 
@@ -727,14 +727,14 @@ Overfull \hbox (24.39684pt too wide) in paragraph at lines 118--120
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.248 
+l.245 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.248 
+l.245 
       ]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 282.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 279.
 
 
 [4]
@@ -745,10 +745,10 @@ Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on inp
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.432 
+l.434 
       ]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 436.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 438.
 
 
 [7]
@@ -757,8 +757,8 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.538 \paragraph
-                {Confidence calibration.} LLM confidence scores are known to be] (samplepaper.bbl)
+l.544 
+      ] (samplepaper.bbl)
 
 [9] (samplepaper.aux)
  ***********
@@ -771,15 +771,15 @@ Package rerunfilecheck Info: File `samplepaper.out' has not changed.
 Here is how much of TeX's memory you used:
  24453 strings out of 473523
  448841 string characters out of 5714630
- 944712 words of memory out of 5000000
+ 945712 words of memory out of 5000000
  47193 multiletter control sequences out of 15000+600000
  578998 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,10n,87p,722b,1190s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecit1000.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0900.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti0900.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0900.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\habya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/habya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on samplepaper.pdf (9 pages, 365471 bytes).
+Output written on samplepaper.pdf (9 pages, 365866 bytes).
 PDF statistics:
- 839 PDF objects out of 1000 (max. 8388607)
+ 840 PDF objects out of 1000 (max. 8388607)
  83 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

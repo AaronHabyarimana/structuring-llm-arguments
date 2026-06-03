@@ -64,7 +64,10 @@ type (rebuttal, undercutting, or undermining), a numerical confidence
 score (used as a routing signal, not a calibrated probability), and a natural-language justification. A two-stage confidence filter
 selects candidates; accepted candidates are collapsed to binary Dung
 \texttt{att/2} facts and evaluated in Prolog under grounded, preferred,
-and stable semantics.
+and stable semantics. The document is intended as a technical reference
+for the supervisors and describes the pipeline in detail, including
+pseudocode, design decisions, and example outputs from a run on the UKP
+nuclear energy debate corpus.
 
 \keywords{Argument Mining \and Dung AAF \and Large Language Models
 \and Attack Typology \and UKP Corpus}

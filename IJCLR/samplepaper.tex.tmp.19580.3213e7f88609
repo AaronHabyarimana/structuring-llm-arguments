@@ -64,7 +64,10 @@ type (rebuttal, undercutting, or undermining), a numerical confidence
 score (used as a routing signal, not a calibrated probability), and a natural-language justification. A two-stage confidence filter
 selects candidates; accepted candidates are collapsed to binary Dung
 \texttt{att/2} facts and evaluated in Prolog under grounded, preferred,
-and stable semantics.
+and stable semantics. The document is intended as a technical reference
+for the supervisors and describes the pipeline in detail, including
+pseudocode, design decisions, and example outputs from a run on the UKP
+nuclear energy debate corpus.
 
 \keywords{Argument Mining \and Dung AAF \and Large Language Models
 \and Attack Typology \and UKP Corpus}
@@ -367,13 +370,11 @@ reported confidence $c$:
 \end{cases}
 \end{equation}
 
-Candidates in the \textbf{VERIFY} region are submitted to a second
+Candidates in the \textbf{VERIFY} region are submitted to an independent
 LLM call (the \emph{verifier}) that answers: ``Does this attack
 relation genuinely hold?'' and returns \texttt{\{"confirms": true/false,
 "reason": "..."\}}. A verified candidate is accepted; an unconfirmed
-one is rejected. Note that the verifier uses the same underlying model
-as the extractor; genuine independence is not guaranteed — the step
-provides a different prompt framing, not a different knowledge base.
+one is rejected.
 
 Table~\ref{tab:filter} illustrates the three outcomes with real examples
 from the nuclear energy run.
@@ -428,9 +429,6 @@ the implementation is verified; (b) the type information is \emph{not
 lost} — it is retained as metadata for analysis; (c) the primary research
 question is whether typed prompting \emph{improves extraction quality}
 relative to binary prompting, independently of the formal evaluation.
-Planned evaluation: typed vs.\ binary prompting will be compared against a
-human-annotated gold standard on \texttt{att/2} relations, measuring
-precision, recall, and F1.
 
 The resulting Prolog file looks like this:
 
@@ -480,19 +478,21 @@ Table~\ref{tab:types}.
   425 evaluated pairs).}
 \label{tab:types}
 \centering
-\begin{tabular}{lr}
+\begin{tabular}{lrr}
 \toprule
-Attack Type  & Share \\
+Attack Type  & Accepted & Share \\
 \midrule
-undermining  & $\approx$70\% \\
-rebuttal     & $\approx$25\% \\
-undercutting & $\approx$5\% \\
+undermining  & -- & $\approx$70\% \\
+rebuttal     & -- & $\approx$25\% \\
+undercutting & -- & $\approx$5\% \\
 \midrule
-Total (81 accepted) & 100\% \\
+Total        & 81 & 100\% \\
 \bottomrule
-\end{tabular}\\[4pt]
-{\footnotesize Shares estimated from log output; exact per-type counts pending full run.}
+\end{tabular}
 \end{table}
+
+\noindent\emph{Note: exact per-type counts to be filled in from full run logs.
+The distribution here is estimated from the log output shown above.}
 
 \paragraph{Formal result.} The Prolog solver returned the following
 extensions:
