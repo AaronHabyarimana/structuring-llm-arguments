@@ -129,8 +129,8 @@ def run_pipeline(
     """
     print("\n── Argumente laden ─────────────────────────────")
     if source == "ukp":
-        print(f"  Lade UKP-Daten ({topic_file}, split=test, limit=10) ...")
-        args = load_ukp(topic_file, split="test", limit=50)
+        print(f"  Lade UKP-Daten ({topic_file}, split=test, limit=15) ...")
+        args = load_ukp(topic_file, split="test", limit=15)
 
         print("\n── Argumente atomisieren ───────────────────────────")
         args = atomize_arguments(args, topic_label)
@@ -174,10 +174,10 @@ def run_chat(
         f"Attack relations:\n{att_lines}\n\n"
         f"Formal analysis result:\n"
         f"{json.dumps(formal_result, indent=2, ensure_ascii=False)}\n\n"
-        "Give a short structured analysis (max 200 words):\n"
+        "Give a short structured analysis:\n"
         "1. Formal result: list the accepted arguments (grounded/preferred extensions) "
         "with a one-sentence description of what each argument says.\n"
-        "2. Key attacks: briefly explain 2-3 of the most important attack relations "
+        "2. All attacks: briefly explain the attack relations "
         "in plain language — what claim challenges what.\n"
         "3. One-sentence conclusion: which side comes out stronger and why."
     )

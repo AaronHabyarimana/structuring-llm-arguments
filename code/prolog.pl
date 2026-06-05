@@ -7,7 +7,7 @@
 %        for Formal Argumentation" (2014)
 
 :- use_module(library(lists)).
-:- ( current_prolog_flag(af_source, F) -> true ; F = generated_af_ukp ),
+:- ( current_prolog_flag(af_source, F) -> true ; F = 'output/generated_af_ukp'),
    consult(F).
 
 % CACHE -------------------------------------------------------

@@ -537,12 +537,12 @@ def to_prolog(arguments: list[dict], attacks: list[dict], topic: str) -> str:
 # HAUPTPROGRAMM
 
 if __name__ == "__main__":
-    topic_file  = "nuclear_energy"
-    topic_label = "Nuclear Energy"
+    topic_file  = "nuclear_energy"  
+    topic_label = "nuclear energy" 
 
     if SOURCE == "ukp":
         print(f"=== Schritt 0a: UKP-Daten laden (topic={topic_file}, split=test, limit=10) ===")
-        args = load_ukp(topic_file, split="test", limit=10)
+        args = load_ukp(topic_file, split="test", limit=15)
 
         for a in args:
             print(f"  [{a['id']}] {a['stance']:3}  {a['text'][:70]}")
