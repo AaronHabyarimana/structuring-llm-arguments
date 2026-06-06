@@ -39,12 +39,38 @@ CONFIDENCE_ACCEPT = 70    # ab hier: direkt akzeptieren, kein Verify nötig
 CONFIDENCE_VERIFY = 50    # ab hier:Verify-Schritt, bei Zustimmung akzeptieren
 
 MAX_WORKERS   = 2                # parallele API-Calls — Rate-Limit der Uni-API
-BATCH_SIZE    = 30                 # Paare pro Classify-Call
+BATCH_SIZE    = 10                 # Paare pro Classify-Call
 RETRY_DELAYS  = (2, 5, 12)       #Wartezeiten (s) bei 429, dann aufgeben
 
 SOURCE = "ukp"  # "ukp" → load_ukp  |  "llm" → extract_arguments
 
+# Default-Parameter für UKP-Läufe (zentral, damit run_config.json sie spiegeln kann)
+UKP_SPLIT    = "test"
+UKP_LIMIT    = 15
+UKP_BALANCED = True
+UKP_SEED     = 10
+ATOMIZE      = True
+
+# Prompt-Versionen — für reproduzierbare Prompt-Vergleiche in den Logs
+PROMPT_VERSIONS = {
+    "atomize":         "atomize_v1",
+    "classify_batch":  "classify_batch_v1",
+    "classify_single": "classify_single_v1",
+    "verify":          "verify_v1",
+    "generate":        "generate_v1",
+}
+
 UKP_DIR = Path(__file__).parent.parent / "UKP_sentential_argument_mining" / "data"
+
+# Logging-Hook: optionaler RunLogger (run_logger.RunLogger). Wenn None, verhält
+# sich die Pipeline exakt wie zuvor (keine Verhaltensänderung).
+_RUN_LOGGER = None
+
+
+def set_run_logger(logger) -> None:
+    """Setzt (oder entfernt mit None) den aktiven RunLogger für LLM-/Pair-Logging."""
+    global _RUN_LOGGER
+    _RUN_LOGGER = logger
 
 
 # SCHRITT 0a: UKP-Daten laden
@@ -105,15 +131,28 @@ def extract_arguments(topic: str, n_pro: int = 5, n_con: int = 5) -> list[dict]:
     topic: Thema der Debatte, z.B. "Nuclear Energy"
     n_pro/n_con: Anzahl Pro-/Contra-Argumente
     """
+    gen_prompt = LLM_GENERATE_PROMPT.format(topic=topic, n_pro=n_pro, n_con=n_con)
+    t0 = time.time()
     response = client.chat.completions.create(
         model=MODEL_EXTRACT,
-        messages=[{"role": "user", "content": LLM_GENERATE_PROMPT.format(
-            topic=topic, n_pro=n_pro, n_con=n_con
-        )}],
-        temperature=0.7,
+        messages=[{"role": "user", "content": gen_prompt}],
+        temperature=0,
         max_tokens=2048,
     )
     content = response.choices[0].message.content
+    if _RUN_LOGGER is not None:
+        usage = None
+        if getattr(response, "usage", None) is not None:
+            try:
+                usage = response.usage.model_dump()
+            except Exception:
+                usage = None
+        _RUN_LOGGER.log_call(
+            phase="generate", prompt=gen_prompt, raw_response=content,
+            latency_s=time.time() - t0, model=MODEL_EXTRACT,
+            prompt_version=PROMPT_VERSIONS.get("generate"), temperature=0,
+            max_tokens=2048, usage=usage,
+        )
     if not content:
         return []
     cleaned = re.sub(r"<think(?:ing)?>.*?</think(?:ing)?>", "", content, flags=re.DOTALL)
@@ -168,7 +207,7 @@ def _atomize_one(a: dict, topic: str) -> list[dict]:
     """Atomisiert ein einzelnes Argument (für parallele Ausführung)."""
     content = _llm(ATOMIZE_PROMPT.format(
         topic=topic, id=a["id"], stance=a["stance"], text=a["text"]
-    ))
+    ), phase="atomize", input_ids=[a["id"]])
     if not content:
         return [a]
     raw = re.sub(r"```(?:json)?\s*|\s*```", "", content.strip()).strip()
@@ -182,13 +221,24 @@ def _atomize_one(a: dict, topic: str) -> list[dict]:
 
 
 def atomize_arguments(arguments: list[dict], topic: str) -> list[dict]:
+    # Original-Texte je Eingabe-ID merken, damit arguments.jsonl die Herkunft
+    # eines atomaren Arguments (original_text, atomized_from) dokumentieren kann.
+    originals = {a["id"]: a["text"] for a in arguments}
+
     slot: dict[int, list[dict]] = {}
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         futures = {ex.submit(_atomize_one, a, topic): i for i, a in enumerate(arguments)}
         for future in as_completed(futures):
             slot[futures[future]] = future.result()
     flat = [atom for i in sorted(slot) for atom in slot[i]]
-    return _fix_atom_ids(flat)
+    fixed = _fix_atom_ids(flat)
+
+    # Herkunftsfelder anhängen (base_id stellt Verbindung zum Original her).
+    for atom in fixed:
+        base = _base_id(atom["id"])
+        atom["atomized_from"] = base
+        atom.setdefault("original_text", originals.get(base, atom["text"]))
+    return fixed
 
 
 def _base_id(id_: str) -> str:
@@ -288,11 +338,37 @@ Respond ONLY with JSON, no markdown:
 {{"confirms": true, "reason": "one sentence"}}"""
 
 
-def _llm(prompt: str, max_tokens: int = 1024) -> str | None:
+def _log_call(phase, prompt, raw, latency, *, input_ids=None, usage=None,
+              error=None, max_tokens=None) -> None:
+    """Leitet einen LLM-Call an den aktiven RunLogger weiter (no-op ohne Logger)."""
+    if _RUN_LOGGER is None:
+        return
+    _RUN_LOGGER.log_call(
+        phase=phase,
+        prompt=prompt,
+        raw_response=raw,
+        latency_s=latency,
+        model=MODEL_ATTACKS,
+        prompt_version=PROMPT_VERSIONS.get(phase),
+        input_ids=input_ids,
+        temperature=0,
+        max_tokens=max_tokens,
+        usage=usage,
+        error=error,
+    )
+
+
+def _llm(prompt: str, max_tokens: int = 1024,
+         *, phase: str = "unknown", input_ids: list | None = None) -> str | None:
+    """
+    Zentraler LLM-Wrapper mit Retry. Loggt jeden einzelnen Versuch (Erfolg wie
+    Fehler) über den optionalen RunLogger. Verhalten ohne Logger unverändert.
+    """
     for delay in (None, *RETRY_DELAYS):
         if delay:
             # Jitter verhindert dass mehrere Threads gleichzeitig wiederholen
             time.sleep(delay + random.uniform(0, delay * 0.5))
+        t0 = time.time()
         try:
             response = client.chat.completions.create(
                 model=MODEL_ATTACKS,
@@ -300,13 +376,28 @@ def _llm(prompt: str, max_tokens: int = 1024) -> str | None:
                 temperature=0,
                 max_tokens=max_tokens,
             )
-            return response.choices[0].message.content
+            content = response.choices[0].message.content
+            usage = None
+            if getattr(response, "usage", None) is not None:
+                try:
+                    usage = response.usage.model_dump()
+                except Exception:
+                    usage = None
+            _log_call(phase, prompt, content, time.time() - t0,
+                      input_ids=input_ids, usage=usage, max_tokens=max_tokens)
+            return content
         except RateLimitError:
-            pass
+            _log_call(phase, prompt, None, time.time() - t0,
+                      input_ids=input_ids, error="RateLimitError", max_tokens=max_tokens)
         except BadRequestError as e:
             if "Rate limit exceeded" in str(e):
-                pass
+                _log_call(phase, prompt, None, time.time() - t0,
+                          input_ids=input_ids, error="BadRequestError: rate limit",
+                          max_tokens=max_tokens)
             else:
+                _log_call(phase, prompt, None, time.time() - t0,
+                          input_ids=input_ids, error=f"BadRequestError: {e}",
+                          max_tokens=max_tokens)
                 raise
     return None
 
@@ -353,8 +444,10 @@ def _classify_batch(pairs: list[tuple[dict, dict]], topic: str) -> dict[tuple, d
     )
 
     # Batch-Versuch (max 2 Versuche)
+    batch_ids = [pid for a, b in pairs for pid in (a["id"], b["id"])]
     for attempt in range(2):
-        content = _llm(prompt, max_tokens=300 * len(pairs))
+        content = _llm(prompt, max_tokens=300 * len(pairs),
+                       phase="classify_batch", input_ids=batch_ids)
         if not content:
             continue
         parsed = _parse_json(content)
@@ -379,7 +472,7 @@ def _classify_batch(pairs: list[tuple[dict, dict]], topic: str) -> dict[tuple, d
                 topic=topic,
                 id_a=a["id"], stance_a=a["stance"], text_a=a["text"],
                 id_b=b["id"], stance_b=b["stance"], text_b=b["text"],
-            ))
+            ), phase="classify_single", input_ids=[a["id"], b["id"]])
             if content:
                 result = _parse_json(content)
                 if isinstance(result, dict):
@@ -388,7 +481,8 @@ def _classify_batch(pairs: list[tuple[dict, dict]], topic: str) -> dict[tuple, d
     return out
 
 
-def _verify_pair(a: dict, b: dict, direction: str, topic: str) -> bool:
+def _verify_pair(a: dict, b: dict, direction: str, topic: str) -> tuple[bool, str]:
+    """Rückgabe: (confirms, reason) — reason für pair_decisions.jsonl erhalten."""
     claimed = {
         "A_ATTACKS_B": f"[{a['id']}] attacks [{b['id']}]",
         "B_ATTACKS_A": f"[{b['id']}] attacks [{a['id']}]"
@@ -398,29 +492,77 @@ def _verify_pair(a: dict, b: dict, direction: str, topic: str) -> bool:
         id_a=a["id"], stance_a=a["stance"], text_a=a["text"],
         id_b=b["id"], stance_b=b["stance"], text_b=b["text"],
         claimed=claimed,
-    ))
+    ), phase="verify", input_ids=[a["id"], b["id"]])
     if not content:
-        return False
+        return False, ""
     result = _parse_json(content)
-    return bool(result.get("confirms", False)) if result else False
+    if not result:
+        return False, ""
+    return bool(result.get("confirms", False)), result.get("reason", "")
 
 
 def _register_attacks(a: dict, b: dict, direction: str,
                       attack_type: str, confidence: int, reason: str,
-                      seen: set, result: list) -> None:
-    """Trägt akzeptierte Attack-Kandidaten in seen/result ein."""
-    if direction in ("A_ATTACKS_B"):
+                      seen: set, result: list, outcome: str = "accept") -> None:
+    """Trägt akzeptierte Attack-Kandidaten in seen/result ein (inkl. outcome)."""
+    if direction == "A_ATTACKS_B":
         key = (a["id"], b["id"])
         if key not in seen:
             seen.add(key)
             result.append({"attacker": a["id"], "target": b["id"],
-                           "type": attack_type, "confidence": confidence, "reason": reason})
-    if direction in ("B_ATTACKS_A"):
+                           "type": attack_type, "confidence": confidence,
+                           "reason": reason, "outcome": outcome})
+    if direction == "B_ATTACKS_A":
         key = (b["id"], a["id"])
         if key not in seen:
             seen.add(key)
             result.append({"attacker": b["id"], "target": a["id"],
-                           "type": attack_type, "confidence": confidence, "reason": reason})
+                           "type": attack_type, "confidence": confidence,
+                           "reason": reason, "outcome": outcome})
+
+
+def _log_pair_decision(a: dict, b: dict, cl: dict | None, outcome: str,
+                       verify_info: tuple | None = None) -> None:
+    """
+    Loggt EINE Paarentscheidung in pair_decisions.jsonl (auch NONE/skip/reject/
+    parse_error). Bei direction=NONE sind attacker/target = None.
+    """
+    if _RUN_LOGGER is None:
+        return
+    cl = cl or {}
+    direction   = cl.get("direction", "NONE")
+    attack_type = cl.get("attack_type", "NONE")
+    confidence  = int(cl.get("confidence", 0) or 0)
+    reason      = cl.get("reason", "")
+
+    if direction == "A_ATTACKS_B":
+        attacker, target = a["id"], b["id"]
+    elif direction == "B_ATTACKS_A":
+        attacker, target = b["id"], a["id"]
+    else:
+        attacker, target = None, None
+
+    verified_bool = bool(verify_info[0]) if verify_info else None
+    verify_reason = verify_info[1] if verify_info else None
+
+    _RUN_LOGGER.log_pair_decision({
+        "pair":        f"{a['id']}:{b['id']}",
+        "attacker":    attacker,
+        "target":      target,
+        "id_a":        a["id"],
+        "id_b":        b["id"],
+        "stance_a":    a["stance"],
+        "stance_b":    b["stance"],
+        "direction":   direction,
+        "attack_type": attack_type,
+        "confidence":  confidence,
+        "reason":      reason,
+        "outcome":     outcome,
+        "verified":    verified_bool,
+        "verify_reason": verify_reason,
+        "same_stance": a["stance"] == b["stance"],
+        "same_base":   _base_id(a["id"]) == _base_id(b["id"]),
+    })
 
 
 def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
@@ -465,7 +607,7 @@ def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
         if cl and CONFIDENCE_VERIFY <= int(cl.get("confidence", 0)) < CONFIDENCE_ACCEPT
         and cl.get("direction", "NONE") != "NONE"
     ]
-    verified: dict[tuple, bool] = {}
+    verified: dict[tuple, tuple[bool, str]] = {}
     if to_verify:
         with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
             futures_v = {
@@ -482,6 +624,7 @@ def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
     for (aid, bid), (a, b, cl) in classify.items():
         if not cl:
             print(f"  [ERROR]  {aid}↔{bid} kein JSON")
+            _log_pair_decision(a, b, None, "parse_error")
             continue
 
         direction   = cl.get("direction", "NONE")
@@ -490,16 +633,33 @@ def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
         reason      = cl.get("reason", "")
         print(f"  [PAIR]   {aid}↔{bid} dir={direction} type={attack_type} conf={confidence}  '{reason}'")
 
+        verify_info = verified.get((aid, bid))  # (bool, reason) oder None
+
         if direction == "NONE" or confidence < CONFIDENCE_VERIFY:
             print(f"  └─ SKIP (unter Threshold)")
+            _log_pair_decision(a, b, cl, "skip")
         elif confidence >= CONFIDENCE_ACCEPT:
-            _register_attacks(a, b, direction, attack_type, confidence, reason, seen, result)
+            _register_attacks(a, b, direction, attack_type, confidence, reason,
+                              seen, result, outcome="accept")
             print(f"  └─ ACCEPT (conf≥{CONFIDENCE_ACCEPT})")
-        elif verified.get((aid, bid), False):
-            _register_attacks(a, b, direction, attack_type, confidence, reason, seen, result)
+            _log_pair_decision(a, b, cl, "accept")
+        elif verify_info and verify_info[0]:
+            _register_attacks(a, b, direction, attack_type, confidence, reason,
+                              seen, result, outcome="verify-accept")
             print(f"  └─ ACCEPT nach Verify")
+            _log_pair_decision(a, b, cl, "verify-accept", verify_info)
         else:
             print(f"  └─ REJECT (Verify verneint)")
+            _log_pair_decision(a, b, cl, "verify-reject", verify_info)
+
+    # attacks.jsonl: akzeptierte Angriffe als gefilterte Kantenliste
+    if _RUN_LOGGER is not None:
+        for atk in result:
+            _RUN_LOGGER.log_attack({
+                "attacker": atk["attacker"], "target": atk["target"],
+                "type": atk["type"], "confidence": atk["confidence"],
+                "reason": atk["reason"], "outcome": atk.get("outcome", "accept"),
+            })
 
     return result
 

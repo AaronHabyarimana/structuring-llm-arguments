@@ -16,6 +16,9 @@ Beenden: 'exit', 'quit' oder Ctrl+C
 import json
 import os
 import sys
+import time
+from datetime import datetime
+from pathlib import Path
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
@@ -23,8 +26,15 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from extract import load_ukp, extract_arguments, atomize_arguments, extract_attacks
+import extract
+from extract import (
+    load_ukp, extract_arguments, atomize_arguments, extract_attacks, to_prolog,
+)
 from af_tool import TOOL_DEFINITION, handle_tool_call, solve_af
+from run_logger import (
+    RunLogger, RUNS_DIR, generate_run_id, slugify,
+    compute_graph_stats, build_report,
+)
 
 load_dotenv()
 
@@ -120,40 +130,161 @@ def _pick_topic() -> tuple[str, str, str]:
     return topic, topic, "llm"
 
 
+def _build_config(topic_file: str, topic_label: str, source: str, run_id: str) -> dict:
+    """Baut run_config.json aus den tatsächlichen Konstanten des Codes."""
+    ukp = source == "ukp"
+    return {
+        "run_id": run_id,
+        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "topic_file": topic_file,
+        "topic_label": topic_label,
+        "source": source,
+        "split": extract.UKP_SPLIT if ukp else None,
+        "limit": extract.UKP_LIMIT if ukp else 20,
+        "balanced": extract.UKP_BALANCED if ukp else None,
+        "seed": extract.UKP_SEED if ukp else None,
+        "atomize": extract.ATOMIZE if ukp else False,
+        "batch_size": extract.BATCH_SIZE,
+        "max_workers": extract.MAX_WORKERS,
+        "confidence_accept": extract.CONFIDENCE_ACCEPT,
+        "confidence_verify": extract.CONFIDENCE_VERIFY,
+        "model_extract": extract.MODEL_EXTRACT,
+        "model_attacks": extract.MODEL_ATTACKS,
+        "prompt_versions": extract.PROMPT_VERSIONS,
+    }
+
+
+def _log_arguments(logger: RunLogger, args: list[dict], config: dict) -> None:
+    """Schreibt arguments.jsonl nach finaler Argumentvorbereitung."""
+    for a in args:
+        logger.log_argument({
+            "id": a["id"],
+            "base_id": extract._base_id(a["id"]),
+            "source": config["source"],
+            "topic": config["topic_file"],
+            "split": config["split"],
+            "stance": a["stance"],
+            "text": a["text"],
+            "original_text": a.get("original_text", a["text"]),
+            "atomized_from": a.get("atomized_from", a["id"]),
+        })
+
+
 def run_pipeline(
-    topic_file: str, topic_label: str, source: str
+    topic_file: str, topic_label: str, source: str, enable_logging: bool = True,
 ) -> tuple[list[dict], list[dict], dict]:
     """
     Vollständige Pipeline: Argumente → Atomisieren → Angriffe → Formale Extensions.
-    Rückgabe: (arguments, attacks, formal_result)
+    Rückgabe: (arguments, attacks, formal_result) — abwärtskompatibel.
+
+    enable_logging=True (Default): legt output/runs/<run_id>/ an und schreibt alle
+    Artefakte (run_config, arguments, calls, pair_decisions, attacks, .pl, results,
+    graph_stats, runtime, report). enable_logging=False → altes Verhalten.
     """
-    print("\n── Argumente laden ─────────────────────────────")
-    if source == "ukp":
-        print(f"  Lade UKP-Daten ({topic_file}, split=test, limit=15) ...")
-        args = load_ukp(topic_file, split="test", limit=15)
+    logger = None
+    if enable_logging:
+        seed = extract.UKP_SEED if source == "ukp" else None
+        run_id = generate_run_id(topic_file, source, seed)
+        run_dir = RUNS_DIR / run_id
+        logger = RunLogger(run_id, run_dir)
+        config = _build_config(topic_file, topic_label, source, run_id)
+        logger.write_json("run_config.json", config)
+        extract.set_run_logger(logger)
+        print(f"  [LOG] Run-Ordner: {run_dir}")
 
-        print("\n── Argumente atomisieren ───────────────────────────")
-        args = atomize_arguments(args, topic_label)
-        print(f"  {len(args)} atomare Argumente")
-    else:
-        print(f"  Generiere Argumente per LLM (10 pro + 10 con) ...")
-        args = extract_arguments(topic_label, n_pro=10, n_con=10)
-    print(f"  {len(args)} Argumente geladen")
+    runtime: dict[str, float] = {}
+    t_start = time.time()
+    try:
+        print("\n── Argumente laden ─────────────────────────────")
+        t0 = time.time()
+        if source == "ukp":
+            print(f"  Lade UKP-Daten ({topic_file}, split={extract.UKP_SPLIT}, "
+                  f"limit={extract.UKP_LIMIT}) ...")
+            args = load_ukp(topic_file, split=extract.UKP_SPLIT,
+                            limit=extract.UKP_LIMIT, balanced=extract.UKP_BALANCED,
+                            seed=extract.UKP_SEED)
+            n_before = len(args)
+            runtime["load_arguments"] = round(time.time() - t0, 3)
 
-    print("\n── Angriffe erkennen ─────────────────────")
-    attacks = extract_attacks(args, topic=topic_label)
-    print(f"  {len(attacks)} Angriffs-Relationen erkannt")
+            print("\n── Argumente atomisieren ───────────────────────────")
+            t0 = time.time()
+            args = atomize_arguments(args, topic_label)
+            runtime["atomize"] = round(time.time() - t0, 3)
+            print(f"  {len(args)} atomare Argumente")
+        else:
+            print(f"  Generiere Argumente per LLM (10 pro + 10 con) ...")
+            args = extract_arguments(topic_label, n_pro=10, n_con=10)
+            n_before = len(args)
+            runtime["load_arguments"] = round(time.time() - t0, 3)
+        print(f"  {len(args)} Argumente geladen")
 
-    print("\n── Formale Semantik (Prolog) ─────────────")
-    result = solve_af(args, attacks, topic=topic_label)
-    if "error" in result:
-        print(f"  [FEHLER] {result['error']}")
-    else:
-        print(f"  Grounded  : {result.get('grounded', [])}")
-        print(f"  Preferred : {result.get('preferred')}")
-        print(f"  Stable    : {result.get('stable')}")
+        if logger is not None:
+            config["n_args_before_atomize"] = n_before
+            logger.write_json("run_config.json", config)  # n_before nachtragen
+            _log_arguments(logger, args, config)
 
-    return args, attacks, result
+        print("\n── Angriffe erkennen ─────────────────────")
+        t0 = time.time()
+        attacks = extract_attacks(args, topic=topic_label)
+        runtime["attack_extraction"] = round(time.time() - t0, 3)
+        print(f"  {len(attacks)} Angriffs-Relationen erkannt")
+
+        # Prolog-Datei: in Run-Ordner UND (abwärtskompatibel) nach output/.
+        prolog_code = to_prolog(args, attacks, topic_label)
+        legacy = Path(__file__).parent / "output" / f"generated_af_{source}.pl"
+        legacy.parent.mkdir(exist_ok=True)
+        legacy.write_text(prolog_code, encoding="utf-8")
+        if logger is not None:
+            pl_name = f"af_{slugify(topic_file)}_{logger.run_id}.pl"
+            logger.write_text(pl_name, prolog_code)
+
+        print("\n── Formale Semantik (Prolog) ─────────────")
+        t0 = time.time()
+        result = solve_af(args, attacks, topic=topic_label)
+        runtime["prolog_solver"] = round(time.time() - t0, 3)
+        if "error" in result:
+            print(f"  [FEHLER] {result['error']}")
+        else:
+            print(f"  Grounded  : {result.get('grounded', [])}")
+            print(f"  Preferred : {result.get('preferred')}")
+            print(f"  Stable    : {result.get('stable')}")
+
+        runtime["total"] = round(time.time() - t_start, 3)
+
+        if logger is not None:
+            _finalize_run(logger, config, args, attacks, result, runtime)
+
+        return args, attacks, result
+    finally:
+        if logger is not None:
+            extract.set_run_logger(None)
+
+
+def _finalize_run(logger, config, args, attacks, result, runtime) -> None:
+    """Schreibt graph_stats.json, results.json, runtime.json und den Markdown-Report."""
+    graph_stats = compute_graph_stats(args, attacks)
+    logger.write_json("graph_stats.json", {"run_id": logger.run_id, **graph_stats})
+    logger.write_json("runtime.json", {"run_id": logger.run_id, **runtime})
+
+    results_doc = {
+        "run_id": logger.run_id,
+        "topic": config["topic_label"],
+        "n_args": result.get("n_args", len(args)),
+        "n_attacks": result.get("n_attacks", len(attacks)),
+        "semantics": result.get("semantics"),
+        "grounded": result.get("grounded"),
+        "preferred": result.get("preferred"),
+        "stable": result.get("stable"),
+        "error": result.get("error"),
+        "warning": result.get("warning"),
+        "runtime_s": runtime,
+        "graph_stats": graph_stats,
+    }
+    logger.write_json("results.json", results_doc)
+
+    report = build_report(config, logger, results_doc, graph_stats)
+    logger.write_text(f"report_{slugify(config['topic_file'])}.md", report)
+    print(f"  [LOG] Report + Artefakte geschrieben: {logger.dir}")
 
 
 def run_chat(

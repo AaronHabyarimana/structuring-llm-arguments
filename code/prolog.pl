@@ -132,6 +132,56 @@ cf_subsets([H|T], [H|S]) :-
     \+ (member(X, S), (att(H, X) ; att(X, H))).
 
 
+%  9b. GROUNDED-FIRST REDUCTION  ----------------------------------
+%  Optimierung für preferred/stable: Jede complete (und damit jede
+%  preferred/stable) Extension enthält die grounded Extension G und
+%  schließt alle von G angegriffenen Argumente (OUT) aus. Angriffe aus
+%  OUT in die "unentschiedenen" Argumente U sind durch G in jeder
+%  complete Extension neutralisiert. Daher gilt:
+%      sigma-Extensionen(AF) = { G ∪ E' | E' in sigma-Extensionen(AF|U) }
+%  für sigma in {complete, preferred, stable}. Für (nahezu) well-founded
+%  AFs ist U klein/leer → preferred/stable werden quasi instant.
+%  (Reduktion auf das grounded-Labelling; vgl. Baroni et al. 2011.)
+
+%% undecided_args(+G, -U): Argumente, die weder in G liegen noch von G
+%% angegriffen werden (= UNDEC im grounded-Labelling).
+undecided_args(G, U) :-
+    all_args(All),
+    findall(X,
+        ( member(X, All),
+          \+ member(X, G),
+          \+ ( member(A, G), att(A, X) )
+        ),
+        U).
+
+%% defended_r(+U, +X, +Set): X ist im Reduct von Set verteidigt — nur
+%% Angreifer innerhalb von U zählen (OUT-Angreifer sind durch G erledigt).
+defended_r(U, X, Set) :-
+    forall( ( att(A, X), member(A, U) ),
+            ( member(B, Set), att(B, A) ) ).
+
+%% admissible_r(+U, +Set): conflict-free + selbstverteidigend im Reduct.
+admissible_r(U, Set) :-
+    conflict_free(Set),
+    forall(member(X, Set), defended_r(U, X, Set)).
+
+%% preferred_reduct(+U, -Prefs): maximale admissible Mengen von AF|U.
+preferred_reduct(U, Prefs) :-
+    findall(SS, (cf_subsets(U, S), sort(S, SS), admissible_r(U, SS)), Adm),
+    sort(Adm, AdmS),
+    findall(E,
+        (member(E, AdmS), \+ (member(B, AdmS), subset(E, B), E \== B)),
+        Prefs).
+
+%% stable_reduct(+U, +Set): conflict-free + greift alle U-Nichtmitglieder an.
+stable_reduct(U, Set) :-
+    conflict_free(Set),
+    forall( (member(X, U), \+ member(X, Set)),
+            ( member(A, Set), att(A, X) ) ).
+
+%% combine(+G, +E1, -E): G ∪ E1, sortiert.
+combine(G, E1, E) :- append(G, E1, E0), sort(E0, E).
+
 
 %  10. ABFRAGE-HELFER -------------------------------
 
@@ -210,6 +260,24 @@ show_json_full :-
     findall(E, preferred_extension(E), Prefs),
     all_args(All),
     findall(S, (cf_subsets(All, Sx), sort(Sx, S), stable(S)), Stabs),
+    write('{"grounded":'),
+    write_json_list(G),
+    write(',"preferred":'),
+    write_json_lists(Prefs),
+    write(',"stable":'),
+    write_json_lists(Stabs),
+    write('}'), nl.
+
+%% Vollständig mit grounded-first-Reduktion — identische Ergebnisse wie
+%% show_json_full, aber bei (nahezu) well-founded AFs drastisch schneller.
+show_json_full_gf :-
+    grounded_extension(G),
+    undecided_args(G, U),
+    preferred_reduct(U, Prefs0),
+    findall(P, (member(E1, Prefs0), combine(G, E1, P)), Prefs),
+    findall(SS, (cf_subsets(U, S), sort(S, SS), stable_reduct(U, SS)), Stabs1),
+    sort(Stabs1, Stabs0),
+    findall(St, (member(E2, Stabs0), combine(G, E2, St)), Stabs),
     write('{"grounded":'),
     write_json_list(G),
     write(',"preferred":'),

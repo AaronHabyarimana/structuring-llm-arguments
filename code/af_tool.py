@@ -157,7 +157,10 @@ def solve_af(
 
     try:
         # Versuch 1: preferred + stable (nur wenn AF klein genug)
-        result = _run("show_json_full") if full else _run("show_json_grounded")
+        # show_json_full_gf nutzt grounded-first-Reduktion: berechnet G zuerst
+        # und verzweigt nur über die unentschiedenen Argumente → für (nahezu)
+        # well-founded AFs drastisch schneller als die naive Powerset-Enumeration.
+        result = _run("show_json_full_gf") if full else _run("show_json_grounded")
 
         # Fallback: preferred hat sich aufgehängt → nur grounded
         if result is None and full:
