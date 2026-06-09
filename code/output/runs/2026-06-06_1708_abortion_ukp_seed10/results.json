@@ -1,0 +1,86 @@
+{
+  "run_id": "2026-06-06_1708_abortion_ukp_seed10",
+  "topic": "Abortion",
+  "n_args": 15,
+  "n_attacks": 16,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con134",
+    "con134b",
+    "con20",
+    "con42",
+    "con72b",
+    "con9",
+    "con9b",
+    "con9c",
+    "pro5"
+  ],
+  "preferred": [
+    [
+      "con134",
+      "con134b",
+      "con20",
+      "con42",
+      "con72b",
+      "con9",
+      "con9b",
+      "con9c",
+      "pro5"
+    ]
+  ],
+  "stable": [
+    [
+      "con134",
+      "con134b",
+      "con20",
+      "con42",
+      "con72b",
+      "con9",
+      "con9b",
+      "con9c",
+      "pro5"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.154,
+    "atomize": 26.134,
+    "attack_extraction": 67.806,
+    "prolog_solver": 2.262,
+    "total": 96.385
+  },
+  "graph_stats": {
+    "n_args": 15,
+    "n_attacks": 16,
+    "density": 0.0762,
+    "avg_in_degree": 1.0667,
+    "avg_out_degree": 1.0667,
+    "isolated_nodes": [
+      "con72b"
+    ],
+    "isolated_ratio": 0.0667,
+    "cross_stance_attacks": 15,
+    "same_stance_attacks": 1,
+    "cross_stance_ratio": 0.9375,
+    "same_stance_ratio": 0.0625,
+    "attack_type_counts": {
+      "rebuttal": 10,
+      "undermining": 5,
+      "undercutting": 1
+    },
+    "attack_type_ratios": {
+      "rebuttal": 0.625,
+      "undermining": 0.3125,
+      "undercutting": 0.0625
+    },
+    "n_scc": 15,
+    "largest_scc_size": 1,
+    "has_cycles": false,
+    "n_self_attacks": 0
+  }
+}

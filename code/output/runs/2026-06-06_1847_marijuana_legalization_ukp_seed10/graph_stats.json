@@ -1,0 +1,28 @@
+{
+  "run_id": "2026-06-06_1847_marijuana_legalization_ukp_seed10",
+  "n_args": 15,
+  "n_attacks": 20,
+  "density": 0.0952,
+  "avg_in_degree": 1.3333,
+  "avg_out_degree": 1.3333,
+  "isolated_nodes": [
+    "pro2"
+  ],
+  "isolated_ratio": 0.0667,
+  "cross_stance_attacks": 17,
+  "same_stance_attacks": 3,
+  "cross_stance_ratio": 0.85,
+  "same_stance_ratio": 0.15,
+  "attack_type_counts": {
+    "undermining": 15,
+    "rebuttal": 5
+  },
+  "attack_type_ratios": {
+    "undermining": 0.75,
+    "rebuttal": 0.25
+  },
+  "n_scc": 15,
+  "largest_scc_size": 1,
+  "has_cycles": false,
+  "n_self_attacks": 0
+}

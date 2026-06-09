@@ -1,0 +1,79 @@
+{
+  "run_id": "2026-06-06_1841_death_penalty_ukp_seed10",
+  "topic": "Death Penalty",
+  "n_args": 17,
+  "n_attacks": 36,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con211",
+    "con42",
+    "con72",
+    "pro27",
+    "pro27b",
+    "pro27c",
+    "pro27d"
+  ],
+  "preferred": [
+    [
+      "con211",
+      "con42",
+      "con72",
+      "pro27",
+      "pro27b",
+      "pro27c",
+      "pro27d"
+    ]
+  ],
+  "stable": [
+    [
+      "con211",
+      "con42",
+      "con72",
+      "pro27",
+      "pro27b",
+      "pro27c",
+      "pro27d"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.086,
+    "atomize": 23.389,
+    "attack_extraction": 93.597,
+    "prolog_solver": 0.213,
+    "total": 117.325
+  },
+  "graph_stats": {
+    "n_args": 17,
+    "n_attacks": 36,
+    "density": 0.1324,
+    "avg_in_degree": 2.1176,
+    "avg_out_degree": 2.1176,
+    "isolated_nodes": [
+      "pro27c",
+      "pro27d"
+    ],
+    "isolated_ratio": 0.1176,
+    "cross_stance_attacks": 26,
+    "same_stance_attacks": 10,
+    "cross_stance_ratio": 0.7222,
+    "same_stance_ratio": 0.2778,
+    "attack_type_counts": {
+      "rebuttal": 14,
+      "undermining": 22
+    },
+    "attack_type_ratios": {
+      "rebuttal": 0.3889,
+      "undermining": 0.6111
+    },
+    "n_scc": 17,
+    "largest_scc_size": 1,
+    "has_cycles": false,
+    "n_self_attacks": 0
+  }
+}

@@ -1,0 +1,9 @@
+topic,n_args,n_atoms,n_pairs,n_acc,acc_pct,density,iso,n_scc,cycles,grounded,n_pref,n_stable,semantics,cross_ratio,rebuttal,undermining,undercutting,runtime,run_id
+Abortion,14,14,85,21,24.7,0.1154,0,14,False,8,1,1,grounded+preferred+stable,0.9048,14,6,1,88.448,2026-06-06_1835_abortion_ukp_seed10
+Cloning,14,19,162,38,23.5,0.1111,1,19,False,11,1,1,grounded+preferred+stable,0.9474,2,28,8,255.796,2026-06-06_1836_cloning_ukp_seed10
+Death Penalty,14,17,127,36,28.3,0.1324,2,17,False,7,1,1,grounded+preferred+stable,0.7222,14,22,0,117.325,2026-06-06_1841_death_penalty_ukp_seed10
+Gun Control,14,17,130,52,40.0,0.1912,0,9,True,9,1,1,grounded+preferred+stable,0.8462,28,22,2,238.927,2026-06-06_1843_gun_control_ukp_seed10
+Marijuana Legalization,14,15,100,20,20.0,0.0952,1,15,False,9,1,1,grounded+preferred+stable,0.85,5,15,0,178.76,2026-06-06_1847_marijuana_legalization_ukp_seed10
+Minimum Wage,14,17,132,49,37.1,0.1801,2,17,False,8,1,1,grounded+preferred+stable,0.7143,6,41,2,159.389,2026-06-06_1850_minimum_wage_ukp_seed10
+Nuclear Energy,14,22,222,52,23.4,0.1126,3,22,False,13,1,1,grounded+preferred+stable,0.9231,8,37,7,316.27,2026-06-06_1830_nuclear_energy_ukp_seed10
+School Uniforms,14,28,345,90,26.1,0.119,1,28,False,12,1,1,grounded+preferred+stable,0.9667,39,51,0,517.051,2026-06-06_1852_school_uniforms_ukp_seed10

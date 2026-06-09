@@ -8,10 +8,8 @@ Bachelorarbeit / ein IJCLR-artiges Samplepaper.
 
 Designprinzipien:
   * Keine schweren externen Dependencies (SCC per Tarjan selbst implementiert).
-  * Bestehende Pipeline möglichst wenig verändern — diese Datei ist additiv.
   * Pro Run ein eigener Ordner output/runs/<run_id>/ mit allen Artefakten.
   * Thread-sicher, weil LLM-Calls über ThreadPoolExecutor laufen.
-  * Keine Secrets / API-Keys / .env-Inhalte werden geloggt.
 """
 
 import hashlib
@@ -47,7 +45,6 @@ def generate_run_id(topic_file: str, source: str, seed: int | None) -> str:
     return f"{ts}_{slugify(topic_file)}_{slugify(source)}{seed_part}"
 
 
-# ---------------------------------------------------------------------------
 # Minimaler JSON-Parser (Duplikat aus extract.py, hier um Zirkular-Import
 # zu vermeiden). Wird nur für best-effort parse_ok in calls.jsonl genutzt.
 # ---------------------------------------------------------------------------
@@ -72,9 +69,7 @@ def _best_effort_parse(content: str):
     return None
 
 
-# ---------------------------------------------------------------------------
 # RunLogger
-# ---------------------------------------------------------------------------
 
 class RunLogger:
     """

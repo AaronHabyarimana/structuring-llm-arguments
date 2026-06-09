@@ -1,0 +1,92 @@
+{
+  "run_id": "2026-06-06_1836_cloning_ukp_seed10",
+  "topic": "Cloning",
+  "n_args": 19,
+  "n_attacks": 38,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con126",
+    "con126b",
+    "con134",
+    "con42",
+    "con42b",
+    "con42c",
+    "con42d",
+    "con72b",
+    "con84",
+    "con9",
+    "pro9b"
+  ],
+  "preferred": [
+    [
+      "con126",
+      "con126b",
+      "con134",
+      "con42",
+      "con42b",
+      "con42c",
+      "con42d",
+      "con72b",
+      "con84",
+      "con9",
+      "pro9b"
+    ]
+  ],
+  "stable": [
+    [
+      "con126",
+      "con126b",
+      "con134",
+      "con42",
+      "con42b",
+      "con42c",
+      "con42d",
+      "con72b",
+      "con84",
+      "con9",
+      "pro9b"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.057,
+    "atomize": 24.036,
+    "attack_extraction": 231.449,
+    "prolog_solver": 0.213,
+    "total": 255.796
+  },
+  "graph_stats": {
+    "n_args": 19,
+    "n_attacks": 38,
+    "density": 0.1111,
+    "avg_in_degree": 2.0,
+    "avg_out_degree": 2.0,
+    "isolated_nodes": [
+      "pro9b"
+    ],
+    "isolated_ratio": 0.0526,
+    "cross_stance_attacks": 36,
+    "same_stance_attacks": 2,
+    "cross_stance_ratio": 0.9474,
+    "same_stance_ratio": 0.0526,
+    "attack_type_counts": {
+      "undermining": 28,
+      "undercutting": 8,
+      "rebuttal": 2
+    },
+    "attack_type_ratios": {
+      "undermining": 0.7368,
+      "undercutting": 0.2105,
+      "rebuttal": 0.0526
+    },
+    "n_scc": 19,
+    "largest_scc_size": 1,
+    "has_cycles": false,
+    "n_self_attacks": 0
+  }
+}

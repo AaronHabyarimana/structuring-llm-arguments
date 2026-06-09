@@ -1,0 +1,28 @@
+{
+  "run_id": "2026-06-06_1835_abortion_ukp_seed10",
+  "n_args": 14,
+  "n_attacks": 21,
+  "density": 0.1154,
+  "avg_in_degree": 1.5,
+  "avg_out_degree": 1.5,
+  "isolated_nodes": [],
+  "isolated_ratio": 0.0,
+  "cross_stance_attacks": 19,
+  "same_stance_attacks": 2,
+  "cross_stance_ratio": 0.9048,
+  "same_stance_ratio": 0.0952,
+  "attack_type_counts": {
+    "rebuttal": 14,
+    "undermining": 6,
+    "undercutting": 1
+  },
+  "attack_type_ratios": {
+    "rebuttal": 0.6667,
+    "undermining": 0.2857,
+    "undercutting": 0.0476
+  },
+  "n_scc": 14,
+  "largest_scc_size": 1,
+  "has_cycles": false,
+  "n_self_attacks": 0
+}

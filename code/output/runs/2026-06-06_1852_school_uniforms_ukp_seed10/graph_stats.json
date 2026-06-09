@@ -1,0 +1,28 @@
+{
+  "run_id": "2026-06-06_1852_school_uniforms_ukp_seed10",
+  "n_args": 28,
+  "n_attacks": 90,
+  "density": 0.119,
+  "avg_in_degree": 3.2143,
+  "avg_out_degree": 3.2143,
+  "isolated_nodes": [
+    "pro60"
+  ],
+  "isolated_ratio": 0.0357,
+  "cross_stance_attacks": 87,
+  "same_stance_attacks": 3,
+  "cross_stance_ratio": 0.9667,
+  "same_stance_ratio": 0.0333,
+  "attack_type_counts": {
+    "undermining": 51,
+    "rebuttal": 39
+  },
+  "attack_type_ratios": {
+    "undermining": 0.5667,
+    "rebuttal": 0.4333
+  },
+  "n_scc": 28,
+  "largest_scc_size": 1,
+  "has_cycles": false,
+  "n_self_attacks": 0
+}

@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-06-06_1836_cloning_ukp_seed10",
+  "n_args": 19,
+  "n_attacks": 38,
+  "density": 0.1111,
+  "avg_in_degree": 2.0,
+  "avg_out_degree": 2.0,
+  "isolated_nodes": [
+    "pro9b"
+  ],
+  "isolated_ratio": 0.0526,
+  "cross_stance_attacks": 36,
+  "same_stance_attacks": 2,
+  "cross_stance_ratio": 0.9474,
+  "same_stance_ratio": 0.0526,
+  "attack_type_counts": {
+    "undermining": 28,
+    "undercutting": 8,
+    "rebuttal": 2
+  },
+  "attack_type_ratios": {
+    "undermining": 0.7368,
+    "undercutting": 0.2105,
+    "rebuttal": 0.0526
+  },
+  "n_scc": 19,
+  "largest_scc_size": 1,
+  "has_cycles": false,
+  "n_self_attacks": 0
+}

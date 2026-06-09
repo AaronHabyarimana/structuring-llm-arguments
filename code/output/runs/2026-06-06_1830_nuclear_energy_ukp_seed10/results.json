@@ -1,0 +1,100 @@
+{
+  "run_id": "2026-06-06_1830_nuclear_energy_ukp_seed10",
+  "topic": "Nuclear Energy",
+  "n_args": 22,
+  "n_attacks": 52,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con126",
+    "con134",
+    "con134b",
+    "con168",
+    "con72",
+    "con72b",
+    "con84",
+    "con9b",
+    "pro2",
+    "pro55b",
+    "pro5b",
+    "pro62",
+    "pro74"
+  ],
+  "preferred": [
+    [
+      "con126",
+      "con134",
+      "con134b",
+      "con168",
+      "con72",
+      "con72b",
+      "con84",
+      "con9b",
+      "pro2",
+      "pro55b",
+      "pro5b",
+      "pro62",
+      "pro74"
+    ]
+  ],
+  "stable": [
+    [
+      "con126",
+      "con134",
+      "con134b",
+      "con168",
+      "con72",
+      "con72b",
+      "con84",
+      "con9b",
+      "pro2",
+      "pro55b",
+      "pro5b",
+      "pro62",
+      "pro74"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.073,
+    "atomize": 24.983,
+    "attack_extraction": 290.94,
+    "prolog_solver": 0.231,
+    "total": 316.27
+  },
+  "graph_stats": {
+    "n_args": 22,
+    "n_attacks": 52,
+    "density": 0.1126,
+    "avg_in_degree": 2.3636,
+    "avg_out_degree": 2.3636,
+    "isolated_nodes": [
+      "pro74",
+      "pro5b",
+      "pro62"
+    ],
+    "isolated_ratio": 0.1364,
+    "cross_stance_attacks": 48,
+    "same_stance_attacks": 4,
+    "cross_stance_ratio": 0.9231,
+    "same_stance_ratio": 0.0769,
+    "attack_type_counts": {
+      "undermining": 37,
+      "rebuttal": 8,
+      "undercutting": 7
+    },
+    "attack_type_ratios": {
+      "undermining": 0.7115,
+      "rebuttal": 0.1538,
+      "undercutting": 0.1346
+    },
+    "n_scc": 22,
+    "largest_scc_size": 1,
+    "has_cycles": false,
+    "n_self_attacks": 0
+  }
+}

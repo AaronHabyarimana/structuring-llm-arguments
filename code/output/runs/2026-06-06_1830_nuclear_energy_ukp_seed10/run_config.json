@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-06-06_1830_nuclear_energy_ukp_seed10",
+  "timestamp": "2026-06-06T18:30:13",
+  "topic_file": "nuclear_energy",
+  "topic_label": "Nuclear Energy",
+  "source": "ukp",
+  "split": "test",
+  "limit": 15,
+  "balanced": true,
+  "seed": 10,
+  "atomize": true,
+  "batch_size": 10,
+  "max_workers": 2,
+  "confidence_accept": 70,
+  "confidence_verify": 50,
+  "model_extract": "GPT OSS 120B",
+  "model_attacks": "GPT OSS 120B",
+  "prompt_versions": {
+    "atomize": "atomize_v1",
+    "classify_batch": "classify_batch_v1",
+    "classify_single": "classify_single_v1",
+    "verify": "verify_v1",
+    "generate": "generate_v1"
+  },
+  "n_args_before_atomize": 14
+}
