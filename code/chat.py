@@ -271,6 +271,7 @@ def _finalize_run(logger, config, args, attacks, result, runtime) -> None:
         "topic": config["topic_label"],
         "n_args": result.get("n_args", len(args)),
         "n_attacks": result.get("n_attacks", len(attacks)),
+        "u_size": result.get("u_size"),   # |U| = unentschiedener Kern (Runtime-Treiber)
         "semantics": result.get("semantics"),
         "grounded": result.get("grounded"),
         "preferred": result.get("preferred"),

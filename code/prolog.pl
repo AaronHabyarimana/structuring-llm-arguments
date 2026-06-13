@@ -285,3 +285,26 @@ show_json_full_gf :-
     write(',"stable":'),
     write_json_lists(Stabs),
     write('}'), nl.
+
+%% Wie show_json_full_gf, aber mit |U|-Schranke. Da die preferred/stable-
+%% Enumeration nur vom unentschiedenen Kern U abhaengt (nicht von n) und in |U|
+%% exponentiell ist, wird sie uebersprungen, wenn |U| > MaxU — dann nur grounded.
+%% u_size wird IMMER ausgegeben (fuer Logging/Runtime-Analyse).
+show_json_gf_guard(MaxU) :-
+    grounded_extension(G),
+    undecided_args(G, U),
+    length(U, NU),
+    write('{"grounded":'),
+    write_json_list(G),
+    (   NU =< MaxU
+    ->  preferred_reduct(U, Prefs0),
+        findall(P, (member(E1, Prefs0), combine(G, E1, P)), Prefs),
+        findall(SS, (cf_subsets(U, S), sort(S, SS), stable_reduct(U, SS)), Stabs1),
+        sort(Stabs1, Stabs0),
+        findall(St, (member(E2, Stabs0), combine(G, E2, St)), Stabs),
+        write(',"preferred":'), write_json_lists(Prefs),
+        write(',"stable":'),    write_json_lists(Stabs)
+    ;   write(',"preferred":null,"stable":null')
+    ),
+    write(',"u_size":'), write(NU),
+    write('}'), nl.

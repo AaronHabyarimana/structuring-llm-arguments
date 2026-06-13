@@ -2,8 +2,9 @@
 af_tool.py  —  Dung-AF-Solver als OpenAI-kompatibles LLM-Tool
 
 Wraps den Prolog-Solver als Function-Call-Tool.
-Größen-Schwellwert: bis PREFERRED_MAX_ARGS werden preferred + stable berechnet,
-darüber nur grounded (polynomiell, immer schnell).
+Schranke: preferred + stable werden nur berechnet, wenn der unentschiedene Kern
+|U| <= MAX_UNDECIDED ist (Enumeration ist in |U| exponentiell, nicht in n);
+sonst nur grounded (polynomiell, immer schnell).
 
 Verwendung:
     from af_tool import TOOL_DEFINITION, handle_tool_call, solve_af
@@ -18,8 +19,13 @@ from pathlib import Path
 CODE_DIR = Path(__file__).parent
 SWIPL = r"C:\Program Files\swipl\bin\swipl.exe"
 
-PREFERRED_MAX_ARGS = 30   # über diesem Limit: nur grounded
-DEFAULT_TIMEOUT    = 30   # Sekunden
+# Schranke fuer preferred/stable: NICHT die Gesamt-Argumentzahl n (irrelevant —
+# well-founded AFs mit n=60 loesen in 0,12s), sondern die Groesse des
+# unentschiedenen Kerns |U| (Argumente in Zyklen). Die Enumeration ist in |U|
+# exponentiell; gemessen: |U|=16 ~7s, |U|=18 ~25-50s, |U|>=20 > 60s. MaxU=18
+# bleibt sicher unter dem Timeout; der Timeout faengt pathologisch dichte U ab.
+MAX_UNDECIDED   = 18      # |U|-Schranke fuer preferred/stable (sonst nur grounded)
+DEFAULT_TIMEOUT = 120     # Sekunden — zweites Netz fuer dichte U-Kerne
 
 
 # TOOL-DEFINITION  (OpenAI function-calling Format) -----------
@@ -126,7 +132,6 @@ def solve_af(
       error      – Fehlermeldung (nur bei Fehler)
     """
     n = len(arguments)
-    full = n <= PREFERRED_MAX_ARGS
 
     pl_content = _build_pl(arguments, attacks, topic)
 
@@ -156,14 +161,15 @@ def solve_af(
             return None
 
     try:
-        # Versuch 1: preferred + stable (nur wenn AF klein genug)
-        # show_json_full_gf nutzt grounded-first-Reduktion: berechnet G zuerst
-        # und verzweigt nur über die unentschiedenen Argumente → für (nahezu)
-        # well-founded AFs drastisch schneller als die naive Powerset-Enumeration.
-        result = _run("show_json_full_gf") if full else _run("show_json_grounded")
+        # Versuch 1: grounded-first mit |U|-Schranke. Der Solver berechnet G
+        # (polynomiell, immer schnell), bestimmt den unentschiedenen Kern U und
+        # enumeriert preferred/stable nur, wenn |U| <= MAX_UNDECIDED. Sonst gibt er
+        # grounded + u_size zurück (preferred/stable=null). n ist irrelevant.
+        result = _run(f"show_json_gf_guard({MAX_UNDECIDED})")
 
-        # Fallback: preferred hat sich aufgehängt → nur grounded
-        if result is None and full:
+        # Fallback: Enumeration trotz Schranke im Timeout hängengeblieben
+        # (pathologisch dichter U-Kern) → nur grounded.
+        if result is None:
             result = _run("show_json_grounded")
             if result is not None:
                 result["preferred"] = None
@@ -173,11 +179,16 @@ def solve_af(
         if result is not None:
             result["n_args"]    = n
             result["n_attacks"] = len(attacks)
-            result["semantics"] = (
-                ["grounded", "preferred", "stable"]
-                if full and result.get("preferred") is not None
-                else ["grounded"]
-            )
+            if result.get("preferred") is not None:
+                result["semantics"] = ["grounded", "preferred", "stable"]
+            else:
+                result["semantics"] = ["grounded"]
+                # Grund differenzieren: |U|-Schranke vs. Timeout
+                if result.get("warning") is None and result.get("u_size") is not None:
+                    result["warning"] = (
+                        f"|U|={result['u_size']} > {MAX_UNDECIDED}: nur grounded "
+                        f"(preferred/stable exponentiell)"
+                    )
             return result
 
         return {
