@@ -48,7 +48,7 @@ SOURCE = "ukp"  # "ukp" → load_ukp  |  "llm" → extract_arguments
 UKP_SPLIT    = "test"
 UKP_LIMIT    = 15
 UKP_BALANCED = True
-UKP_SEED     = 10
+UKP_SEED     = 42
 ATOMIZE      = True
 
 # Prompt-Versionen — für reproduzierbare Prompt-Vergleiche in den Logs
@@ -82,7 +82,7 @@ def set_run_logger(logger) -> None:
 # annotation: "Argument_for" -> pro, "Argument_against" -> con, "NoArgument" -> überspringen
 
 def load_ukp(topic: str, split: str, limit: int,
-             balanced: bool = True, seed: int = 10) -> list[dict]:
+             balanced: bool = True, seed: int = UKP_SEED) -> list[dict]:
     """
     Lädt annotierte Argumente aus dem UKP-Datensatz.
     topic: Dateiname ohne .tsv, z.B. "nuclear_energy"
@@ -94,8 +94,11 @@ def load_ukp(topic: str, split: str, limit: int,
     path = UKP_DIR / f"{topic}.tsv"
     pros, cons = [], []
     pro_i = con_i = 1
-    with open(path, encoding="utf-8") as f:
-        for row in csv.DictReader(f, delimiter="\t"):
+    # quoting=QUOTE_NONE: das UKP-TSV nutzt kein CSV-Quoting; ein einzelnes '"' im
+    # Satz (z.B. ' " The cortex ...') würde sonst als Feld-Quote interpretiert und
+    # verschmölze zig Folgezeilen in EIN sentence-Feld (Datenkorruption).
+    with open(path, encoding="utf-8", newline="") as f:
+        for row in csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE):
             if row["set"] != split or row["annotation"] == "NoArgument":
                 continue
             stance = "pro" if row["annotation"] == "Argument_for" else "con"
