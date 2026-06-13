@@ -2,3 +2,9 @@
 *.pyc
 __pycache__/
 
+# Paper-Quellen gehören nicht ins Code-Repo
+IJCLR/
+
+# Benchmark-Skripte + ihre temporären Artefakte
+code/bench_*.py
+code/tmp*.pl
