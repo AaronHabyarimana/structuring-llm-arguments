@@ -53,10 +53,10 @@ ATOMIZE      = True
 
 # Prompt-Versionen — für reproduzierbare Prompt-Vergleiche in den Logs
 PROMPT_VERSIONS = {
-    "atomize":         "atomize_v1",
-    "classify_batch":  "classify_batch_v1",
-    "classify_single": "classify_single_v1",
-    "verify":          "verify_v1",
+    "atomize":         "atomize_v3",   # v3: zitierte/konzessive Fremdpositionen nicht mehr promoten (Polaritäts-Flip)
+    "classify_batch":  "classify_batch_v3",   # v3: deskriptiv≠normativ kann nicht rebutten (Kategorienfehler)
+    "classify_single": "classify_single_v3",  # v3: deskriptiv≠normativ kann nicht rebutten (Kategorienfehler)
+    "verify":          "verify_v3",            # v3: deskriptiv≠normativ kann nicht rebutten (Kategorienfehler)
     "generate":        "generate_v1",
 }
 
@@ -188,18 +188,21 @@ Check whether it bundles multiple distinct claims into one sentence.
 If yes, split it into atomic arguments (one claim each), preserving the stance.
 If it already expresses a single claim, return it unchanged.
 
-Important: Concessive fragments ("Although X", "While X", "Despite X") are rhetorical
-hedges, NOT independent arguments. Drop them entirely — only keep the main claim.
+Important: Only promote claims the speaker actually ASSERTS as their own.
+- Concessive/contrastive clauses (markers: "but", "although", "while", "despite",
+  "even though", "yet") are rhetorical hedges, NOT independent arguments. Keep them
+  attached to the main claim or drop them — never make them a separate atom.
+- Reported or conceded positions of the opposing side (e.g. "opponents argue X",
+  "greens always argue X", "some claim X, but ...") are NOT the speaker's own claim.
+  Do NOT promote them to a separate atom; drop them.
+This prevents atoms that, read in isolation, carry the OPPOSITE stance of the speaker
+(e.g. a pro-nuclear sentence must never yield a pro-renewable atom).
 
 Self-containment rule: Every output argument MUST be understandable without
 any surrounding context. If a fragment contains pronouns like "it", "them",
 "this", "they" without a clear referent, replace the pronoun with the explicit
 noun from the original sentence. If the referent cannot be recovered, drop
 the fragment entirely.
-
-Argumentative content rule: Only keep claims that take a position or make
-an evaluative assertion. Pure factual statements without evaluative content
-(e.g. "X once spoke about Y") are not arguments — drop them.
 
 Argument [{id}] ({stance}):
 {text}
@@ -284,7 +287,7 @@ def _fix_atom_ids(arguments: list[dict]) -> list[dict]:
 BATCH_PAIR_PROMPT = """Propose attack candidates for the following argument pairs from a debate on "{topic}".
 
 An attack exists when one argument:
-- directly contradicts the conclusion of the other (rebuttal), OR
+- asserts a conclusion logically incompatible with the other's conclusion — the one claim can be true only if the other is false (rebuttal), OR
 - undermines a premise the other relies on (undermining), OR
 - shows the other's conclusion does not follow even if its premise is true (undercutting)
 
@@ -292,7 +295,15 @@ An attack exists when one argument:
 
 direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
 attack_type  = one of: rebuttal / undercutting / undermining / NONE
-  rebuttal:     attacker directly contradicts the target's conclusion
+  rebuttal:     the two conclusions are logically incompatible — they negate the SAME
+                proposition, so one claim is true only if the other is false. Merely
+                taking the opposing stance, addressing a different sub-topic, or
+                "arguing for the other side" is NOT a rebuttal; there must be a direct
+                contradiction between the two specific claims. A descriptive/empirical
+                claim (what people believe or do, statistics, trends) and a normative
+                claim (what ought to be) are NOT logically incompatible — they cannot
+                rebut each other (at most undermining/undercutting). A rebuttal is
+                inherently MUTUAL (it holds in both directions); pick either direction.
   undercutting: attacker shows target's conclusion doesn't follow even if target's premise holds
   undermining:  attacker directly attacks a premise the target relies on
   If direction=NONE, attack_type MUST be NONE.
@@ -312,13 +323,21 @@ A=[{id_a}] ({stance_a}) {text_a}
 B=[{id_b}] ({stance_b}) {text_b}
 
 Propose an attack candidate if one exists. An attack exists when one argument:
-- directly contradicts the conclusion of the other (rebuttal), OR
+- asserts a conclusion logically incompatible with the other's conclusion — the one claim can be true only if the other is false (rebuttal), OR
 - undermines a premise the other relies on (undermining), OR
 - shows the other's conclusion does not follow even if its premise is true (undercutting)
 
 direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
 attack_type  = one of: rebuttal / undercutting / undermining / NONE
-  rebuttal:     attacker directly contradicts the target's conclusion
+  rebuttal:     the two conclusions are logically incompatible — they negate the SAME
+                proposition, so one claim is true only if the other is false. Merely
+                taking the opposing stance, addressing a different sub-topic, or
+                "arguing for the other side" is NOT a rebuttal; there must be a direct
+                contradiction between the two specific claims. A descriptive/empirical
+                claim (what people believe or do, statistics, trends) and a normative
+                claim (what ought to be) are NOT logically incompatible — they cannot
+                rebut each other (at most undermining/undercutting). A rebuttal is
+                inherently MUTUAL (it holds in both directions); pick either direction.
   undercutting: attacker shows target's conclusion doesn't follow even if target's premise holds
   undermining:  attacker directly attacks a premise the target relies on
   If direction=NONE, attack_type MUST be NONE.
@@ -338,7 +357,10 @@ A previous analysis claims: {claimed}
 
 Does this attack relation genuinely hold?
 Does A undermine a premise B relies on (undermining)?
-Does A directly contradict B's conclusion (rebuttal)?
+Do A and B assert logically incompatible conclusions that negate the same proposition,
+so that one is true only if the other is false (rebuttal)? Opposing stance alone is NOT enough.
+A descriptive claim (what people believe/do, statistics) and a normative claim (what ought
+to be) are NOT logically incompatible and cannot rebut each other.
 Does A show B's conclusion doesn't follow even if B's premise is true (undercutting)?
 If any of these holds, confirm=true.
 
