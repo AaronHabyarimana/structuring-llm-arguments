@@ -373,6 +373,15 @@ def build_report(
     n_verify = counts.get("verify-accept", 0) + counts.get("verify-reject", 0)
     verify_rate = _pct(counts.get("verify-accept", 0), n_verify)
 
+    # Tatsächliche Graph-Kanten (logger.attacks == attacks.jsonl == graph n_attacks).
+    # Symmetrisierte Rebuttals werden via log_attack ergänzt, aber NICHT als
+    # pair_decision geloggt — daher hier separat aus logger.attacks zählen,
+    # damit die Summe mit dem Graphen übereinstimmt.
+    atk_counts = _decision_counts(logger.attacks)
+    n_direct_edges = atk_counts.get("accept", 0) + atk_counts.get("verify-accept", 0)
+    n_symmetric = atk_counts.get("symmetric-rebuttal", 0)
+    n_edges_total = len(logger.attacks)
+
     n_before = config.get("n_args_before_atomize", "?")
     n_after = graph_stats.get("n_args", "?")
     n_pairs = len(dec)
@@ -451,12 +460,18 @@ Timestamp: {config.get('timestamp')}
 ## Attack Extraction
 
 - Pairs evaluated: {n_pairs}
-- Accepted attacks: {accepted}
+- Accepted pairs (accept/verify): {accepted}
 - Rejected/skipped: {rejected + skipped} (reject/verify-reject: {rejected}, skip: {skipped})
 - Verify calls: {n_verify}
 - Verify accept rate: {verify_rate}
 - Fallback calls (classify_single): {fallbacks}
 - Parse errors: {parse_err}
+
+### Attack edges in graph
+
+- Direct edges: {n_direct_edges}
+- Symmetric rebuttal edges: {n_symmetric}
+- Total attacks: {n_edges_total}
 
 ## Graph Statistics
 
