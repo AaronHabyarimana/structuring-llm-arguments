@@ -60,6 +60,11 @@ PROMPT_VERSIONS = {
     "generate":        "generate_v1",
 }
 
+# Rebuttals sind per Definition gegenseitig (Pollock 1992; ASPIC+): wenn die
+# Konklusionen einander negieren, gilt der Angriff in beide Richtungen. Bei True
+# wird für jeden akzeptierten Rebuttal die Gegenkante ergänzt (Symmetrisierung).
+SYMMETRIZE_REBUTTALS = True
+
 UKP_DIR = Path(__file__).parent.parent / "UKP_sentential_argument_mining" / "data"
 
 # Logging-Hook: optionaler RunLogger (run_logger.RunLogger). Wenn None, verhält
@@ -651,6 +656,28 @@ def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
         else:
             print(f"  └─ REJECT (Verify verneint)")
             _log_pair_decision(a, b, cl, "verify-reject", verify_info)
+
+    # Symmetrisierung: Rebuttals gelten per Definition gegenseitig (Pollock 1992;
+    # ASPIC+). Für jeden akzeptierten Rebuttal die Gegenkante ergänzen, sofern die
+    # Gegenrichtung nicht ohnehin schon (aus einer anderen Klassifikation) existiert.
+    if SYMMETRIZE_REBUTTALS:
+        added = []
+        for atk in result:
+            if atk["type"] != "rebuttal":
+                continue
+            rev = (atk["target"], atk["attacker"])
+            if rev in seen:
+                continue
+            seen.add(rev)
+            added.append({
+                "attacker": atk["target"], "target": atk["attacker"],
+                "type": "rebuttal", "confidence": atk["confidence"],
+                "reason": f"[symmetric rebuttal] {atk['reason']}",
+                "outcome": "symmetric-rebuttal",
+            })
+        if added:
+            print(f"  [SYM] {len(added)} Rebuttal-Gegenkanten ergänzt")
+        result.extend(added)
 
     # attacks.jsonl: akzeptierte Angriffe als gefilterte Kantenliste
     if _RUN_LOGGER is not None:
