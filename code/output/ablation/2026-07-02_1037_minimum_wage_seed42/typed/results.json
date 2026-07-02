@@ -1,0 +1,80 @@
+{
+  "grounded": [
+    "con12",
+    "con14",
+    "con14b",
+    "con18",
+    "con76",
+    "con76b",
+    "con87",
+    "con87b",
+    "con87c",
+    "pro95b"
+  ],
+  "preferred": [
+    [
+      "con12",
+      "con14",
+      "con14b",
+      "con18",
+      "con70",
+      "con70b",
+      "con76",
+      "con76b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro95b"
+    ],
+    [
+      "con12",
+      "con14",
+      "con14b",
+      "con18",
+      "con76",
+      "con76b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro36",
+      "pro95b"
+    ]
+  ],
+  "stable": [
+    [
+      "con12",
+      "con14",
+      "con14b",
+      "con18",
+      "con70",
+      "con70b",
+      "con76",
+      "con76b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro95b"
+    ],
+    [
+      "con12",
+      "con14",
+      "con14b",
+      "con18",
+      "con76",
+      "con76b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro36",
+      "pro95b"
+    ]
+  ],
+  "u_size": 3,
+  "n_args": 22,
+  "n_attacks": 58,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "topic_file": "minimum_wage",
+  "topic_label": "Minimum Wage",
+  "n_atoms": 22,
+  "typed": {
+    "n_edges_raw": 55,
+    "n_edges_final": 58,
+    "grounded": 10,
+    "n_preferred": 2,
+    "n_stable": 2,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 433.691,
+      "solve_s": 0.205
+    }
+  },
+  "binary": {
+    "n_edges_raw": 49,
+    "n_edges_final": 49,
+    "grounded": 10,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 222.475,
+      "solve_s": 0.142
+    }
+  },
+  "jaccard_directed_raw": 0.2683,
+  "jaccard_directed_final": 0.2892,
+  "jaccard_undirected": 0.4444,
+  "directed_raw": {
+    "intersection": 22,
+    "typed_only": [
+      "con12->pro29",
+      "con12->pro32",
+      "con12->pro4",
+      "con12->pro4b",
+      "con14->pro29",
+      "con14->pro32",
+      "con14b->pro29",
+      "con14b->pro32",
+      "con18->pro29",
+      "con18->pro95",
+      "con70->pro29",
+      "con70->pro29b",
+      "con70->pro32",
+      "con70->pro4",
+      "con70->pro82",
+      "con70b->pro29",
+      "con70b->pro29b",
+      "con70b->pro32",
+      "con70b->pro4",
+      "con70b->pro82",
+      "con76->pro29",
+      "con76->pro32",
+      "con76->pro4",
+      "con76->pro4b",
+      "con76b->pro32",
+      "con76b->pro4",
+      "con76b->pro4b",
+      "con87c->pro29",
+      "con87c->pro32",
+      "pro36->con70",
+      "pro36->con70b",
+      "pro4->con14",
+      "pro4->con14b"
+    ],
+    "binary_only": [
+      "con18->con76",
+      "con18->con76b",
+      "con18->pro95b",
+      "con70->con12",
+      "con70->con76",
+      "con70->con76b",
+      "con70->pro36",
+      "con70->pro82b",
+      "con70b->con12",
+      "con70b->con76",
+      "con70b->con76b",
+      "con70b->pro36",
+      "con70b->pro82b",
+      "con76b->pro15",
+      "con87c->pro15",
+      "con87c->pro29b",
+      "pro4->con12",
+      "pro4->con70",
+      "pro4->con70b",
+      "pro4->con76",
+      "pro4->con76b",
+      "pro4->con87c",
+      "pro4b->con12",
+      "pro4b->con76",
+      "pro4b->con76b",
+      "pro95->pro4b",
+      "pro95b->pro4b"
+    ]
+  },
+  "undirected": {
+    "intersection": 32,
+    "typed_only": 23,
+    "binary_only": 17
+  }
+}

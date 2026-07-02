@@ -1,0 +1,546 @@
+[
+  {
+    "attacker": "pro82",
+    "target": "pro29",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Shows that some criminals desire execution, challenging the premise that the death penalty functions as a deterrent threat.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro15",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "B highlights the risk of executing innocents, attacking the premise that punishment is deserved",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro15",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "B points out the irreversibility of execution, undermining the claim that punishment restores justice",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro15",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "B provides evidence of wrongful executions, challenging the notion of deserved punishment",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro15",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "B argues that capital punishment leads to unjust application, weakening the moral justification in A",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con190",
+    "target": "pro15",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "B questions the fairness of executing individuals with brain defects, attacking the premise of moral deservedness",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro15",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "B challenges the premise that capital punishment is just by citing widespread trial errors.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro15",
+    "target": "con140",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "A claims execution restores moral order, while B asserts it merely sanctions killing as pay‑back, a direct moral contradiction.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro15b",
+    "type": "undermining",
+    "confidence": 90,
+    "reason": "Con36 questions the certainty of guilt, undermining the premise that the punished person is the true wrongdoer.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro15b",
+    "type": "undermining",
+    "confidence": 88,
+    "reason": "Con189 highlights the irreversibility of execution, challenging the premise that the convicted individual is correctly identified.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro15b",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "Con27 presents evidence of wrongful convictions, undermining the premise that the punished are indeed the wrongdoers.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro15b",
+    "type": "undercutting",
+    "confidence": 80,
+    "reason": "Con174 argues that capital punishment can be disproportionate, showing the conclusion of deserved equivalence does not follow.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con190",
+    "target": "pro15b",
+    "type": "undercutting",
+    "confidence": 78,
+    "reason": "Con190 questions the fairness of executing individuals with brain defects, undercutting the claim that punishment always matches harm.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro15b",
+    "type": "undermining",
+    "confidence": 87,
+    "reason": "Con229 cites systematic trial errors, undermining the premise that the executed are correctly identified as wrongdoers.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro15b",
+    "type": "undermining",
+    "confidence": 82,
+    "reason": "Con140 frames executions as sanctioned pay‑back killing, challenging the moral premise that such punishment is deserved.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro4",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con36 challenges the acceptability of capital punishment by highlighting the risk of executing innocent people, undermining the premise that it protects society.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro4",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con189 argues that wrongful executions are irreversible, attacking the premise that capital punishment is a justified protective measure.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro4",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "Con27 presents evidence of wrongful convictions, undermining the claim that capital punishment reliably protects society.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro4",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Con174 asserts that capital punishment unfairly punishes non‑capital offenders, challenging the premise of its justified use.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con190",
+    "target": "pro4",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con190 questions the fairness of executing individuals with brain defects, attacking the moral premise of capital punishment’s acceptability.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro4",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "Con229 cites systematic trial errors, undermining the premise that capital punishment is a reliable protective tool.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro4",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "Con140 frames executions as sanctioned pay‑back killing, challenging the moral justification underlying pro4’s claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro4b",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "A implies death penalty is justified, while B argues it risks executing innocent, a direct contradiction",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro4b",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "A supports death penalty; B claims execution is irreversible if a mistake occurs, contradicting A’s implied endorsement",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro4b",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "A’s implied support of capital punishment conflicts with B’s claim that many executed were innocent",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro4b",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "A suggests death penalty is acceptable, while B states it punishes people who do not deserve it, a logical incompatibility",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro95",
+    "type": "undercutting",
+    "confidence": 70,
+    "reason": "B shows that even if killers reoffend, the death penalty may be unjust because innocent people could be executed.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro95",
+    "type": "undercutting",
+    "confidence": 70,
+    "reason": "B argues that the irreversibility of execution undermines the justification based on repeat offenses.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro95",
+    "target": "con174",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "A asserts the death penalty is justified, whereas B asserts it is unjust, directly contradicting each other's conclusions",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro95",
+    "target": "con229",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "A claims the death penalty is justified by recidivism, while B claims it is unjustified due to trial errors, making their conclusions mutually exclusive.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro95",
+    "target": "con140",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "A concludes the death penalty is justified, whereas B concludes it is immoral, directly contradicting each other",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro32",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con174 claims the death penalty punishes people who are not deserving, challenging the premise that retribution honors the victim",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con190",
+    "target": "pro32",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con190 questions the fairness of killing someone with a brain defect, attacking the moral premise behind honoring the victim",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro32",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con229 cites systematic trial errors, undermining the claim that retributive execution properly honors victims",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro32",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con140 argues that executions sanction killing as pay‑back, challenging the premise that such retribution is a proper honor",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro32b",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con36 highlights the risk of executing the innocent, weakening the premise that retribution consoles families",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro32b",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con189 points out the irreversibility of execution errors, undermining the claim that retribution benefits grieving families",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro32b",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con27 provides statistics on wrongful executions, challenging the premise that retributive death penalties aid families",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro32b",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con174 argues that capital punishment punishes undeserving individuals, attacking the justification that it honors victims",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con190",
+    "target": "pro32b",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con190 questions the fairness of killing someone with a brain defect, undermining the moral basis of retributive consolation",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro32",
+    "target": "con36",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "A claims the death penalty is justified to honor victims, while B claims it is unjust because innocent people may be executed, directly opposing the same normative proposition.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro32",
+    "target": "con189",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "A claims the death penalty is justified by honoring victims, while B claims it is unjust because execution is irreversible, making their conclusions mutually exclusive.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro32",
+    "type": "undercutting",
+    "confidence": 80,
+    "reason": "B shows that even if retribution honors victims, the death penalty’s wrongful executions prevent the conclusion from following",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro32b",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Con argument shows many trials have serious errors, undermining the premise that executions will correctly target the guilty, which the pro claim relies on for consolation.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro32b",
+    "type": "undermining",
+    "confidence": 65,
+    "reason": "Con claim that executions sanction killing as pay‑back attacks the moral premise that retributive killing is justified, which the pro argument assumes.",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro32c",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con argument highlights the risk of executing the innocent, undermining the pro premise that execution reliably prevents future tragedy.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro32c",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con claim that mistakes are irreversible undermines the pro premise that execution safely eliminates future threats.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro32c",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "Con evidence of wrongful convictions attacks the pro assumption that only guilty perpetrators are executed.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro32c",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Con argument that non‑capital offenders receive the punishment challenges the pro claim that retribution is justly applied only to the guilty.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con190",
+    "target": "pro32c",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "Con question of fairness to those with brain defects attacks the moral premise underlying the pro retributive justification.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro32c",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con study of trial errors undermines the pro premise that executions will correctly target the true perpetrators.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro32c",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Con claim that executions sanction killing as pay‑back attacks the moral justification assumed by the pro retributive argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro29",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "con36 shows wrongful executions, challenging the premise that capital punishment effectively threatens criminals",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro29",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "con189 argues mistakes are irreversible, undermining the premise that capital punishment is a reliable threat",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro29",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "con27 provides evidence of innocent people executed, weakening the claim that capital punishment threatens only criminals",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro29",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "con174 claims the death penalty punishes non‑capital offenders, directly contradicting the idea that it is a threat to criminals",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro29",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "con229 cites high error rates in capital trials, undermining the premise that capital punishment reliably threatens criminals",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro15",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "[symmetric rebuttal] A claims execution restores moral order, while B asserts it merely sanctions killing as pay‑back, a direct moral contradiction.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con36",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] A implies death penalty is justified, while B argues it risks executing innocent, a direct contradiction",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con189",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] A supports death penalty; B claims execution is irreversible if a mistake occurs, contradicting A’s implied endorsement",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con27",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] A’s implied support of capital punishment conflicts with B’s claim that many executed were innocent",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con174",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] A suggests death penalty is acceptable, while B states it punishes people who do not deserve it, a logical incompatibility",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con174",
+    "target": "pro95",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "[symmetric rebuttal] A asserts the death penalty is justified, whereas B asserts it is unjust, directly contradicting each other's conclusions",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con229",
+    "target": "pro95",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] A claims the death penalty is justified by recidivism, while B claims it is unjustified due to trial errors, making their conclusions mutually exclusive.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro95",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] A concludes the death penalty is justified, whereas B concludes it is immoral, directly contradicting each other",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro32",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] A claims the death penalty is justified to honor victims, while B claims it is unjust because innocent people may be executed, directly opposing the same normative proposition.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con189",
+    "target": "pro32",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] A claims the death penalty is justified by honoring victims, while B claims it is unjust because execution is irreversible, making their conclusions mutually exclusive.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro29",
+    "target": "con174",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "[symmetric rebuttal] con174 claims the death penalty punishes non‑capital offenders, directly contradicting the idea that it is a threat to criminals",
+    "outcome": "symmetric-rebuttal"
+  }
+]

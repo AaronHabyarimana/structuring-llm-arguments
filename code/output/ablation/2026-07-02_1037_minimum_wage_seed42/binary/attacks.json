@@ -1,0 +1,394 @@
+[
+  {
+    "attacker": "con14",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con14 argues outsourcing will eliminate teen jobs, contradicting pro82’s premise that teens will still have work to cut hours.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14b",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con14b claims outsourcing reduces American jobs, undermining pro82’s assumption that teens can keep jobs to work fewer hours.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Con12 argues higher wages reduce hiring capacity, challenging pro82’s premise that teens will retain jobs to reduce hours.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con76",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Con76 provides empirical evidence of a sharp drop in teen employment after a wage hike, contradicting pro82’s premise.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con76b",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Con76b asserts the 2009 increase significantly cut teenage employment, directly undermining pro82’s claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Automation as a response to higher wages challenges the premise that teens can simply work fewer hours.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B argues higher wages lead to automation, which could reduce teen job opportunities and undermine A’s mechanism linking wage hikes to lower dropout rates.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Outsourcing due to higher wages undermines the premise that a higher minimum wage keeps teens in school.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14b",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Outsourcing to cheaper foreign workers challenges the claim that higher wages will reduce teen dropout by preserving jobs.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87c",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Labeling the wage hike as a mere bandage disputes its effectiveness in addressing teen dropout.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Passing labor costs to consumers suggests higher wages could harm low‑income teens, contradicting the pro claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70b",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "If firms shift costs to consumers, the intended benefit to teens may be negated, attacking the pro argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Higher labor costs reducing hiring directly opposes the premise that a wage increase will keep teens in school.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con76",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Empirical evidence of a sharp drop in teen employment after a wage hike refutes the pro claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con76b",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Stating that the 2009 increase significantly reduced teenage employment directly contradicts the pro argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Con18 argues employers will replace workers with kiosks, undermining pro15’s benefit claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con14 suggests outsourcing will occur if wages rise, contradicting pro15’s expected worker benefit.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87c",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B argues the wage hike is merely a bandage, undermining A's claim that it will benefit workers.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70b",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 60,
+    "reason": "B claims widespread price pass‑through, which could negate the worker benefits A predicts.",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B states higher wages reduce hiring capacity, directly contradicting A's benefit claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con76",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B provides empirical evidence of employment loss after a wage hike, refuting A's benefit assertion.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con76b",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B cites a significant reduction in teenage employment following a wage increase, undermining A's claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con87c",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "A shows productivity can cover wage hikes, contradicting B's claim that a raise is merely a bandage.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con70",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "A argues firms can absorb higher wages due to productivity gains, refuting B's assertion that fast‑food will pass 100% of costs to consumers.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con70b",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "A’s productivity argument undermines B’s claim that other firms will fully shift higher labor costs onto prices.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con12",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "A suggests firms can afford wages thanks to productivity, countering B’s premise that higher wages will reduce hiring.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con76",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "A’s productivity outpacing wage growth challenges B’s link between the 2009 wage hike and the sharp teenage employment drop.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con76b",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "A’s claim that productivity exceeds wage increases disputes B’s statement that the 2009 hike significantly cut teenage employment.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro95",
+    "target": "pro4b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B highlights millions earning poverty wages, implying growth has not translated into higher wages, opposing A’s growth‑outpaces‑wage claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro95b",
+    "target": "pro4b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B points out reliance on federal support for low‑wage workers, challenging A’s assertion that economic growth outpaces wage increases.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con12",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "A claims growth outpaces wage hikes, undermining B's premise that higher wages force firms to cut hiring.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con76",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "A suggests firms can afford wage increases, contradicting B's evidence that a wage hike sharply reduced teen employment.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con76b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "A's growth argument challenges B's claim that the 2009 wage rise caused a significant drop in teenage jobs.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro95b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The automation argument challenges the premise that low‑wage workers need higher wages, implying wages are unnecessary",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "con70 predicts full price pass‑through, directly contradicting pro36's finding of little or no price increase",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "con70b asserts widespread price pass‑through, opposing pro36's claim of minimal price changes",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The automation argument challenges the need for higher wages by suggesting jobs can be replaced, undermining the pro claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "The outsourcing claim argues that higher wages would push jobs abroad, contradicting the premise that raising wages is beneficial.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14b",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "It asserts that outsourcing due to higher wages reduces American jobs, directly opposing the pro argument's implication.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87c",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "It claims a wage hike is merely a superficial fix, contradicting the pro claim that higher wages are needed.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "It argues higher wages would force firms to cut employment, directly opposing the pro claim that wages need to rise.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "con76",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "A offers automation as an alternative cause, undermining B's claim that the wage hike alone caused teenage job loss",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "con76b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "A suggests automation could explain employment decline, challenging B's attribution of the drop to the minimum‑wage increase",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "con12",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Con70 argues firms can fully pass higher labor costs to consumers, undermining con12's premise that higher wages force firms to cut hiring.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "con76",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "If firms pass costs entirely, the employment decline reported in con76 is less logically necessary, challenging its implication.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "con76b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Full cost pass‑through claimed in con70 weakens the causal link between wage hikes and the employment reduction claimed in con76b.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70b",
+    "target": "con12",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Con70b’s claim that firms can shift costs to consumers contradicts con12’s argument that higher wages reduce firms’ hiring capacity.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70b",
+    "target": "con76",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "By asserting firms can offset wage costs via prices, con70b challenges the necessity of the employment drop described in con76.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70b",
+    "target": "con76b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The possibility of full cost pass‑through in con70b disputes the implication that wage hikes must have caused the teenage employment reduction in con76b.",
+    "outcome": "accept"
+  }
+]

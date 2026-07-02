@@ -1,0 +1,15 @@
+{
+  "experiment": "ablation_typed_binary",
+  "variant": "binary",
+  "typed": false,
+  "topic_file": "minimum_wage",
+  "topic_label": "Minimum Wage",
+  "source": "ukp",
+  "seed": 42,
+  "limit": 15,
+  "batch_size": 10,
+  "conf_accept": 70,
+  "conf_verify": 50,
+  "symmetrize_rebuttals": false,
+  "n_atoms": 22
+}

@@ -1,0 +1,314 @@
+[
+  {
+    "attacker": "pro29",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Data on deaths from unsafe abortions challenges the premise that restricting abortion after viability is acceptable, as it may increase unsafe procedures.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro29",
+    "target": "con23",
+    "type": "NONE",
+    "confidence": 65,
+    "reason": "Evidence of deaths from unsafe abortions undermines the premise that ending abortion is beneficial, suggesting it could increase mortality.",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B's commitment to end abortion contradicts A's implication that legal abortion reduces maternal deaths",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23b",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B's support for moving society toward ending abortion opposes A's implied policy benefit",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B introduces anti‑abortion legislation, directly opposing A's claim that lack of legal abortion causes deaths",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro63b",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Pro63b challenges the moral distinction used by pro7 by suggesting the same justification would also permit killing an adult, undermining pro7's premise.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The claim that women experience overwhelming guilt suggests mental‑health harms, undermining the premise that only physical life/health exceptions justify post‑viability bans.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Reporting nightmares indicates psychological injury, challenging the premise that only physical health matters for post‑viability abortion restrictions.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro63b",
+    "target": "pro71",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Equating abortion’s justification with that for killing an adult exposes a moral inconsistency, challenging the acceptance of early abortions based on viability.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro27",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The constitutional ruling that a fetus is not a \"person\" undermines the premise that the State can protect fetal life after viability.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro71",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The claim that early suffragists opposed abortion challenges the premise that early abortion is broadly accepted and morally justified.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro71",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "Introducing a Life‑at‑Conception Act asserts that abortion is impermissible, directly opposing the claim that early abortions are socially accepted.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro71",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "If fetuses feel pain during early abortions, the claim that early abortions are more acceptable because the fetus is undeveloped is undermined.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B's claim that women feel overwhelming guilt is used to argue abortions are harmful and thus unjustified, contradicting A's claim that some abortions are not unjustified",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B's report of nightmares suggests abortions cause severe harm, challenging A's assertion that some abortions are justified",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24c",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B's claim of excessive drinking implies negative consequences that can be used to argue abortions are unjustified, opposing A",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24d",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B's allegation of drug abuse after abortion is presented as evidence of harm, undermining A's stance that some abortions are not unjustified",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24e",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B's claim of increased promiscuity is used to portray abortions as socially harmful, conflicting with A's claim of partial justification",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24f",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B's assertion that women cannot maintain relationships after abortion challenges A's view that some abortions are morally permissible",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24g",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B's report of difficulty bonding with later children is presented as a detrimental outcome, opposing A's claim that not all abortions are unjustified",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24h",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B's statement that women suffer in various ways after abortion is used to argue abortions are unjustified, contradicting A",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro63b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Claiming fetal pain introduces a moral difference that challenges the analogy to adult killing.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24d",
+    "target": "pro58",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B claims women who abort report drug abuse, undermining the premise that abortion leads to reduced crime",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24e",
+    "target": "pro58",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B asserts increased promiscuity among women who abort, challenging the claim that abortion reduces crime",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24f",
+    "target": "pro58",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B states women who abort struggle with relationships, which contradicts the notion that abortion has positive social effects like crime reduction",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24g",
+    "target": "pro58",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B reports difficulty bonding with later children after abortion, casting doubt on the claim that abortion reduces crime",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24h",
+    "target": "pro58",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B highlights other suffering of women who abort, which opposes the argument that abortion reduces crime",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The legislation treats the fetus as a person, directly contradicting the court ruling that a fetus is not a person.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The claim that fetuses feel pain implies personhood, challenging the court’s statement that a fetus is not a person.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "con24",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The high rate of repeat abortions reported in A suggests that guilt, claimed as overwhelming in B, does not deter many women, undermining B's premise.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con8",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "A shows only a minority of abortions involve repeat abortions, challenging B's implication that fetal pain is a universal concern for all abortions",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "A limits the population to repeat abortions, undermining B's broad claim that women who have abortions experience overwhelming guilt",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24b",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "By restricting to women with three+ prior abortions, A questions the generality of B's claim about nightmares among all abortion patients",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24c",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "A suggests the statistic applies to a small subset, weakening B's sweeping statement about excessive drinking among women who have abortions",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24d",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "A's focus on repeat abortions challenges B's universal assertion of drug abuse among abortion patients",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24e",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "A indicates only a minority have multiple abortions, casting doubt on B's claim of increased promiscuity for all women who abort",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24f",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "A's data about repeat abortions undermines B's broad claim of relationship difficulties for all women who have abortions",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24g",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "A limits the scope to women with three+ abortions, contradicting B's general statement about bonding difficulties with later children",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "con24h",
+    "type": "NONE",
+    "confidence": 78,
+    "reason": "A's statistic about repeat abortions challenges B's unqualified claim that all women who abort suffer in various ways",
+    "outcome": "accept"
+  }
+]

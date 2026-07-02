@@ -1,0 +1,194 @@
+[
+  {
+    "attacker": "con14",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "Con14 asserts that legalization increases child accessibility, undermining pro15's premise that legalization improves regulation.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The assertion that legalization has been bad for a community challenges the positive outcome (improved regulation) claimed by the pro argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro15b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B claims overall community harm, undermining A's positive tax‑revenue implication",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "pro15b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B asserts higher toxicity, challenging the benefit premise of A",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro15b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B highlights severe health risks, contradicting A's favorable economic claim",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B attacks the notion that prohibition is harmful by portraying users negatively",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con95",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B presents evidence of lasting IQ loss, challenging A's claim that prohibition creates social costs",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro4b",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B claims legalization harms a community, directly opposing A's conclusion that legalization is justified.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "pro4b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B asserts higher toxicity of marijuana, challenging the desirability of legalization promoted by A.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "con14 claims legalization raises child access, contradicting pro4’s conclusion that legalization is beneficial.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "con87 asserts a gateway effect, challenging the desirability of legalization advocated by pro4.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87b",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "con87b opposes marijuana as a starter drug, undermining pro4’s support for legalization.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "con115 cites negative community impact of legalization, countering pro4’s pro‑legalization stance.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro4b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B claims health harms, challenging the desirability of legalization advocated by A",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro4c",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B attacks the desirability of legalization by portraying users negatively",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con95",
+    "target": "pro4c",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B presents evidence of lasting IQ loss, undermining A’s pro‑legalization stance",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro4c",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B argues legalization increases child access, contradicting A’s conclusion",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87",
+    "target": "pro4c",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B claims marijuana is a gateway drug, challenging A’s argument for legalization",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The toxicity claim directly attacks the premise that marijuana is a safer natural alternative.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "The claim that marijuana is terrible for physical health contradicts the notion of it being a beneficial substitute.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87b",
+    "target": "pro4c",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "con87b argues that legalization would create a starter drug, contradicting pro4c's endorsement of legalization.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro4c",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "con115 claims legalization harms the Pueblo community, directly opposing pro4c's claim that legalization is beneficial.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 55,
+    "reason": "con18 suggests negative cognitive effects of regular use, challenging pro95's positive portrayal of marijuana as a beneficial medical substitute.",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "pro32",
+    "target": "con14",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Pro32’s evidence that teen use isn’t rising undermines con14’s claim that legalization will increase child accessibility.",
+    "outcome": "accept"
+  }
+]

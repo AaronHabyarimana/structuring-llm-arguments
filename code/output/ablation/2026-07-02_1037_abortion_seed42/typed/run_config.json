@@ -1,0 +1,15 @@
+{
+  "experiment": "ablation_typed_binary",
+  "variant": "typed",
+  "typed": true,
+  "topic_file": "abortion",
+  "topic_label": "Abortion",
+  "source": "ukp",
+  "seed": 42,
+  "limit": 15,
+  "batch_size": 10,
+  "conf_accept": 70,
+  "conf_verify": 50,
+  "symmetrize_rebuttals": true,
+  "n_atoms": 25
+}

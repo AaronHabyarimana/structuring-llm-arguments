@@ -1,0 +1,186 @@
+[
+  {
+    "attacker": "con23",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Con23 claims strict gun laws fail in Mexico, undermining A's premise that stricter laws would reduce child gun accidents.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23b",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Con23b asserts strict gun control won't work in the US, directly challenging A's implied effectiveness of such laws.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con109 cites studies that firearm education lowers delinquency, contradicting A's implication that guns inherently cause harm to children.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con109b argues children associate guns with positive values, disputing A's premise that guns are a primary danger to kids.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Con8 points to Mexico's high gun murders despite strict laws, challenging A's premise that stricter regulations would lower gun deaths.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro71",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The claim that gun control would hinder protection from foreign invaders contests the notion that the original intent has been perverted.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9a",
+    "target": "pro63",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B shows cars cause more deaths than guns, challenging A's premise that guns are the primary lethal tool and thus cars are not a viable alternative.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro58",
+    "target": "con56",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The high gun homicide count challenges the belief that owning a gun protects people.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The claim that strict gun laws fail in Mexico challenges the premise that reducing gun ownership would lower deaths.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23b",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Stating that gun control won’t work in the US undermines the premise that limiting ownership can reduce gun‑related deaths.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Evidence that firearm education lowers delinquency attacks the premise that guns inherently increase harmful outcomes.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Linking guns to feelings of freedom and safety counters the claim that higher ownership leads to more deaths.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Citing Mexico’s high gun murders despite strict laws challenges the premise that reducing ownership lowers homicide rates.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con56",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Survey data showing public belief that guns protect against victimization undermines the premise that guns primarily increase deaths.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B claims strict gun control won't work, undermining the implication that reducing gun ownership would improve safety.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B presents evidence that firearm education lowers delinquency, challenging A's claim that more guns do not make society safer.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B argues children associate guns with positive values, contradicting A's assertion that higher gun ownership fails to enhance safety.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B cites Mexico's strict laws with high gun murders, challenging the idea that lower gun ownership (or control) would make society safer.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro36b",
+    "target": "con60",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "A claims higher gun ownership raises deaths, undermining B's justification for personal gun-based safety",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro27",
+    "target": "con60",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "A claims armed civilians are unlikely to stop crimes, undermining B's implied premise that taking personal safety into one's own hands (presumably by arming) will be effective.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro27b",
+    "target": "con56",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "A asserts that armed civilians increase deadly outcomes, directly challenging B's premise that gun ownership protects people from victimization.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro27b",
+    "target": "con60",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "A claims armed civilians increase danger, contradicting B's implication that personal self‑protection with firearms is effective.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "con60",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "A’s claim that strict gun laws do not lower homicide rates undermines B’s premise that personal self‑protection (often via firearms) is an effective safety solution.",
+    "outcome": "accept"
+  }
+]

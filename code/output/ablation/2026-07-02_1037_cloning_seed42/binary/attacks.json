@@ -1,0 +1,282 @@
+[
+  {
+    "attacker": "con140",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "The claim that cloned people would lack full rights challenges the ethical acceptability of the proposed cloning for gay women.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Labeling clones as mere copies attacks the premise that cloning can provide a legitimate child for gay women.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "The argument that creating a child solely for another purpose is immoral undermines the moral justification of the proposed cloning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 88,
+    "reason": "Stating that clones often have genetic defects attacks the feasibility of the gay‑women cloning proposal.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152b",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 88,
+    "reason": "The claim that clones are unhealthy challenges the safety of the suggested cloning method.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152c",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Linking genetic defects to premature ageing attacks the viability of using cloning for gay women.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152d",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "B claims cloning causes lethal genetic defects, undermining A's premise that cloning is a viable way for gay women to have a child.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro7",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "B cites an expert denouncing human reproductive cloning as dangerous, challenging A's assumption that cloning can safely be used.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152b",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B claims clones are unhealthy, undermining the value of storing DNA for future cloning",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152c",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B says genetic defects cause premature ageing, challenging the benefit of DNA storage for cloning",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152d",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B asserts defects can lead to death, which contradicts the premise that storing DNA is worthwhile",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 60,
+    "reason": "B raises security concerns about cloning random people, questioning the safety of DNA storage",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B cites an expert denouncing human cloning as dangerous, undermining the justification for DNA storage",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 65,
+    "reason": "B argues cloning could create societal division, challenging the desirability of storing DNA",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 60,
+    "reason": "B states cloning violates individuality and freedom, contradicting the premise of storing DNA",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B claims cloned people lack full rights, undermining the desirability of storing DNA for future cloning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B's assertion that clones are merely copies challenges the premise that storing DNA for cloning is ethically acceptable.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B argues that creating a child solely to save another is immoral, attacking the ethical basis of storing DNA for cloning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro71b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B points out genetic defects in clones, which undermines the presumed benefit of keeping DNA for future cloning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Claiming clones would lack full rights challenges the implication that they possess individuality.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Stating clones are merely copies directly contradicts the assertion that they are not carbon copies lacking individuality.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "Suggesting perfect clones would be treated differently implies they lack full individuality, challenging pro36's claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Stating cloning leads to a lack of uniqueness directly contradicts the claim that clones are not carbon copies without individuality.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Arguing cloning violates convictions about individuality directly opposes pro36's assertion of clone individuality.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Calling cloned people \"just copies\" undermines the premise that reproductive cloning can yield distinct, genetically related children.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B claims cloning violates humanity, challenging the moral acceptability of A's proposed benefit",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "B asserts clones have genetic defects, directly undermining A's claim that cloning can provide viable children",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152b",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "B states clones are unhealthy, contradicting A's premise of providing healthy offspring",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152c",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B links genetic defects to premature ageing, negating A's benefit of a normal lifespan for cloned children",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152d",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B argues defects can cause death, refuting A's claim that cloning yields living children",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B cites expert warning that cloning is too dangerous, attacking the feasibility of A's benefit claim",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B warns of new societal divisions, presenting a social cost that opposes A's positive framing",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B predicts differential treatment of clones, undermining the assumed benefit of having a genetically related child",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro27",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B argues cloning erodes uniqueness, challenging the value of the children A claims cloning would provide",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "con8b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The claim that clones have built‑in defects undermines the premise that ‘perfect’ clones could exist and be treated differently.",
+    "outcome": "accept"
+  }
+]

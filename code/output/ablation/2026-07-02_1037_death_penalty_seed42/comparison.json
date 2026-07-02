@@ -1,0 +1,70 @@
+{
+  "topic_file": "death_penalty",
+  "topic_label": "Death Penalty",
+  "n_atoms": 18,
+  "typed": {
+    "n_edges_raw": 57,
+    "n_edges_final": 68,
+    "grounded": 3,
+    "n_preferred": 3,
+    "n_stable": 3,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 232.799,
+      "solve_s": 0.145
+    }
+  },
+  "binary": {
+    "n_edges_raw": 51,
+    "n_edges_final": 51,
+    "grounded": 10,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 137.934,
+      "solve_s": 0.134
+    }
+  },
+  "jaccard_directed_raw": 0.7143,
+  "jaccard_directed_final": 0.7,
+  "jaccard_undirected": 0.8305,
+  "directed_raw": {
+    "intersection": 45,
+    "typed_only": [
+      "con174->pro4b",
+      "con189->pro4b",
+      "con189->pro95",
+      "con27->pro4b",
+      "con36->pro4b",
+      "con36->pro95",
+      "pro15->con140",
+      "pro32->con189",
+      "pro32->con36",
+      "pro95->con140",
+      "pro95->con174",
+      "pro95->con229"
+    ],
+    "binary_only": [
+      "con140->pro15",
+      "con189->pro32",
+      "con229->pro95",
+      "con27->pro95",
+      "con36->pro32",
+      "pro36->pro15"
+    ]
+  },
+  "undirected": {
+    "intersection": 49,
+    "typed_only": 8,
+    "binary_only": 2
+  }
+}

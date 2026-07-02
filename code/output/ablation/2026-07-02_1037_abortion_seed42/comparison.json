@@ -1,0 +1,107 @@
+{
+  "topic_file": "abortion",
+  "topic_label": "Abortion",
+  "n_atoms": 25,
+  "typed": {
+    "n_edges_raw": 26,
+    "n_edges_final": 41,
+    "grounded": 7,
+    "n_preferred": 4,
+    "n_stable": 4,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 337.319,
+      "solve_s": 0.166
+    }
+  },
+  "binary": {
+    "n_edges_raw": 39,
+    "n_edges_final": 39,
+    "grounded": 11,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 279.165,
+      "solve_s": 0.145
+    }
+  },
+  "jaccard_directed_raw": 0.0833,
+  "jaccard_directed_final": 0.0811,
+  "jaccard_undirected": 0.1207,
+  "directed_raw": {
+    "intersection": 5,
+    "typed_only": [
+      "con140b->pro63",
+      "con140b->pro63b",
+      "con152->pro63",
+      "con152->pro63b",
+      "con23->pro63",
+      "con23->pro63b",
+      "con23b->pro63",
+      "con23b->pro63b",
+      "con24->pro29b",
+      "con24b->pro29b",
+      "con8->pro29b",
+      "pro7->pro27",
+      "pro71->con24",
+      "pro71->con24b",
+      "pro71->con24c",
+      "pro71->con24d",
+      "pro71->con24e",
+      "pro71->con24f",
+      "pro71->con24g",
+      "pro71->con24h",
+      "pro71->con8"
+    ],
+    "binary_only": [
+      "con109->con24",
+      "con109b->con24",
+      "con109b->con24b",
+      "con109b->con24c",
+      "con109b->con24d",
+      "con109b->con24e",
+      "con109b->con24f",
+      "con109b->con24g",
+      "con109b->con24h",
+      "con109b->con8",
+      "con140b->pro71",
+      "con152->pro71",
+      "con24->pro63",
+      "con24->pro7",
+      "con24b->pro63",
+      "con24b->pro7",
+      "con24c->pro63",
+      "con24d->pro58",
+      "con24d->pro63",
+      "con24e->pro58",
+      "con24e->pro63",
+      "con24f->pro58",
+      "con24f->pro63",
+      "con24g->pro58",
+      "con24g->pro63",
+      "con24h->pro58",
+      "con24h->pro63",
+      "con8->pro27",
+      "con8->pro63b",
+      "con8->pro71",
+      "pro27->pro7",
+      "pro29->con23",
+      "pro29->pro7",
+      "pro63b->pro71"
+    ]
+  },
+  "undirected": {
+    "intersection": 7,
+    "typed_only": 19,
+    "binary_only": 32
+  }
+}

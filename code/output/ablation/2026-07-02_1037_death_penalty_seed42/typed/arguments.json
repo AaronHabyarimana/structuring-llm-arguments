@@ -1,0 +1,128 @@
+[
+  {
+    "id": "pro82",
+    "text": "On the contrary, sometimes defendants insist on execution.",
+    "stance": "pro",
+    "atomized_from": "pro82",
+    "original_text": "On the contrary , sometimes defendants insist on execution ."
+  },
+  {
+    "id": "pro15",
+    "text": "Deserved punishment protects society morally by restoring the just order.",
+    "stance": "pro",
+    "atomized_from": "pro15",
+    "original_text": "Deserved punishment protects society morally by restoring this just order , making the wrongdoer pay a price equivalent to the harm he has done ."
+  },
+  {
+    "id": "pro15b",
+    "text": "Deserved punishment makes the wrongdoer pay a price equivalent to the harm the wrongdoer has caused.",
+    "stance": "pro",
+    "atomized_from": "pro15",
+    "original_text": "Deserved punishment protects society morally by restoring this just order , making the wrongdoer pay a price equivalent to the harm he has done ."
+  },
+  {
+    "id": "pro4",
+    "text": "The framers of the Constitution clearly believed that capital punishment was an acceptable means of protecting society from wicked dissolute men.",
+    "stance": "pro",
+    "atomized_from": "pro4",
+    "original_text": "The framers of the constitution clearly believed that Capital punishment was an acceptable mess of protecting society form ï ¿ ½ wicked dissolute menï ¿ ½ Thomas Jefferson liked to talk about it ( Carrington , F. , 1978 ) ."
+  },
+  {
+    "id": "pro4b",
+    "text": "Thomas Jefferson liked to talk about capital punishment.",
+    "stance": "pro",
+    "atomized_from": "pro4",
+    "original_text": "The framers of the constitution clearly believed that Capital punishment was an acceptable mess of protecting society form ï ¿ ½ wicked dissolute menï ¿ ½ Thomas Jefferson liked to talk about it ( Carrington , F. , 1978 ) ."
+  },
+  {
+    "id": "pro95",
+    "text": "The fact has been proven that these killers reoffend repeatedly.",
+    "stance": "pro",
+    "atomized_from": "pro95",
+    "original_text": "It has been proven these killers do it again and again ."
+  },
+  {
+    "id": "pro36",
+    "text": "If the criminal knows that the justice system will not stop at putting him to death, then the system appears more draconian to him.",
+    "stance": "pro",
+    "atomized_from": "pro36",
+    "original_text": "If the criminal knows that the justice system will not stop at putting him to death , then the system appears more draconian to him ."
+  },
+  {
+    "id": "pro32",
+    "text": "Retribution or \"an eye for an eye\" honors the victim.",
+    "stance": "pro",
+    "atomized_from": "pro32",
+    "original_text": "They argue that retribution or \" an eye for an eye \" honors the victim , helps console grieving families , and ensures that the perpetrators of heinous crimes never have an opportunity to cause future tragedy ."
+  },
+  {
+    "id": "pro32b",
+    "text": "Retribution or \"an eye for an eye\" helps console grieving families.",
+    "stance": "pro",
+    "atomized_from": "pro32",
+    "original_text": "They argue that retribution or \" an eye for an eye \" honors the victim , helps console grieving families , and ensures that the perpetrators of heinous crimes never have an opportunity to cause future tragedy ."
+  },
+  {
+    "id": "pro32c",
+    "text": "Retribution or \"an eye for an eye\" ensures that perpetrators of heinous crimes never have an opportunity to cause future tragedy.",
+    "stance": "pro",
+    "atomized_from": "pro32",
+    "original_text": "They argue that retribution or \" an eye for an eye \" honors the victim , helps console grieving families , and ensures that the perpetrators of heinous crimes never have an opportunity to cause future tragedy ."
+  },
+  {
+    "id": "pro29",
+    "text": "Capital punishment is a threat to criminals.",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "Even though capital punishment is not used so often , it still is a threat to the criminal ."
+  },
+  {
+    "id": "con36",
+    "text": "The sad thing about the death penalty, according to those who are opposed, is that innocence is proven after the execution has been carried out.",
+    "stance": "con",
+    "atomized_from": "con36",
+    "original_text": "The sad thing about this , according to those who are opposed is that innocence is proven after the execution has been carried out ."
+  },
+  {
+    "id": "con189",
+    "text": "Once an inmate is executed, nothing can be done to make amends if a mistake has been made.",
+    "stance": "con",
+    "atomized_from": "con189",
+    "original_text": "Once an inmate is executed , nothing can be done to make amends if a mistake has been made ."
+  },
+  {
+    "id": "con27",
+    "text": "Thus, for every seven people executed, we have found one person on death row who never should have been convicted.",
+    "stance": "con",
+    "atomized_from": "con27",
+    "original_text": "Thus , for every seven people executed , we have found one person on death row who never should have been convicted ."
+  },
+  {
+    "id": "con174",
+    "text": "Capital punishment means that people without capital receive the punishment.",
+    "stance": "con",
+    "atomized_from": "con174",
+    "original_text": "As the saying goes : ' Capital punishment means them without the capital get the punishment . ' \""
+  },
+  {
+    "id": "con190",
+    "text": "Is it fair that a person should be murdered just because the person was unlucky enough to be born with a brain defect?",
+    "stance": "con",
+    "atomized_from": "con190",
+    "original_text": "Is it fair that someone should be murdered just because they were unlucky enough to be born with a brain defect ."
+  },
+  {
+    "id": "con229",
+    "text": "A recent study by Columbia University Law School found that two thirds of all capital trials contained serious errors.",
+    "stance": "con",
+    "atomized_from": "con229",
+    "original_text": "A recent study by Columbia University Law School found that two thirds of all capital trials contained serious errors ."
+  },
+  {
+    "id": "con140",
+    "text": "Allowing executions sanctions killing as a form of pay‑back.",
+    "stance": "con",
+    "atomized_from": "con140",
+    "original_text": "Allowing executions sanctions killing as a form of ' pay-back . '"
+  }
+]

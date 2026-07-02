@@ -1,0 +1,474 @@
+[
+  {
+    "attacker": "con152b",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 85,
+    "reason": "B claims clones are unhealthy, showing A's conclusion that stem‑cell plasticity makes cloning beneficial does not follow even if the premise holds",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152c",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 85,
+    "reason": "B argues genetic defects cause premature ageing, undermining the inference that stem‑cell versatility guarantees safe cloning",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152d",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 85,
+    "reason": "B states such defects can lead to death, indicating A's positive claim about stem‑cell use does not guarantee a safe outcome",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 80,
+    "reason": "B raises the risk of misuse (collecting cells and cloning random people), showing A's technical claim does not ensure ethical acceptability",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 80,
+    "reason": "B cites an expert denouncing human reproductive cloning as dangerous, challenging the implication that stem‑cell plasticity makes cloning advisable",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 80,
+    "reason": "B points to potential new societal divisions, indicating A's technical advantage does not automatically lead to a positive overall outcome",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 80,
+    "reason": "B argues perfect clones would be treated differently, showing A's claim about cell versatility does not guarantee social fairness",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 75,
+    "reason": "B claims cloning would erode uniqueness, contesting the desirability of the capability highlighted by A",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro29",
+    "type": "undercutting",
+    "confidence": 75,
+    "reason": "B asserts cloning violates convictions about individuality and freedom, challenging the positive inference drawn from A's premise",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro29",
+    "target": "con140b",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Pro29's claim that embryonic stem cells can be directed to any cell type challenges the premise that clones are merely identical copies.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro29",
+    "target": "con152",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Pro29 suggests we can manipulate stem cells to any cell type, which undermines the premise that clones inevitably carry genetic defects.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Con140 challenges the premise that cloning is ethically acceptable by asserting cloned individuals would lack full rights.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro7",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "Con140b claims clones are merely copies, contradicting pro7's implication that the child would be a unique offspring of the two women.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "Con152 asserts clones have genetic defects, undermining the feasibility premise of pro7's proposed cloning method.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152b",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "Con152b states clones are unhealthy, directly challenging the premise that cloning can safely provide a child for gay women.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152c",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con152c highlights that genetic defects cause premature ageing, further undermining the premise of safe, viable cloning in pro7.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152d",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "con152d challenges the safety premise of cloning, undermining pro7's claim that gay women could successfully use the technology",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "con9 cites an expert denouncing human cloning as dangerous, attacking the safety premise behind pro7",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "con8 argues cloning would create societal divisions, undermining the assumption that the technology is socially acceptable for gay couples",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "con8b claims clones would be treated differently, challenging the premise that cloning would be a fair solution for gay women",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "con24 asserts cloning eliminates uniqueness, attacking the desirability premise of pro7's proposal",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro7",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "con24b states cloning violates convictions about individuality and freedom, undermining the ethical premise of pro7",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152b",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "The claim that clones are unhealthy challenges the premise that storing DNA for future cloning is safe or desirable.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152c",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Highlighting genetic defects leading to premature ageing attacks the safety premise underlying the pro claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152d",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Stating that defects can cause death undermines the premise that cloning is a viable future option.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "Raising the risk of unauthorized cell collection attacks the assumption that DNA storage is secure and ethically acceptable.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Citing an expert who denounces cloning as dangerous undermines the premise that cloning is a safe prospect.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "The claim that cloning could create new societal divisions challenges the premise that cloning is socially benign.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "Suggesting perfect clones would be treated differently attacks the premise that cloning would not cause discrimination.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "The argument that cloning leads to a lack of uniqueness undermines the premise that cloning is a desirable outcome.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro71b",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "Claiming cloning violates convictions about individuality and freedom attacks the ethical premise supporting DNA storage for cloning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro36",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "'Cloned people are just copies' directly contradicts 'clones are not carbon copies with no individuality'.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 90,
+    "reason": "The con claim attacks the ethical premise that creating a child for a specific purpose is acceptable.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro27",
+    "type": "undercutting",
+    "confidence": 85,
+    "reason": "It argues that genetic defects mean the conclusion that cloning provides viable children does not follow.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152b",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "The claim that clones are unhealthy challenges the premise that cloning yields healthy offspring.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152c",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "It asserts that defects cause premature ageing, undermining the premise that cloned children will be a beneficial solution.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152d",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "It claims defects can lead to death, attacking the premise that cloning can safely provide children.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 90,
+    "reason": "Wilmut’s denouncement questions the safety premise underlying the pro argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "The claim of new societal divisions attacks the premise that cloning is socially acceptable.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 85,
+    "reason": "It argues that perfect clones would be treated differently, undermining the premise of equal social status for cloned children.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "The lack of uniqueness claim challenges the premise that cloning is a desirable way to have children.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro36",
+    "type": "rebuttal",
+    "confidence": 70,
+    "reason": "Con asserts perfect clones would be treated differently, implying lack of individuality, which contradicts the pro claim that clones have individuality.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24",
+    "target": "pro36",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "Con claims cloning leads to a lack of uniqueness, directly opposing the pro claim that clones are not carbon copies without individuality.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con24b",
+    "target": "pro36",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "Con states cloning violates convictions about human individuality, directly contradicting the pro assertion of clone individuality.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro27",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con argues cloned people would lack full rights, undermining the premise that cloning provides a beneficial solution for childless couples.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro27",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "Con claims cloned people are merely copies, contradicting the pro claim that cloning yields genetically related children for those unable to conceive.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "con23",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "A's claim that clones are merely copies challenges the premise that a child created for saving another is a unique individual, undermining B's moral argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "con8b",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "If clones are merely copies, the claim that perfect clones would be treated differently contradicts that conclusion.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "con8",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Wilmut’s claim that cloning is too dangerous attacks the premise that cloning will occur, which underlies the societal division argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "con8b",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "If cloning is too dangerous to attempt, the premise that perfect clones will exist (needed for differential treatment) is weakened.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "con24",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Wilmut’s safety objection undermines the assumption that cloning will happen, which is required for the lack‑uniqueness claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "con24b",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "The danger argument challenges the premise that cloning will be realized, thereby weakening the individuality‑violation claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro7",
+    "target": "con140b",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] Con140b claims clones are merely copies, contradicting pro7's implication that the child would be a unique offspring of the two women.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro36",
+    "target": "con140b",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] 'Cloned people are just copies' directly contradicts 'clones are not carbon copies with no individuality'.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro36",
+    "target": "con8b",
+    "type": "rebuttal",
+    "confidence": 70,
+    "reason": "[symmetric rebuttal] Con asserts perfect clones would be treated differently, implying lack of individuality, which contradicts the pro claim that clones have individuality.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro36",
+    "target": "con24",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] Con claims cloning leads to a lack of uniqueness, directly opposing the pro claim that clones are not carbon copies without individuality.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro36",
+    "target": "con24b",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "[symmetric rebuttal] Con states cloning violates convictions about human individuality, directly contradicting the pro assertion of clone individuality.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro27",
+    "target": "con140b",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "[symmetric rebuttal] Con claims cloned people are merely copies, contradicting the pro claim that cloning yields genetically related children for those unable to conceive.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con8b",
+    "target": "con140b",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] If clones are merely copies, the claim that perfect clones would be treated differently contradicts that conclusion.",
+    "outcome": "symmetric-rebuttal"
+  }
+]

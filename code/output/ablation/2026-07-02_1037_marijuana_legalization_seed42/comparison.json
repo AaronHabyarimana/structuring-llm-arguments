@@ -1,0 +1,75 @@
+{
+  "topic_file": "marijuana_legalization",
+  "topic_label": "Marijuana Legalization",
+  "n_atoms": 20,
+  "typed": {
+    "n_edges_raw": 31,
+    "n_edges_final": 41,
+    "grounded": 13,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 242.72,
+      "solve_s": 0.136
+    }
+  },
+  "binary": {
+    "n_edges_raw": 24,
+    "n_edges_final": 24,
+    "grounded": 13,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 155.306,
+      "solve_s": 0.132
+    }
+  },
+  "jaccard_directed_raw": 0.4103,
+  "jaccard_directed_final": 0.413,
+  "jaccard_undirected": 0.5278,
+  "directed_raw": {
+    "intersection": 16,
+    "typed_only": [
+      "con115->pro36b",
+      "con12->pro36b",
+      "con14->pro36b",
+      "con18->pro36b",
+      "con70->pro36b",
+      "con87->pro36b",
+      "con87b->pro36b",
+      "con87c->pro36b",
+      "con95->pro36b",
+      "con95->pro82",
+      "con95->pro95",
+      "pro15->con14",
+      "pro29->pro36b",
+      "pro4c->con115",
+      "pro4c->con87b"
+    ],
+    "binary_only": [
+      "con115->pro15",
+      "con115->pro15b",
+      "con115->pro4c",
+      "con12->pro15b",
+      "con14->pro15",
+      "con70->pro15b",
+      "con70->pro4b",
+      "con87b->pro4c"
+    ]
+  },
+  "undirected": {
+    "intersection": 19,
+    "typed_only": 12,
+    "binary_only": 5
+  }
+}

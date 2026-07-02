@@ -1,0 +1,338 @@
+[
+  {
+    "attacker": "con36",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The con claim that an ugly uniform highlights individual issues challenges the premise that uniforms foster community support for troubled students.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Con argues the policy is illegal, undermining the legitimacy of any claimed community support.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27b",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "Con claims the policy violates freedom of expression, challenging the premise that uniforms can positively support students.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27c",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con highlights high uniform costs, suggesting the policy may hinder rather than help troubled students.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con asserts uniforms emphasize class distinctions, contradicting the idea they foster community support.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Con cites research showing higher self‑perception without uniforms, directly refuting the support claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Con argues uniforms cannot solve serious discipline or academic issues, challenging the claimed benefit for troubled students.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con states uniforms hinder transition to adulthood, opposing the notion they provide supportive community feelings.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Pointing out that most uniform schools are in poor neighborhoods suggests safety may be due to socioeconomic factors, undermining the claim that uniforms cause safety.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro32",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The claim that girls should avoid pressure implies uniforms are a pressure, contradicting the idea that they improve perception",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Calling uniforms 'ugly' undermines the claim that they lead to better perception",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B argues uniforms reinforce class distinctions, undermining A's premise that uniforms improve perception.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "B cites evidence that non‑uniformed students have higher self‑perception, directly contradicting A's claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B claims uniforms hinder adulthood transition, challenging the positive perception asserted by A.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 92,
+    "reason": "Con36 claims ugly uniforms highlight self‑centered issues, undermining pro95’s positive view of uniforms.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Con27 argues uniforms violate the guarantee of free public education, directly challenging the legitimacy of pro95’s endorsement.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27b",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Con27b says uniforms breach children’s freedom of expression, attacking the premise of pro95’s benefit claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27c",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Con27c highlights the high cost to parents, undermining the claim that uniforms are an unproblematic improvement.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Con140 points out that uniform policies are concentrated in poor neighborhoods, questioning the universal benefit asserted by pro95.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 93,
+    "reason": "Con140b argues uniforms emphasize class distinctions, directly contradicting pro95’s claim that they improve focus.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 96,
+    "reason": "Con23 cites research showing higher self‑perception without uniforms, refuting pro95’s implication that uniforms aid learning and wellbeing.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "B argues uniforms won’t solve discipline or academic problems, directly challenging A’s claim that uniforms help focus on learning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B claims uniforms hinder students' transition to adulthood, undermining A’s assertion that uniforms improve focus.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B points out limited clothing choices for males, contradicting A’s positive view of uniforms for learning focus.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro95",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B highlights limited choices for females, challenging A’s claim that uniforms are beneficial for learning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B suggests an ugly uniform creates a distraction, countering A’s claim that uniforms reduce distraction.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B argues uniforms violate free public education, challenging the justification behind A’s benefit claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B claims uniforms breach freedom of expression, opposing A’s positive assertion about reduced distraction.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B shows that limited choices for females may cause distraction, undermining A's claim that uniforms reduce distraction",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B’s claim that uniforms violate the guarantee of free public education undermines the implicit premise in A that a uniform policy is feasible and acceptable.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro36b",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B claims uniforms highlight class differences, which would likely increase drama, contradicting A's claim that uniforms provide less drama.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro36c",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The claim that an ugly uniform makes the issue personal challenges the idea that uniforms improve focus on learning.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro36c",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B claims uniforms highlight class differences, undermining the premise that they improve learning focus.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro36c",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B argues uniforms are unlikely to solve discipline and academic problems, directly challenging the claim that they boost learning focus.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro36c",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B suggests uniforms hinder adulthood transition, which can be seen as undermining the benefit of increased learning focus.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro32",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "The study showing higher self‑perception without uniforms challenges the idea that uniforms protect girls from pressure",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro32",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Arguing that uniform rules won’t solve discipline issues undermines the claim that uniforms prevent pressure on girls",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro32b",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Labeling uniforms as ugly contradicts the claim that girls actually welcome wearing them",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro32b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "The con claim argues the policy is illegal, showing that even if girls welcome uniforms the policy’s justification fails.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27b",
+    "target": "pro32b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "Violating freedom of expression undermines the conclusion that a uniform is acceptable despite girls’ preference.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro32b",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Evidence that non‑uniformed students have higher self‑perception suggests the uniform may not be positively received.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con8b",
+    "target": "pro32b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "Limited choices for females contradicts the claim that girls actually welcome wearing a uniform.",
+    "outcome": "accept"
+  }
+]

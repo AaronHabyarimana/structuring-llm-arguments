@@ -1,0 +1,156 @@
+[
+  {
+    "id": "pro82",
+    "text": "Storage is safe and secure",
+    "stance": "pro",
+    "atomized_from": "pro82",
+    "original_text": "Storage is safe and secure , plans are well in hand for eventual disposal ."
+  },
+  {
+    "id": "pro82b",
+    "text": "Plans are well in hand for eventual disposal",
+    "stance": "pro",
+    "atomized_from": "pro82",
+    "original_text": "Storage is safe and secure , plans are well in hand for eventual disposal ."
+  },
+  {
+    "id": "pro15",
+    "text": "Civil waste and spent fuel storage is robust",
+    "stance": "pro",
+    "atomized_from": "pro15",
+    "original_text": "Civil waste and spent fuel storage is also robust and often below ground level ."
+  },
+  {
+    "id": "pro15b",
+    "text": "Civil waste and spent fuel storage is often below ground level",
+    "stance": "pro",
+    "atomized_from": "pro15",
+    "original_text": "Civil waste and spent fuel storage is also robust and often below ground level ."
+  },
+  {
+    "id": "pro4",
+    "text": "Nuclear power is virtually emission-free regarding CO2 and therefore merits at least grudging support as part of the response to increasing atmospheric CO2 levels and depletion of fossil fuels.",
+    "stance": "pro",
+    "atomized_from": "pro4",
+    "original_text": "They have to varying degrees either changed their public stance , or conceded that since nuclear power is virtually emission-free regarding CO2 , it merits at least grudging support as part of the response to increasing atmospheric CO2 levels and depletion of fossil fuels ."
+  },
+  {
+    "id": "pro95",
+    "text": "Low levels of radiation comparable to those received naturally in some places are not harmful.",
+    "stance": "pro",
+    "atomized_from": "pro95",
+    "original_text": "Low levels of radiation comparable to those received naturally in some places are not harmful ."
+  },
+  {
+    "id": "pro36",
+    "text": "If external costs are accounted for, nuclear is very competitive.",
+    "stance": "pro",
+    "atomized_from": "pro36",
+    "original_text": "If external costs are accounted , nuclear is very competitive ."
+  },
+  {
+    "id": "pro32",
+    "text": "Also, if we know how to control atomic fusion, the same reactions that fuel the sun, we can have almost unlimited energy.",
+    "stance": "pro",
+    "atomized_from": "pro32",
+    "original_text": "Also , if we know how to control atomic fusion , the same reactions that fuel the sun , we can have almost unlimited energy ."
+  },
+  {
+    "id": "pro29",
+    "text": "Nuclear is much cheaper than wind or photovoltaic power.",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "Nuclear is much cheaper than wind or PV and for wind and solar greens always argue , yes the costs high , but we have to bear them for the sake of the environment ."
+  },
+  {
+    "id": "pro29b",
+    "text": "We have to bear the high costs of wind and solar for the sake of the environment.",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "Nuclear is much cheaper than wind or PV and for wind and solar greens always argue , yes the costs high , but we have to bear them for the sake of the environment ."
+  },
+  {
+    "id": "con36",
+    "text": "Nuclear wastes (as, or in, spent fuel) are an unresolved problem.",
+    "stance": "con",
+    "atomized_from": "con36",
+    "original_text": "Nuclear wastes ( as , or in , spent fuel ) are an unresolved problem ."
+  },
+  {
+    "id": "con27",
+    "text": "Uranium sources are just as finite as other fuel sources such as coal and natural gas.",
+    "stance": "con",
+    "atomized_from": "con27",
+    "original_text": "* Uranium sources are just as finite as other fuel sources , such as coal , natural gas , etc. , and are expensive to mine , refine , and transport , and produce considerable environmental waste ( including greenhouse gasses ) during all of these processes ."
+  },
+  {
+    "id": "con27b",
+    "text": "Uranium is expensive to mine, refine, and transport.",
+    "stance": "con",
+    "atomized_from": "con27",
+    "original_text": "* Uranium sources are just as finite as other fuel sources , such as coal , natural gas , etc. , and are expensive to mine , refine , and transport , and produce considerable environmental waste ( including greenhouse gasses ) during all of these processes ."
+  },
+  {
+    "id": "con27c",
+    "text": "Uranium production produces considerable environmental waste, including greenhouse gases, during all of these processes.",
+    "stance": "con",
+    "atomized_from": "con27",
+    "original_text": "* Uranium sources are just as finite as other fuel sources , such as coal , natural gas , etc. , and are expensive to mine , refine , and transport , and produce considerable environmental waste ( including greenhouse gasses ) during all of these processes ."
+  },
+  {
+    "id": "con140",
+    "text": "Cooling nuclear power plant operations often requires a whole lot of water.",
+    "stance": "con",
+    "atomized_from": "con140",
+    "original_text": "Cooling those operations often requires a whole lot of water , the drawing and releasing of which can affect aquatic wildlife ."
+  },
+  {
+    "id": "con140b",
+    "text": "The drawing and releasing of that water can affect aquatic wildlife.",
+    "stance": "con",
+    "atomized_from": "con140",
+    "original_text": "Cooling those operations often requires a whole lot of water , the drawing and releasing of which can affect aquatic wildlife ."
+  },
+  {
+    "id": "con23",
+    "text": "Building a plant with 100% security is technically impossible.",
+    "stance": "con",
+    "atomized_from": "con23",
+    "original_text": "It is technically impossible to build a plant with 100 % security ."
+  },
+  {
+    "id": "con152",
+    "text": "One of the biggest issues is environmental impact in relation to uranium.",
+    "stance": "con",
+    "atomized_from": "con152",
+    "original_text": "Environmental Impact : One of the biggest issues is environmental impact in relation to uranium ."
+  },
+  {
+    "id": "con109",
+    "text": "The $12 billion to $18 billion price estimate for a large plant in Florida excludes the nuclear industry's history of 250 % cost overruns.",
+    "stance": "con",
+    "atomized_from": "con109",
+    "original_text": "But as Michael Grunwald noted in Time , recent price estimates for a large plant in Florida came in at $ 12 billion to $ 18 billion , and that 's before you consider the fact that the nuclear industry has a history of 250-percent cost overruns.Some analysts say alternative methods would yield much more climate-saving bang for our buck than nuclear power ."
+  },
+  {
+    "id": "con109b",
+    "text": "Some analysts claim that alternative methods would yield much more climate‑saving bang for our buck than nuclear power.",
+    "stance": "con",
+    "atomized_from": "con109",
+    "original_text": "But as Michael Grunwald noted in Time , recent price estimates for a large plant in Florida came in at $ 12 billion to $ 18 billion , and that 's before you consider the fact that the nuclear industry has a history of 250-percent cost overruns.Some analysts say alternative methods would yield much more climate-saving bang for our buck than nuclear power ."
+  },
+  {
+    "id": "con9",
+    "text": "Nuclear power plants could be preferred targets for terrorist attacks.",
+    "stance": "con",
+    "atomized_from": "con9",
+    "original_text": "Nuclear power plants as well as nuclear waste could be preferred targets for terrorist attacks ."
+  },
+  {
+    "id": "con9b",
+    "text": "Nuclear waste could be preferred targets for terrorist attacks.",
+    "stance": "con",
+    "atomized_from": "con9",
+    "original_text": "Nuclear power plants as well as nuclear waste could be preferred targets for terrorist attacks ."
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "id": "pro82",
+    "text": "Increasing the minimum wage would allow teens to work fewer hours for the same amount of pay, giving teens more time to study.",
+    "stance": "pro",
+    "atomized_from": "pro82",
+    "original_text": "Increasing the minimum wage would allow teens to work fewer hours for the same amount of pay giving them more time to study and reducing the likelihood that they would drop out of high school ."
+  },
+  {
+    "id": "pro82b",
+    "text": "Increasing the minimum wage would reduce the likelihood that teens would drop out of high school.",
+    "stance": "pro",
+    "atomized_from": "pro82",
+    "original_text": "Increasing the minimum wage would allow teens to work fewer hours for the same amount of pay giving them more time to study and reducing the likelihood that they would drop out of high school ."
+  },
+  {
+    "id": "pro15",
+    "text": "Raising the federal minimum wage will benefit workers in states where the hourly minimum rate is already higher than the federal minimum.",
+    "stance": "pro",
+    "atomized_from": "pro15",
+    "original_text": "Myth : Raising the federal minimum wage wo n't benefit workers in states where the hourly minimum rate is already higher than the federal minimum ."
+  },
+  {
+    "id": "pro4",
+    "text": "Improvements in productivity have outpaced increases in the minimum wage.",
+    "stance": "pro",
+    "atomized_from": "pro4",
+    "original_text": "Improvements in productivity and economic growth have outpaced increases in the minimum wage ."
+  },
+  {
+    "id": "pro4b",
+    "text": "Improvements in economic growth have outpaced increases in the minimum wage.",
+    "stance": "pro",
+    "atomized_from": "pro4",
+    "original_text": "Improvements in productivity and economic growth have outpaced increases in the minimum wage ."
+  },
+  {
+    "id": "pro95",
+    "text": "Firms are allowed to pay poverty-level wages to 3.6 million people, which is 5 percent of the workforce.",
+    "stance": "pro",
+    "atomized_from": "pro95",
+    "original_text": "Since firms are allowed to pay poverty-level wages to 3.6 million people -- 5 percent of the workforce -- these workers must rely on Federal income support programs ."
+  },
+  {
+    "id": "pro95b",
+    "text": "The 3.6 million workers who receive poverty-level wages must rely on Federal income support programs.",
+    "stance": "pro",
+    "atomized_from": "pro95",
+    "original_text": "Since firms are allowed to pay poverty-level wages to 3.6 million people -- 5 percent of the workforce -- these workers must rely on Federal income support programs ."
+  },
+  {
+    "id": "pro36",
+    "text": "Our preliminary analysis of grocery, retail, gasoline, and rent prices has found little or no evidence of price increases in Seattle relative to the surrounding areas, the researchers concluded.",
+    "stance": "pro",
+    "atomized_from": "pro36",
+    "original_text": "“ Our preliminary analysis of grocery , retail , gasoline , and rent prices has found little or no evidence of price increases in Seattle relative to the surrounding areas , ” the researchers concluded ."
+  },
+  {
+    "id": "pro32",
+    "text": "For more than 75 years, real GDP per capita has steadily increased, even when the minimum wage has been raised.",
+    "stance": "pro",
+    "atomized_from": "pro32",
+    "original_text": "For more than 75 years , real GDP per capita has steadily increased , even when the minimum wage has been raised ."
+  },
+  {
+    "id": "pro29",
+    "text": "When adjusted for inflation, the current federal minimum wage would need to be more than $8 per hour to equal its buying power of the early 1980s.",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "Not true : While the federal minimum wage was only $ 3.35 per hour in 1981 and is currently $ 7.25 per hour in real dollars , when adjusted for inflation , the current federal minimum wage would need to be more than $ 8 per hour to equal its buying power of the early 1980s and more nearly $ 11 per hour to equal its buying power of the late 1960s ."
+  },
+  {
+    "id": "pro29b",
+    "text": "When adjusted for inflation, the current federal minimum wage would need to be nearly $11 per hour to equal its buying power of the late 1960s.",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "Not true : While the federal minimum wage was only $ 3.35 per hour in 1981 and is currently $ 7.25 per hour in real dollars , when adjusted for inflation , the current federal minimum wage would need to be more than $ 8 per hour to equal its buying power of the early 1980s and more nearly $ 11 per hour to equal its buying power of the late 1960s ."
+  },
+  {
+    "id": "con18",
+    "text": "Why pay a clerk a high wage to take an order when you can automate by putting up a kiosk ?",
+    "stance": "con",
+    "atomized_from": "con18",
+    "original_text": "Why pay a clerk a high wage to take an order when you can automate by putting up a kiosk ?"
+  },
+  {
+    "id": "con14",
+    "text": "The company may start outsourcing jobs to employees in countries that are willing to work for much less than $10.10 per hour.",
+    "stance": "con",
+    "atomized_from": "con14",
+    "original_text": "Or instead of hiring fewer employees , the company may start outsourcing jobs to employees in countries that are willing to work for much less than $ 10.10 per hour , resulting in fewer jobs for Americans ."
+  },
+  {
+    "id": "con14b",
+    "text": "Outsourcing jobs to cheaper foreign workers would result in fewer jobs for Americans.",
+    "stance": "con",
+    "atomized_from": "con14",
+    "original_text": "Or instead of hiring fewer employees , the company may start outsourcing jobs to employees in countries that are willing to work for much less than $ 10.10 per hour , resulting in fewer jobs for Americans ."
+  },
+  {
+    "id": "con87",
+    "text": "Politicians are playing on public sympathy.",
+    "stance": "con",
+    "atomized_from": "con87",
+    "original_text": "The politician are playing on the public sympathy and the knowledge that the general public is too braindead to know what ’s really happening and why a wage hike is nothing more than a bandage on a massive hemorrhage ."
+  },
+  {
+    "id": "con87b",
+    "text": "Politicians are exploiting the fact that the general public is too braindead to know what is really happening.",
+    "stance": "con",
+    "atomized_from": "con87",
+    "original_text": "The politician are playing on the public sympathy and the knowledge that the general public is too braindead to know what ’s really happening and why a wage hike is nothing more than a bandage on a massive hemorrhage ."
+  },
+  {
+    "id": "con87c",
+    "text": "A wage hike is nothing more than a bandage on a massive hemorrhage.",
+    "stance": "con",
+    "atomized_from": "con87",
+    "original_text": "The politician are playing on the public sympathy and the knowledge that the general public is too braindead to know what ’s really happening and why a wage hike is nothing more than a bandage on a massive hemorrhage ."
+  },
+  {
+    "id": "con70",
+    "text": "If the minimum wage is increased, fast-food restaurants would pass on almost 100% of their increased labor costs to consumers.",
+    "stance": "con",
+    "atomized_from": "con70",
+    "original_text": "A 2013 article by the Federal Reserve Bank of Chicago stated that if the minimum wage is increased , fast-food restaurants would pass on almost 100 % of their increased labor costs on to consumers and that other firms may do the same ."
+  },
+  {
+    "id": "con70b",
+    "text": "If the minimum wage is increased, other firms may also pass on almost 100% of their increased labor costs to consumers.",
+    "stance": "con",
+    "atomized_from": "con70",
+    "original_text": "A 2013 article by the Federal Reserve Bank of Chicago stated that if the minimum wage is increased , fast-food restaurants would pass on almost 100 % of their increased labor costs on to consumers and that other firms may do the same ."
+  },
+  {
+    "id": "con12",
+    "text": "If businesses must pay their minimum wage employees more, businesses cannot afford to hire as many employees.",
+    "stance": "con",
+    "atomized_from": "con12",
+    "original_text": "Fewer Hirings : If business must pay their minimum wage employees more , they can not afford to hire as many employees ."
+  },
+  {
+    "id": "con76",
+    "text": "The teenage employment index fell sharply after the July 2009 minimum-wage increase, dropping about 8 % in three months, whereas the previous 8 % drop took over a year.",
+    "stance": "con",
+    "atomized_from": "con76",
+    "original_text": "Casey B. Mulligan , PhD , economics professor at the University of Chicago , stated that the teenage employment index fell sharply after the minimum wage increase of July 2009 ( a fall of about 8 % in three months , while the previous drop of 8 % took over a year ) : \" This suggests that the 2009 minimum-wage increase did significantly reduce teenage employment . \""
+  },
+  {
+    "id": "con76b",
+    "text": "The 2009 minimum-wage increase significantly reduced teenage employment.",
+    "stance": "con",
+    "atomized_from": "con76",
+    "original_text": "Casey B. Mulligan , PhD , economics professor at the University of Chicago , stated that the teenage employment index fell sharply after the minimum wage increase of July 2009 ( a fall of about 8 % in three months , while the previous drop of 8 % took over a year ) : \" This suggests that the 2009 minimum-wage increase did significantly reduce teenage employment . \""
+  }
+]

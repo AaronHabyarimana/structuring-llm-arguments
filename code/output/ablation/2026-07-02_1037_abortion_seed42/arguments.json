@@ -1,0 +1,177 @@
+[
+  {
+    "id": "pro29",
+    "text": "The World Health Organization estimated in 2004 that unsafe abortions cause 68,000 maternal deaths worldwide each year.",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "The World Health Organization estimated in 2004 that unsafe abortions cause 68,000 maternal deaths worldwide each year , many of those in developing countries where safe and legal abortion services are difficult to access ."
+  },
+  {
+    "id": "pro29b",
+    "text": "Many of those maternal deaths occur in developing countries where safe and legal abortion services are difficult to access.",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "The World Health Organization estimated in 2004 that unsafe abortions cause 68,000 maternal deaths worldwide each year , many of those in developing countries where safe and legal abortion services are difficult to access ."
+  },
+  {
+    "id": "pro7",
+    "text": "If the State is interested in protecting fetal life after viability, the State may proscribe abortion after viability, except when it is necessary to preserve the life or health of the mother.",
+    "stance": "pro",
+    "atomized_from": "pro7",
+    "original_text": "\" If the State is interested in protecting fetal life after viability , it may go so far as to pro-scribe abortion during that period , except when it is necessary to preserve the life or health of the mother . \""
+  },
+  {
+    "id": "pro71",
+    "text": "Americans are more accepting of abortions that occur early in pregnancy when the fetus is not as developed and is not viable (able to survive on its own outside of the woman's body).",
+    "stance": "pro",
+    "atomized_from": "pro71",
+    "original_text": "Americans are more accepting of abortions that occur early in pregnancy when the fetus is not as developed and is not “ viable ” ( able to survive on its own outside of the woman ’s body ) ."
+  },
+  {
+    "id": "pro63",
+    "text": "Not all abortions are unjustified according to this argument.",
+    "stance": "pro",
+    "atomized_from": "pro63",
+    "original_text": "Not all abortions are unjustified according to this argument : abortion would be justified if the same justification could be applied to killing an adult human ."
+  },
+  {
+    "id": "pro63b",
+    "text": "Abortion would be justified if the same justification could be applied to killing an adult human.",
+    "stance": "pro",
+    "atomized_from": "pro63",
+    "original_text": "Not all abortions are unjustified according to this argument : abortion would be justified if the same justification could be applied to killing an adult human ."
+  },
+  {
+    "id": "pro58",
+    "text": "Abortion reduces crime.",
+    "stance": "pro",
+    "atomized_from": "pro58",
+    "original_text": "Abortion reduces crime ."
+  },
+  {
+    "id": "pro36",
+    "text": "The National Cancer Institute (NCI), the American Cancer Society (ACS), and the American College of Obstetricians and Gynecologists all refuted the claim that abortion can lead to a higher probability of developing breast cancer.",
+    "stance": "pro",
+    "atomized_from": "pro36",
+    "original_text": "The National Cancer Institute ( NCI ) , the American Cancer Society ( ACS ) , and the American College of Obstetricians and Gynecologists all refuted the claim that abortion can lead to a higher probability of developing breast cancer ."
+  },
+  {
+    "id": "pro27",
+    "text": "The court also ruled that the word \"person\" in the Constitution did not include a fetus.",
+    "stance": "pro",
+    "atomized_from": "pro27",
+    "original_text": "They also ruled that the word \" person \" in the Constitution did not include a fetus ."
+  },
+  {
+    "id": "con140",
+    "text": "Susan B. Anthony and Elizabeth Cady Stanton led the fight for women's right to own property, to vote, and to obtain equal education.",
+    "stance": "con",
+    "atomized_from": "con140",
+    "original_text": "Chief among them were Susan B. Anthony and Elizabeth Cady Stanton , who not only led the fight for the right of women to own property , to vote , and obtain equal education , but also spoke out against abortion ."
+  },
+  {
+    "id": "con140b",
+    "text": "Susan B. Anthony and Elizabeth Cady Stanton spoke out against abortion.",
+    "stance": "con",
+    "atomized_from": "con140",
+    "original_text": "Chief among them were Susan B. Anthony and Elizabeth Cady Stanton , who not only led the fight for the right of women to own property , to vote , and obtain equal education , but also spoke out against abortion ."
+  },
+  {
+    "id": "con23",
+    "text": "I will always support legislation that would end abortion.",
+    "stance": "con",
+    "atomized_from": "con23",
+    "original_text": "I have stated many times that I will always support legislation that would end abortion or lead us in the direction of ending abortion . \""
+  },
+  {
+    "id": "con23b",
+    "text": "I will always support legislation that would lead society in the direction of ending abortion.",
+    "stance": "con",
+    "atomized_from": "con23",
+    "original_text": "I have stated many times that I will always support legislation that would end abortion or lead us in the direction of ending abortion . \""
+  },
+  {
+    "id": "con152",
+    "text": "For this reason, I introduced S. 583, the Life at Conception Act on March 14, 2013.",
+    "stance": "con",
+    "atomized_from": "con152",
+    "original_text": "For this reason , I introduced S. 583 , the Life at Conception Act on March 14 , 2013 ."
+  },
+  {
+    "id": "con109",
+    "text": "Half of all women having abortions each year have had at least one previous abortion, according to the Guttmacher Institute.",
+    "stance": "con",
+    "atomized_from": "con109",
+    "original_text": "The Guttmacher Institute reported that half of all women having abortions every year have had at least one previous abortion , while 8.5 % of abortions reported to the Centers for Disease Control and Prevention in 2010 were undergone by women who had three or more previous abortions ."
+  },
+  {
+    "id": "con109b",
+    "text": "8.5 % of abortions reported to the Centers for Disease Control and Prevention in 2010 were performed by women who had three or more previous abortions.",
+    "stance": "con",
+    "atomized_from": "con109",
+    "original_text": "The Guttmacher Institute reported that half of all women having abortions every year have had at least one previous abortion , while 8.5 % of abortions reported to the Centers for Disease Control and Prevention in 2010 were undergone by women who had three or more previous abortions ."
+  },
+  {
+    "id": "con8",
+    "text": "Fetuses feel pain during the abortion procedure.",
+    "stance": "con",
+    "atomized_from": "con8",
+    "original_text": "\" Fetuses feel pain during the abortion procedure ."
+  },
+  {
+    "id": "con24",
+    "text": "Women who have had abortions report overwhelming guilt.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  },
+  {
+    "id": "con24b",
+    "text": "Women who have had abortions report experiencing nightmares.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  },
+  {
+    "id": "con24c",
+    "text": "Women who have had abortions report excessive drinking.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  },
+  {
+    "id": "con24d",
+    "text": "Women who have had abortions report drug abuse.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  },
+  {
+    "id": "con24e",
+    "text": "Women who have had abortions report increased promiscuity.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  },
+  {
+    "id": "con24f",
+    "text": "Women who have had abortions report an inability to form or maintain relationships.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  },
+  {
+    "id": "con24g",
+    "text": "Women who have had abortions report difficulty bonding with later children.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  },
+  {
+    "id": "con24h",
+    "text": "Women who have had abortions report other ways in which they are suffering.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "They speak of overwhelming guilt , nightmares , excessive drinking , drug abuse , promiscuity , an inability to form or maintain relationships , difficulty bonding with later children , and other ways in which they are suffering ."
+  }
+]

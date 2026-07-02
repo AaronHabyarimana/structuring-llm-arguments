@@ -1,0 +1,330 @@
+[
+  {
+    "attacker": "pro15",
+    "target": "con14",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "Pro15 claims legalization improves regulation, while con14 asserts it increases child accessibility, a logically incompatible outcome.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con95",
+    "target": "pro82",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "con95 cites irreversible IQ loss, questioning the ability of users to engage in proper dispute settlement envisioned by pro82.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro4",
+    "type": "undercutting",
+    "confidence": 70,
+    "reason": "The claim that habitual users appear \"stupid\" challenges the conclusion that legalization is beneficial by suggesting harmful effects of use.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con95",
+    "target": "pro4",
+    "type": "undercutting",
+    "confidence": 75,
+    "reason": "Evidence of irreversible IQ loss undermines the pro‑legalization conclusion by showing a serious negative consequence of marijuana use.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro4",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "con14 claims legalization harms children, directly contradicting pro4’s claim that legalization is justified",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87",
+    "target": "pro4",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "con87 asserts marijuana is a gateway to harder drugs, opposing pro4’s endorsement of legalization",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87b",
+    "target": "pro4",
+    "type": "rebuttal",
+    "confidence": 70,
+    "reason": "con87b states society should not accept marijuana as a starter drug, conflicting with pro4’s pro‑legalization stance",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro4",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "con115 reports that legalization has been harmful, directly opposing pro4’s claim that legalization is beneficial",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro4b",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "Con115 concludes legalization is harmful, directly contradicting pro4b’s conclusion that legalization is justified.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro4b",
+    "type": "undercutting",
+    "confidence": 70,
+    "reason": "con12 argues health harms, showing that a racist history alone may not justify legalization",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro4c",
+    "type": "undercutting",
+    "confidence": 65,
+    "reason": "con18 highlights negative user outcomes, questioning whether resource waste justifies legalization",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con95",
+    "target": "pro4c",
+    "type": "undercutting",
+    "confidence": 70,
+    "reason": "con95 shows lasting cognitive damage, undermining the claim that waste alone warrants legalization",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro4c",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "con14 claims legalization increases child access, directly opposing pro4c’s pro‑legalization stance",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87",
+    "target": "pro4c",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "con87 argues legalization creates a gateway to harder drugs, contradicting pro4c’s justification for legalization",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4c",
+    "target": "con87b",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "Pro argues legalization while con opposes marijuana as a starter drug, directly contradicting the policy conclusion",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro4c",
+    "target": "con115",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "Pro supports legalization whereas con claims legalization has harmed a community, making the conclusions mutually exclusive",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro95",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con attacks the premise that marijuana is beneficial by asserting negative cognitive effects of habitual use",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con95",
+    "target": "pro95",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Con95 cites lasting IQ loss, challenging the premise that marijuana is a beneficial medical substitute.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "pro95",
+    "type": "undermining",
+    "confidence": 75,
+    "reason": "Con70 asserts marijuana is more toxic than cigarette smoke, undermining the safety premise of the pro argument.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro95",
+    "type": "undermining",
+    "confidence": 80,
+    "reason": "Con12 claims marijuana is terrible for physical health, directly challenging the premise of medical benefit.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro29",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 78,
+    "reason": "B claims legalization cuts illegal revenue, challenging the implication that existing legalizations are unproblematic",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con18",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 72,
+    "reason": "B asserts habitual users appear stupid, questioning the desirability of the legal status cited by A",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con95",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 75,
+    "reason": "B presents evidence of lasting IQ loss, suggesting A's factual count does not support legalization",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 77,
+    "reason": "B argues legalization raises child access, undermining the inference that many legalizations are benign",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 80,
+    "reason": "B claims marijuana is a gateway drug, challenging the positive view implied by A's legal‑status argument",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87b",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 78,
+    "reason": "B states society should not accept marijuana as a starter drug, contesting the implication of A's evidence",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con87c",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 70,
+    "reason": "B suggests rapid societal change prevents proper debate, questioning the relevance of A's legal‑status statistics",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 73,
+    "reason": "B cites a community’s negative experience, implying that existing legalizations may be harmful",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con70",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 76,
+    "reason": "B claims marijuana is more toxic than cigarettes, challenging the notion that current legalizations are safe",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con12",
+    "target": "pro36b",
+    "type": "undercutting",
+    "confidence": 74,
+    "reason": "B argues marijuana is terrible for physical health, disputing the positive inference drawn from A's legal‑status claim",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro32",
+    "target": "con14",
+    "type": "undermining",
+    "confidence": 70,
+    "reason": "Pro32 cites data showing teen use is not rising, which challenges con14's premise that legalization will increase child accessibility.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con14",
+    "target": "pro15",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] Pro15 claims legalization improves regulation, while con14 asserts it increases child accessibility, a logically incompatible outcome.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con14",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] con14 claims legalization harms children, directly contradicting pro4’s claim that legalization is justified",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con87",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "[symmetric rebuttal] con87 asserts marijuana is a gateway to harder drugs, opposing pro4’s endorsement of legalization",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con87b",
+    "type": "rebuttal",
+    "confidence": 70,
+    "reason": "[symmetric rebuttal] con87b states society should not accept marijuana as a starter drug, conflicting with pro4’s pro‑legalization stance",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4",
+    "target": "con115",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] con115 reports that legalization has been harmful, directly opposing pro4’s claim that legalization is beneficial",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4b",
+    "target": "con115",
+    "type": "rebuttal",
+    "confidence": 85,
+    "reason": "[symmetric rebuttal] Con115 concludes legalization is harmful, directly contradicting pro4b’s conclusion that legalization is justified.",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4c",
+    "target": "con14",
+    "type": "rebuttal",
+    "confidence": 80,
+    "reason": "[symmetric rebuttal] con14 claims legalization increases child access, directly opposing pro4c’s pro‑legalization stance",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "pro4c",
+    "target": "con87",
+    "type": "rebuttal",
+    "confidence": 75,
+    "reason": "[symmetric rebuttal] con87 argues legalization creates a gateway to harder drugs, contradicting pro4c’s justification for legalization",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con87b",
+    "target": "pro4c",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] Pro argues legalization while con opposes marijuana as a starter drug, directly contradicting the policy conclusion",
+    "outcome": "symmetric-rebuttal"
+  },
+  {
+    "attacker": "con115",
+    "target": "pro4c",
+    "type": "rebuttal",
+    "confidence": 90,
+    "reason": "[symmetric rebuttal] Pro supports legalization whereas con claims legalization has harmed a community, making the conclusions mutually exclusive",
+    "outcome": "symmetric-rebuttal"
+  }
+]

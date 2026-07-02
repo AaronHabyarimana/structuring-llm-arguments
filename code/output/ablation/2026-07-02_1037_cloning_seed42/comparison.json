@@ -1,0 +1,83 @@
+{
+  "topic_file": "cloning",
+  "topic_label": "Cloning",
+  "n_atoms": 20,
+  "typed": {
+    "n_edges_raw": 52,
+    "n_edges_final": 59,
+    "grounded": 9,
+    "n_preferred": 2,
+    "n_stable": 2,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 161.137,
+      "solve_s": 0.13
+    }
+  },
+  "binary": {
+    "n_edges_raw": 35,
+    "n_edges_final": 35,
+    "grounded": 15,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 232.523,
+      "solve_s": 1.006
+    }
+  },
+  "jaccard_directed_raw": 0.4746,
+  "jaccard_directed_final": 0.4242,
+  "jaccard_undirected": 0.4746,
+  "directed_raw": {
+    "intersection": 28,
+    "typed_only": [
+      "con109->pro29",
+      "con140->pro27",
+      "con140b->con23",
+      "con140b->con8b",
+      "con152b->pro29",
+      "con152c->pro29",
+      "con152d->pro29",
+      "con24->pro29",
+      "con24->pro7",
+      "con24->pro71b",
+      "con24b->pro29",
+      "con24b->pro7",
+      "con8->pro29",
+      "con8->pro7",
+      "con8b->pro29",
+      "con8b->pro7",
+      "con8b->pro71b",
+      "con9->con24",
+      "con9->con24b",
+      "con9->con8",
+      "con9->con8b",
+      "con9->pro29",
+      "pro29->con140b",
+      "pro29->con152"
+    ],
+    "binary_only": [
+      "con140->pro36",
+      "con140->pro71b",
+      "con140b->pro71b",
+      "con152->con8b",
+      "con152->pro71b",
+      "con23->pro7",
+      "con23->pro71b"
+    ]
+  },
+  "undirected": {
+    "intersection": 28,
+    "typed_only": 24,
+    "binary_only": 7
+  }
+}

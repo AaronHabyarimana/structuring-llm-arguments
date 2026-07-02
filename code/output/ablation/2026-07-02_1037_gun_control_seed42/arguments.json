@@ -1,0 +1,149 @@
+[
+  {
+    "id": "pro29",
+    "text": "David Frum , Daily Beast and CNN contributor , stated , \" American children under age 15 were nine times more likely to die of a gun accident than children in other advanced wealthy countries … About 200 Americans go to emergency rooms every day with gunshot wounds . \"",
+    "stance": "pro",
+    "atomized_from": "pro29",
+    "original_text": "David Frum , Daily Beast and CNN contributor , stated , \" American children under age 15 were nine times more likely to die of a gun accident than children in other advanced wealthy countries … About 200 Americans go to emergency rooms every day with gunshot wounds . \""
+  },
+  {
+    "id": "pro7",
+    "text": "It is a terrible irony that the very same gun enthusiasts — many of whom see gun registration to be in infringement on personal liberty and fear an oppressive federal government — wish to impose what they fear onto others .",
+    "stance": "pro",
+    "atomized_from": "pro7",
+    "original_text": "It is a terrible irony that the very same gun enthusiasts — many of whom see gun registration to be in infringement on personal liberty and fear an oppressive federal government — wish to impose what they fear onto others ."
+  },
+  {
+    "id": "pro71",
+    "text": "These gun owners and sellers have hopelessly perverted the original intent of the Second Amendment.",
+    "stance": "pro",
+    "atomized_from": "pro71",
+    "original_text": "In order to do this , these gun owners/sellers have hopelessly perverted the original intent of the 2nd Amendment and have expanded its guarantee of the right to “ keep and bear arms ” far beyond its original bounds ."
+  },
+  {
+    "id": "pro71b",
+    "text": "These gun owners and sellers have expanded the guarantee of the right to keep and bear arms far beyond its original bounds.",
+    "stance": "pro",
+    "atomized_from": "pro71",
+    "original_text": "In order to do this , these gun owners/sellers have hopelessly perverted the original intent of the 2nd Amendment and have expanded its guarantee of the right to “ keep and bear arms ” far beyond its original bounds ."
+  },
+  {
+    "id": "pro63",
+    "text": "Cars can been used to kill people but they are far too large and unwieldy to replace guns ( you ca n’t exactly put one in your backpack to sneak into a school ) .",
+    "stance": "pro",
+    "atomized_from": "pro63",
+    "original_text": "Cars can been used to kill people but they are far too large and unwieldy to replace guns ( you ca n’t exactly put one in your backpack to sneak into a school ) ."
+  },
+  {
+    "id": "pro58",
+    "text": "In 2007 the United States had 12,632 gun homicides (4.19 deaths per 100,000 people).",
+    "stance": "pro",
+    "atomized_from": "pro58",
+    "original_text": "In 2007 the United States had 12,632 gun homicides ( 4.19 deaths per 100,000 people ) and 17,352 gun suicides ( 5.76 deaths per 100,000 people ) ."
+  },
+  {
+    "id": "pro58b",
+    "text": "In 2007 the United States had 17,352 gun suicides (5.76 deaths per 100,000 people).",
+    "stance": "pro",
+    "atomized_from": "pro58",
+    "original_text": "In 2007 the United States had 12,632 gun homicides ( 4.19 deaths per 100,000 people ) and 17,352 gun suicides ( 5.76 deaths per 100,000 people ) ."
+  },
+  {
+    "id": "pro36",
+    "text": "Higher levels of gun ownership do not produce a safer society.",
+    "stance": "pro",
+    "atomized_from": "pro36",
+    "original_text": "Higher levels of gun ownership do not produce a safer society and often lead to a higher numbers of deaths due to gun violence ."
+  },
+  {
+    "id": "pro36b",
+    "text": "Higher levels of gun ownership often lead to a higher number of deaths due to gun violence.",
+    "stance": "pro",
+    "atomized_from": "pro36",
+    "original_text": "Higher levels of gun ownership do not produce a safer society and often lead to a higher numbers of deaths due to gun violence ."
+  },
+  {
+    "id": "pro27",
+    "text": "Armed civilians are unlikely to stop crimes.",
+    "stance": "pro",
+    "atomized_from": "pro27",
+    "original_text": "Armed civilians are unlikely to stop crimes and are more likely to make dangerous situations , including mass shootings , more deadly ."
+  },
+  {
+    "id": "pro27b",
+    "text": "Armed civilians are more likely to make dangerous situations, including mass shootings, more deadly.",
+    "stance": "pro",
+    "atomized_from": "pro27",
+    "original_text": "Armed civilians are unlikely to stop crimes and are more likely to make dangerous situations , including mass shootings , more deadly ."
+  },
+  {
+    "id": "con23",
+    "text": "Strict gun control laws do not work in Mexico.",
+    "stance": "con",
+    "atomized_from": "con23",
+    "original_text": "Strict gun control laws do not work in Mexico , and will not work in the United States ."
+  },
+  {
+    "id": "con23b",
+    "text": "Strict gun control laws will not work in the United States.",
+    "stance": "con",
+    "atomized_from": "con23",
+    "original_text": "Strict gun control laws do not work in Mexico , and will not work in the United States ."
+  },
+  {
+    "id": "con109",
+    "text": "Studies show that children taught about firearms and their legitimate uses by family members have much lower rates of delinquency than children in households without guns.",
+    "stance": "con",
+    "atomized_from": "con109",
+    "original_text": "According to Kyle Wintersteen , Managing Editor of Guns and Ammo , studies show that \" children taught about firearms and their legitimate uses by family members have much lower rates of delinquency than children in households without guns \" and \" children introduced to guns associate them with freedom , security , and recreation — not violence . \""
+  },
+  {
+    "id": "con109b",
+    "text": "Studies show that children introduced to guns associate them with freedom, security, and recreation—not violence.",
+    "stance": "con",
+    "atomized_from": "con109",
+    "original_text": "According to Kyle Wintersteen , Managing Editor of Guns and Ammo , studies show that \" children taught about firearms and their legitimate uses by family members have much lower rates of delinquency than children in households without guns \" and \" children introduced to guns associate them with freedom , security , and recreation — not violence . \""
+  },
+  {
+    "id": "con9a",
+    "text": "Car accidents kill more people every year than guns.",
+    "stance": "con",
+    "atomized_from": "con9",
+    "original_text": "“ Since car accidents kill more people every year then guns , why do n’t we ban cars ? ”"
+  },
+  {
+    "id": "con9b",
+    "text": "We should not ban guns because car accidents kill more people every year than guns.",
+    "stance": "con",
+    "atomized_from": "con9",
+    "original_text": "“ Since car accidents kill more people every year then guns , why do n’t we ban cars ? ”"
+  },
+  {
+    "id": "con8",
+    "text": "Mexico has some of the strictest gun control laws in the world and yet, in 2012, Mexico had 11,309 gun murders (9.97 gun homicides per 100,000 people) compared to the United States that had 9,146 gun homicides (2.97 per 100,000 people).",
+    "stance": "con",
+    "atomized_from": "con8",
+    "original_text": "Mexico has some of the strictest gun control laws in the world and yet , in 2012 , Mexico had 11,309 gun murders ( 9.97 gun homicides per 100,000 people ) compared to the United States that had 9,146 gun homicides ( 2.97 per 100,000 people ) ."
+  },
+  {
+    "id": "con24",
+    "text": "Gun control laws would prevent citizens from protecting themselves from foreign invaders.",
+    "stance": "con",
+    "atomized_from": "con24",
+    "original_text": "Gun control laws would prevent citizens from protecting themselves from foreign invaders ."
+  },
+  {
+    "id": "con56",
+    "text": "A December 10, 2014 Pew survey found that 57% of people believe that owning a gun protects people from being victimized.",
+    "stance": "con",
+    "atomized_from": "con56",
+    "original_text": "A Dec. 10 , 2014 Pew survey found that 57 % of people believe that owning a gun protects them from being victimized ."
+  },
+  {
+    "id": "con60",
+    "text": "I took the matter of the safety of myself and my family into my own hands.",
+    "stance": "con",
+    "atomized_from": "con60",
+    "original_text": "Well , he lost because I did n’t have time to wait for help and took the matter of the safety of myself and my family into my own hands ."
+  }
+]

@@ -1,0 +1,62 @@
+{
+  "grounded": [
+    "con109",
+    "con109b",
+    "con23",
+    "con23b",
+    "con24",
+    "con56",
+    "con60",
+    "con8",
+    "con9a",
+    "pro58",
+    "pro58b",
+    "pro63",
+    "pro7",
+    "pro71b"
+  ],
+  "preferred": [
+    [
+      "con109",
+      "con109b",
+      "con23",
+      "con23b",
+      "con24",
+      "con56",
+      "con60",
+      "con8",
+      "con9a",
+      "pro58",
+      "pro58b",
+      "pro63",
+      "pro7",
+      "pro71b"
+    ]
+  ],
+  "stable": [
+    [
+      "con109",
+      "con109b",
+      "con23",
+      "con23b",
+      "con24",
+      "con56",
+      "con60",
+      "con8",
+      "con9a",
+      "pro58",
+      "pro58b",
+      "pro63",
+      "pro7",
+      "pro71b"
+    ]
+  ],
+  "u_size": 0,
+  "n_args": 21,
+  "n_attacks": 26,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ]
+}

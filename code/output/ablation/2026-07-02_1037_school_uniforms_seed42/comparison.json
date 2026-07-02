@@ -1,0 +1,82 @@
+{
+  "topic_file": "school_uniforms",
+  "topic_label": "School Uniforms",
+  "n_atoms": 21,
+  "typed": {
+    "n_edges_raw": 24,
+    "n_edges_final": 29,
+    "grounded": 13,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 173.066,
+      "solve_s": 0.131
+    }
+  },
+  "binary": {
+    "n_edges_raw": 42,
+    "n_edges_final": 42,
+    "grounded": 12,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 356.033,
+      "solve_s": 0.123
+    }
+  },
+  "jaccard_directed_raw": 0.375,
+  "jaccard_directed_final": 0.3396,
+  "jaccard_undirected": 0.375,
+  "directed_raw": {
+    "intersection": 18,
+    "typed_only": [
+      "con140b->pro36",
+      "con23->pro36c",
+      "con27c->pro36c",
+      "con36->pro36b",
+      "con8->pro36b",
+      "con8b->pro36b"
+    ],
+    "binary_only": [
+      "con109->pro32",
+      "con109->pro82",
+      "con140->pro95",
+      "con23->pro32",
+      "con23->pro32b",
+      "con27->pro32b",
+      "con27->pro36",
+      "con27->pro36b",
+      "con27->pro82",
+      "con27b->pro32b",
+      "con27b->pro36",
+      "con27b->pro82",
+      "con27c->pro82",
+      "con27c->pro95",
+      "con36->pro36c",
+      "con8->pro95",
+      "con8b->pro32b",
+      "con8b->pro36",
+      "con8b->pro95",
+      "con9->pro36c",
+      "con9->pro4",
+      "con9->pro82",
+      "con9->pro95",
+      "pro32->pro4"
+    ]
+  },
+  "undirected": {
+    "intersection": 18,
+    "typed_only": 6,
+    "binary_only": 24
+  }
+}

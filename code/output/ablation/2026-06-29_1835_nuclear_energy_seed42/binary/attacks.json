@@ -1,0 +1,362 @@
+[
+  {
+    "attacker": "con23",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Claim that 100% security is impossible challenges the assertion that storage is safe and secure.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9b",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Stating nuclear waste could be terrorist targets directly contradicts the claim that storage is safe and secure.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro82",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "The con argument claims nuclear waste remains an unresolved problem, directly contradicting the pro claim that storage is safe and secure.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro82b",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Con36 claims nuclear waste remains an unresolved problem, directly contradicting A's claim of solid disposal plans.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Con36 asserts nuclear waste is an unresolved problem, directly contradicting pro15’s claim of robust storage.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Saying 100% security is impossible challenges the assertion that waste storage is robust.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9b",
+    "target": "pro15",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Targeting nuclear waste directly contradicts the claim that its storage is robust.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "pro15b",
+    "target": "con36",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "A asserts waste is safely stored, undermining B's claim that waste is an unresolved problem",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9b",
+    "target": "pro15b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "B asserts nuclear waste is a terrorist target, undermining A's implication that underground storage makes waste safe.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "con36 highlights unresolved nuclear waste, challenging the overall merit of nuclear suggested by pro4.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "con27 argues uranium is finite, undermining pro4's premise that nuclear helps with fossil‑fuel depletion.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27b",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "con27b points to high uranium costs, questioning the practicality of the support pro4 advocates.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27c",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "con27c claims uranium production emits greenhouse gases, directly contradicting pro4's claim of virtual CO2‑free nuclear power.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "con140 notes large water use for cooling, presenting an environmental drawback that challenges pro4's overall endorsement.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "con140b argues water discharge harms wildlife, further contesting the environmental benefits claimed by pro4.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "con23 states perfect plant security is impossible, questioning the safety aspect of the support pro4 offers.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "con152 emphasizes uranium’s environmental impact, contradicting pro4’s emission‑free assertion.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "con109 highlights massive cost overruns, undermining the feasibility of the nuclear support advocated by pro4.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "B argues alternative methods give more climate benefit, undermining A's claim that nuclear deserves support.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B points out terrorist targeting risk, challenging the safety premise of A's support for nuclear.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9b",
+    "target": "pro4",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B claims nuclear waste could be terrorist targets, attacking A's implication that nuclear is a safe climate solution.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con36",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "Con36 claims waste is unresolved, undermining the premise that external costs can be fully accounted",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con27 argues uranium is finite, challenging the long‑term cost competitiveness assumed by pro36",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Con27b highlights high uranium extraction costs, contradicting the cost‑competitiveness premise of pro36",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27c",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con27c points to significant environmental waste from uranium production, questioning the external‑cost accounting in pro36",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Con140 adds large water‑use externalities that could make nuclear less competitive when accounted",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Con140b shows ecological damage from cooling water, further challenging the external‑cost premise of pro36",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 65,
+    "reason": "Con23 argues perfect security is impossible, implying higher safety costs that weaken pro36’s competitiveness claim",
+    "outcome": "verify-accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Con152 stresses major environmental impacts of uranium, undermining the assumption that external costs are fully accounted in pro36",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B shows that cost estimates ignore historic overruns, undermining the claim that nuclear is competitive even when external costs are included.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "B argues alternative technologies give more climate benefit per dollar, challenging the conclusion that nuclear is the most competitive option.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "B introduces terrorist‑target risk as an external cost not accounted for, weakening A's competitiveness claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9b",
+    "target": "pro36",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "B points to waste‑related terrorist risk, an external cost that contradicts A's assertion of nuclear competitiveness when external costs are considered.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro32",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Claim that 100% security is impossible challenges the practicality of achieving unlimited energy from fusion.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27b",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 90,
+    "reason": "If uranium mining, refining and transport are costly, the claimed overall cheapness of nuclear power is undermined.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con27c",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 80,
+    "reason": "Environmental waste and greenhouse‑gas emissions from uranium production add hidden costs that challenge the claim that nuclear is cheaper.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "High water usage for cooling can increase operational expenses, weakening the argument that nuclear is cheaper than wind or solar.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con23",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "If 100 % security is impossible, extra safety measures and risk‑related costs could erode nuclear’s cost advantage.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con152",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "The environmental impact of uranium extraction adds external costs that contradict the claim of nuclear’s lower overall cost.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 95,
+    "reason": "Historical 250 % cost overruns show that the quoted $12‑18 billion estimate is unrealistically low, directly refuting the cheapness claim.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 85,
+    "reason": "Analysts argue that other technologies deliver more climate benefit per dollar, challenging the assertion that nuclear is the cheapest option.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Terrorist targeting risk raises security costs, which can diminish nuclear’s purported cost advantage.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con9b",
+    "target": "pro29",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "Potential terrorist attacks on nuclear waste increase long‑term management expenses, undermining the claim that nuclear is cheaper.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con109b",
+    "target": "pro29b",
+    "type": "NONE",
+    "confidence": 75,
+    "reason": "Con claim that other methods give more climate‑saving bang for the buck challenges the pro conclusion that we must bear high renewable costs.",
+    "outcome": "accept"
+  },
+  {
+    "attacker": "con140b",
+    "target": "con152",
+    "type": "NONE",
+    "confidence": 70,
+    "reason": "A highlights a significant environmental impact, challenging B's claim that uranium impact is the biggest issue",
+    "outcome": "accept"
+  }
+]
