@@ -1,0 +1,40 @@
+% !TEX root = ../my-thesis.tex
+%
+\chapter{Conclusion}
+\label{sec:conclusion}
+
+This thesis presented an end-to-end pipeline that turns natural-language debate
+text into a formally evaluated Dung argumentation framework, from categorized
+attack extraction through confidence filtering to a Prolog solver under grounded,
+preferred, and stable semantics.
+
+Returning to the research questions, RQ1 is answered in the affirmative. The
+pipeline runs end to end across eight topics and produces well-defined frameworks
+whose extensions can be computed in a fraction of a second per topic thanks to
+the grounded-first reduction. RQ4 is answered by the cross-topic analysis. All
+frameworks are cyclic, and six of eight admit several preferred and stable
+extensions, so the formal layer can make explicit several internally consistent
+positions that the raw argument set leaves implicit, although its advantage over
+the grounded extension is uneven across topics. The answers to RQ2 and RQ3 rest
+on the typed-versus-binary ablation and the gold-standard evaluation, which are
+set up in Chapter~\ref{sec:evaluation} and will be completed before submission.
+
+% TODO: nach Durchfuehrung der Experimente die Antworten auf RQ2 und RQ3 hier
+% konkret zusammenfassen.
+
+Overall the results demonstrate the feasibility of integrating modern language
+models with established formal argumentation, and they suggest that formal
+semantics can provide a transparent reasoning layer on top of LLM-generated
+argumentative content.
+
+\section{Future Work}
+\label{sec:conclusion:future}
+
+Several directions remain open. The extraction quality should be evaluated
+against annotated subtask datasets beyond the single gold standard used here.
+The typed attacks and confidence scores, which the current pipeline discards
+when converting to binary facts, could be used directly by a richer formalism
+such as ASPIC+ or a quantitative bipolar framework. Finally, the pipeline should
+be compared qualitatively against other methods, including a standalone LLM asked
+to summarise the positions in a debate, and across several models rather than a
+single one.

@@ -1,0 +1,53 @@
+% !TEX root = ../my-thesis.tex
+%
+\IfLanguageName{english}{\pdfbookmark[0]{Abstract}{Abstract}}{\pdfbookmark[0]{Zusammenfassung}{Zusammenfassung}}
+\IfLanguageName{english}{\addchap*{Abstract}}{\addchap*{Zusammenfassung}}
+\label{sec:abstract}
+
+This thesis presents an end-to-end pipeline that generates, structures, and
+formally evaluates Abstract Argumentation Frameworks from natural-language debate
+topics using large language models. Rather than treating attack detection as a
+binary decision, the system prompts a language model to produce categorized
+attack candidates, each annotated with an attack type, namely rebuttal,
+undercutting, or undermining, a confidence score, and a natural-language
+justification. A two-stage confidence filter routes candidates to acceptance,
+rejection, or verification. Accepted attacks are reduced to binary facts and
+handed to a Prolog solver that computes grounded, preferred, and stable
+extensions under Dung semantics. Evaluated on eight topics from the UKP
+Sentential Argument Mining Corpus, every framework is cyclic and six of eight
+admit several preferred and stable extensions, each corresponding to an
+internally coherent position that a standalone language model leaves implicit.
+Beyond this cross-topic analysis, the thesis sets up an ablation that isolates
+the effect of typed against binary prompting and a gold-standard evaluation of
+the extraction quality.
+
+\IfLanguageName{english}{
+\vspace*{20mm}
+
+{\usekomafont{chapter}Abstract (german)}
+\label{sec:abstract-diff}
+% Set german quote style and language system.
+\setquotestyle{german}
+\selectlanguage{ngerman}
+
+Diese Arbeit stellt eine durchgängige Pipeline vor, die mithilfe großer
+Sprachmodelle aus natürlichsprachlichen Debattenthemen abstrakte
+Argumentationsframeworks erzeugt, strukturiert und formal auswertet. Statt die
+Angriffserkennung als binaere Entscheidung zu behandeln, erzeugt das System
+kategorisierte Angriffskandidaten, die jeweils mit einem Angriffstyp (Rebuttal,
+Undercutting oder Undermining), einem Konfidenzwert und einer Begründung
+versehen sind. Ein zweistufiger Konfidenzfilter leitet die Kandidaten zur
+Annahme, Ablehnung oder Verifikation. Angenommene Angriffe werden auf binäre
+Fakten reduziert und an einen Prolog-Solver übergeben, der grounded, preferred
+und stable Extensions unter Dung-Semantik berechnet. In der Auswertung auf acht
+Themen des UKP-Korpus ist jedes Framework zyklisch, und sechs von acht Themen
+besitzen mehrere preferred und stable Extensions, die jeweils einer in sich
+konsistenten Position entsprechen. Ergänzend bereitet die Arbeit eine Ablation
+zum Vergleich von typisiertem und binärem Prompting vor.
+
+% reset to english
+\selectlanguage{english}
+\setquotestyle{english}
+
+}
+{}

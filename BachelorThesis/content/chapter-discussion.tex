@@ -1,0 +1,46 @@
+% !TEX root = ../my-thesis.tex
+%
+\chapter{Discussion}
+\label{sec:discussion}
+
+\section{What the Formal Layer Adds}
+\label{sec:discussion:value}
+
+The cross-topic results in Section~\ref{sec:evaluation:crosstopic} show that the
+formal layer does uncover structure. Six of eight topics support several
+internally consistent positions, and every framework is cyclic. At the same time
+the value of the expensive preferred and stable enumeration over the cheap
+grounded extension is uneven. On several topics the grounded extension already
+decides most arguments, so preferred and stable add little, because the
+extraction tends to produce nearly acyclic graphs outside the symmetrized
+rebuttals. The clearest payoff appears on topics such as Death Penalty, Gun
+Control, and Minimum Wage, where three distinct stable extensions emerge. An
+honest reading is therefore that the formal layer is most useful where the
+debate genuinely splits into competing coherent camps, and closer to redundant
+where one side dominates.
+
+\section{Threats to Validity}
+\label{sec:discussion:threats}
+
+Several threats qualify the results. The confidence score is a routing signal
+and not a calibrated probability, so the thresholds are design choices rather
+than learned values. In the LLM-generated setting the arguments, the attacks,
+and the confidence scores all come from the same model, so there is no
+independent quality signal, and that setting is treated as a qualitative check
+rather than a second evaluation. The UKP samples are small, with a balanced
+draw per topic, which limits how far the cross-topic numbers generalise. Finally,
+all results stem from a single model at temperature zero, and server-side
+execution does not guarantee perfect determinism.
+
+\section{Design Trade-offs}
+\label{sec:discussion:tradeoffs}
+
+Three design decisions shape the frameworks and deserve explicit discussion. The
+symmetrization of rebuttals is well motivated by the absence of a preference
+ordering in Dung's abstract framework, but it is also the single source of every
+cycle, which makes a mislabelled rebuttal costly. Dropping the attack type when
+converting to binary attack facts is consistent with the set-based question Dung
+semantics answer, yet it discards information that a richer formalism could use.
+The confidence thresholds trade precision against recall, and the verification
+step exists precisely to recover borderline cases without lowering the
+acceptance threshold for everyone.

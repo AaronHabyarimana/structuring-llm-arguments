@@ -1,0 +1,216 @@
+% !TEX root = ../my-thesis.tex
+%
+\chapter{Evaluation}
+\label{sec:evaluation}
+
+This chapter evaluates the pipeline. Section~\ref{sec:evaluation:setup} describes
+the experimental setup. Section~\ref{sec:evaluation:crosstopic} reports the
+cross-topic results over the eight UKP topics (RQ1, RQ4).
+Section~\ref{sec:evaluation:ablation} compares typed against binary prompting
+(RQ2), and Section~\ref{sec:evaluation:gold} evaluates the attack quality against
+a manual gold standard (RQ3). Section~\ref{sec:evaluation:case} works through a
+small case study, and Section~\ref{sec:evaluation:errors} analyses the recurring
+error types.
+
+\section{Experimental Setup}
+\label{sec:evaluation:setup}
+
+The pipeline is evaluated in two settings. The first starts from argument sets of
+the UKP Sentential Argument Mining Corpus~\cite{stab2018}, which provides
+sentence-level stance annotations for eight controversial topics. Each sentence
+is labelled \texttt{Argument\_for}, \texttt{Argument\_against}, or
+\texttt{NoArgument}. The \texttt{NoArgument} sentences are discarded and the test
+splits are used. For each topic a balanced sample of pro and con arguments is
+drawn with a fixed random seed for reproducibility. The second setting uses
+LLM-generated arguments on the topic of allowing autonomous vehicles in public,
+with ten pro and ten con arguments. Since the generation prompt already
+constrains each argument to a single claim, atomization is skipped in that
+setting.
+
+In both settings the extractor and the verifier call the open-weight model
+GPT-OSS-120B at temperature zero, with argument pairs processed in batches of
+$b = 10$. Candidates are accepted at confidence $c \geq \theta_{\text{acc}} = 70$,
+forwarded to the verifier at $50 = \theta_{\text{ver}} \leq c < 70$, and rejected
+below $\theta_{\text{ver}}$. All runs are logged with their configuration, seed,
+and per-pair decisions, so that every number reported here can be traced back to
+a concrete run.
+
+\section{Cross-Topic Results}
+\label{sec:evaluation:crosstopic}
+
+Table~\ref{tab:evaluation:crosstopic} reports, for each of the eight UKP topics,
+the number of atomic arguments, the number of queried pairs, the number of
+accepted attacks and their share among all pairs, whether the framework contains
+a cycle, the size of the grounded extension, and the numbers of preferred and
+stable extensions.
+
+\begin{table}[t]
+  \centering
+  \caption{Cross-topic results over the eight UKP topics. ``Acc'' is the number
+  of accepted attacks, that is the edges of the framework, and ``Acc\%'' is their
+  share among all queried pairs. ``Cyc'' indicates a cycle, ``Grnd'' is the size
+  of the grounded extension, and \#Pr and \#St are the numbers of preferred and
+  stable extensions.}
+  \label{tab:evaluation:crosstopic}
+  \begin{tabular}{lrrrrcrrr}
+    \toprule
+    Topic & Atoms & Pairs & Acc & Acc\% & Cyc & Grnd & \#Pr & \#St \\
+    \midrule
+    Abortion          & 25 & 272 & 20 &  7.4 & yes & 12 & 2 & 2 \\
+    Cloning           & 16 & 118 & 34 & 28.8 & yes &  5 & 1 & 1 \\
+    Death Penalty     & 18 & 148 & 47 & 31.8 & yes &  2 & 3 & 3 \\
+    Gun Control       & 23 & 244 & 20 &  8.2 & yes & 12 & 3 & 3 \\
+    Marijuana Legal.  & 21 & 199 & 10 &  5.0 & yes & 16 & 2 & 2 \\
+    Minimum Wage      & 22 & 221 & 55 & 24.9 & yes &  6 & 3 & 3 \\
+    Nuclear Energy    & 20 & 183 & 35 & 19.1 & yes & 10 & 3 & 3 \\
+    School Uniforms   & 21 & 202 & 28 & 13.9 & yes & 14 & 1 & 1 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Two observations stand out. First, every framework contains cycles, a direct
+consequence of the rebuttal symmetrization described in
+Section~\ref{sec:foundations:typology}. Second, six of the eight topics admit
+several preferred extensions, and the number of stable extensions matches the
+number of preferred extensions in every case. Only Cloning and School Uniforms
+reduce to a single extension. These multiple positions are not asserted by a free
+generation. They are derived from the model's own pairwise attack judgments
+through the fixed semantics, and each is conflict-free and admissible by
+construction. The acceptance rate varies widely, from 5.0 percent for Marijuana
+Legalization to 31.8 percent for Death Penalty, which reflects genuine
+differences in how directly the sampled arguments engage each other.
+
+\section{Typed versus Binary Prompting}
+\label{sec:evaluation:ablation}
+
+% ==================================================================
+% PLATZHALTER: dieses Experiment ist noch nicht durchgefuehrt (RQ2).
+% Inhalt nach Durchfuehrung: zweiter binaerer Extraktions-Arm auf
+% identischer Atom-Menge, Jaccard der Attack-Mengen (vor und nach
+% Symmetrisierung), Effekt auf #grounded/#preferred/#stable je Topic,
+% aggregierte Tabelle ueber die acht Themen.
+% ==================================================================
+
+This section measures whether the typed attack prompting of
+Section~\ref{sec:method:extraction}, which the paper advertises as its central
+contribution, actually produces different or more reliable attacks than plain
+binary prompting. A second extraction arm runs the identical atomized argument
+set $\mathcal{A}'$ through a binary prompt that asks only whether an attack
+exists, without the attack type and without the Pollock definitions. The two
+resulting attack sets are compared per topic by their Jaccard similarity, both on
+the raw directed edges before symmetrization and on the final edges, and both
+frameworks are solved to compare the numbers of grounded, preferred, and stable
+extensions.
+
+\emph{This experiment is planned and not yet carried out. Results and the
+corresponding table will be added here.}
+
+\section{Attack Quality against a Gold Standard}
+\label{sec:evaluation:gold}
+
+% ==================================================================
+% PLATZHALTER: dieses Experiment ist noch nicht durchgefuehrt (RQ3).
+% Inhalt nach Durchfuehrung: ein Topic, ~100 manuell annotierte Paare,
+% Precision/Recall/F1 der Attack-Detektion, ggf. getrennt nach Typ,
+% Einordnung gegen die ~67% F1 aus Kramer et al.
+% ==================================================================
+
+To move from feasibility to a measurable quality statement, one topic is
+annotated by hand at the level of argument pairs, and the pipeline's attack
+decisions are scored against this gold standard in terms of precision, recall,
+and F1. The result is placed next to the F1 around 67 percent reported by
+Kramer et al.~\cite{kramer2021} on the same corpus.
+
+\emph{This experiment is planned and not yet carried out. Results will be added
+here.}
+
+\section{Case Study: Nuclear Energy}
+\label{sec:evaluation:case}
+
+For greater comprehensibility a small nuclear-energy sample is analysed in
+detail. Starting from six balanced UKP arguments, atomization yields eight atomic
+arguments, three pro and five con. Only the sentence about meltdown statistics is
+split, into three separate claims. Of the $\binom{8}{2} = 28$ pairs, 25 are
+queried after skipping pairs of atoms that share a source argument. Six attacks
+are accepted. Rebuttal symmetrization adds two reverse edges, so the framework
+has eight directed attacks, four undermining and four rebuttals.
+
+The graph centers on the argument that nuclear power merits support because it is
+virtually CO\textsubscript{2}-free, which the con side attacks from several
+directions. The symmetrized rebuttals make the framework cyclic, which suggests
+that several preferred and stable sets might exist. In this case, however, the
+grounded extension already terminates by accepting all five con arguments and
+rejecting the entire pro side, so grounded, preferred, and stable coincide on a
+single extension.
+
+\begin{figure}[t]
+  \centering
+  \begin{minipage}[c]{0.50\linewidth}
+    \centering
+    \begin{tikzpicture}[
+      >={Stealth[length=1.8mm]},
+      arg/.style={draw, circle, minimum size=6.5mm, inner sep=0.2pt, font=\tiny\ttfamily, fill=white},
+      pro/.style={arg, draw=blue!55!black},
+      con/.style={arg, draw=red!55!black},
+      gr/.style={fill=gray!22},
+      reb/.style={red!75!black, <->, thin},
+      und/.style={blue!60!black, ->, thin},
+    ]
+      \node[con,gr] (con58)  at (-1.1, 1.2) {con58};
+      \node[con,gr] (con71b) at (-1.6, 0.0) {con71b};
+      \node[con,gr] (con71c) at (-1.1,-1.2) {con71c};
+      \node[pro]    (pro4)   at ( 0.0, 0.0) {pro4};
+      \node[con,gr] (con63)  at ( 2.4, 0.0) {con63};
+      \node[pro]    (pro82)  at ( 3.4, 1.0) {pro82};
+      \node[pro]    (pro15)  at ( 3.4,-1.0) {pro15};
+      \node[con,gr] (con71)  at ( 1.2,-1.9) {con71};
+      \draw[reb] (con71b) to (pro4);
+      \draw[reb] (con71c) to (pro4);
+      \draw[und] (con58) to (pro4);
+      \draw[und] (con63) to (pro4);
+      \draw[und] (con63) to (pro82);
+      \draw[und] (con63) to (pro15);
+    \end{tikzpicture}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.48\linewidth}
+    \scriptsize
+    \begin{tabular}{@{}l@{\ }p{0.76\linewidth}@{}}
+      \texttt{pro4:}   & nuclear is $\text{CO}_2$-free, merits support \\
+      \texttt{pro82:}  & waste storage is safe and secure \\
+      \texttt{pro15:}  & spent-fuel storage is robust \\
+      \texttt{con63:}  & nuclear waste is a terrorism risk \\
+      \texttt{con58:}  & subsidies better spent on renewables \\
+      \texttt{con71b:} & 1 of 5 meltdowns: 1000+ deaths \\
+      \texttt{con71c:} & 1 of 100k meltdowns: 50000 deaths \\
+      \texttt{con71:}  & 2 of 3 meltdowns: no deaths (isolated) \\
+    \end{tabular}
+  \end{minipage}
+  \caption{Attack graph of the small nuclear-energy sample, eight atoms and eight
+  directed edges. Red double arrows are symmetric rebuttals, blue arrows denote
+  undermining attacks. Filled nodes form the grounded extension, which here
+  coincides with the unique preferred and stable extension.}
+  \label{fig:evaluation:nuclear}
+\end{figure}
+
+\section{Error Analysis}
+\label{sec:evaluation:errors}
+
+The case study surfaces two recurring limitations, each from a different stage of
+the pipeline.
+
+First, the attack-type classification can mislabel a premise-directed attack as a
+rebuttal. Since rebuttals are symmetrized into mutual attacks while undermining
+attacks stay directed, a false rebuttal label introduces a bidirectional
+conflict and therefore an unjustified cycle. The meltdown-fatality claims, for
+instance, attack the CO\textsubscript{2} argument as rebuttals, although they
+question its safety premise rather than directly negating its support
+conclusion. An undermining label would have been more suitable and would not have
+added a reverse edge.
+
+Second, atomization can produce atoms that, read in isolation, no longer carry a
+clear stance and end up neither attacking nor attacked. The claim that two of
+three meltdowns cause no deaths, for example, understates rather than opposes the
+pro side on its own and therefore stays isolated in the graph.
+
+% TODO: nach dem Gold-Standard die Haeufigkeit dieser Fehlertypen quantifizieren
+% und ueber mehrere Themen statt nur am Nuclear-Beispiel zeigen.

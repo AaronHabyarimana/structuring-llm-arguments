@@ -1,0 +1,103 @@
+% !TEX root = my-thesis.tex
+
+% **************************************************
+% Information and Commands for Reuse
+% **************************************************
+\newcommand{\thesisTitle}{Structuring LLM Arguments:
+A Logic of Argumentation Based Approach}
+\newcommand{\thesisName}{Aaron Habyarimana}
+\newcommand{\thesisBirthplace}{Mainz}
+% Options: Bachelorarbeit, Masterarbeit, Bachelor thesis, Master thesis, Dissertation.
+% Dissertation has different titlepage than others
+\newcommand{\thesisSubject}{Bachelorarbeit}
+\newcommand{\thesisKeywords}{Abstract Argumentation Frameworks, Argument Mining, Dung Semantics, Large Language Models, Formal Reasoning}  % (optional) Keywords are added to PDF meta data
+
+\newcommand{\thesisDate}{\today} % automatically insert current date. Change to the submission date if you like. (Apparently, some people handed in their thesis with the wrong date because they did not change it here)
+\ifcsname thesisVersion\endcsname
+% version specifier from cmd option. In the gitlab CI/CD job the commit short SHA will be inserted.
+\else
+% update to fixed version string if no command option is specified
+\newcommand{\thesisVersion}{CleanThesis 0.4.1 - JGU patches}
+\fi
+
+\newcommand{\thesisFirstReviewer}{Prof. Dr. Stefan Kramer}
+\newcommand{\thesisFirstReviewerUniversity}{\protect{Johannes Gutenberg University Mainz}}
+\newcommand{\thesisFirstReviewerDepartment}{Institute of Computer Science - Data Mining}
+
+\newcommand{\thesisSecondReviewer}{Maike Paetzel-Prüsmann}
+\newcommand{\thesisSecondReviewerUniversity}{\protect{Johannes Gutenberg University Mainz}}
+\newcommand{\thesisSecondReviewerDepartment}{Institute of Computer Science}
+
+\newcommand{\thesisFirstSupervisor}{Derian Boer}
+\newcommand{\thesisSecondSupervisor}{Lennart Baur}
+
+\newcommand{\thesisUniversity}{\protect{Johannes Gutenberg University Mainz}}
+\newcommand{\thesisUniversityDepartment}{FB08}
+\newcommand{\thesisUniversityDepartmentLong}{Faculty of Physics, Mathematics, and Computer Science}
+\newcommand{\thesisUniversityInstitute}{Institute of Computer Science}
+\newcommand{\thesisUniversityGroup}{Data Mining}
+\newcommand{\thesisUniversityCity}{Mainz}
+\newcommand{\thesisUniversityStreetAddress}{Staudingerweg 9}
+\newcommand{\thesisUniversityPostalCode}{55128}
+
+\newcommand{\thesisAIToolsAllowed}{true}  % Change here [true, false] for declaration.
+\newcommand{\thesisTitlepageElement}{show}  % show or hide titlepage graphical element
+\newcommand{\thesisTitlepageHeight}{6cm}  % height of line in cm
+\newcommand{\thesisTitlepageStart}{8cm}  % shifted start from center
+
+
+% **************************************************
+% Debug LaTeX Information
+% **************************************************
+%\listfiles
+
+
+% **************************************************
+% Load and Configure Packages
+% **************************************************
+\usepackage[ngerman, english]{babel} % babel system, adjust the language of the content (the last mentioned language is used as default for all text)
+\PassOptionsToPackage{% setup clean thesis style
+    figuresep=colon,%
+    hangfigurecaption=false,%
+    hangsection=true,%
+    hangsubsection=true,%
+    sansserif=false,%
+    configurelistings=true,%
+    colorize=full,%
+    colortheme=jgured,%
+    configurebiblatex=true,%
+    bibsys=biber,%
+    bibfile=bib-refs,%
+    bibstyle=numeric,%
+    bibsorting=nty,%
+}{cleanthesis}
+\usepackage{cleanthesis}
+
+\hypersetup{% setup the hyperref-package options
+    pdftitle={\thesisTitle},    %   - title (PDF meta)
+    pdfsubject={\thesisSubject},%   - subject (PDF meta)
+    pdfauthor={\thesisName},    %   - author (PDF meta)
+    pdfkeywords={\thesisKeywords}, % list of keywords
+    plainpages=false,           %   -
+    colorlinks=false,           %   - colorize links?
+    pdfborder={0 0 0},          %   -
+    breaklinks=true,            %   - allow line break inside links
+    bookmarksnumbered=true,     %
+    bookmarksopen=true          %
+}
+
+% **************************************************
+% Other Packages
+% **************************************************
+\usepackage{scrhack}
+\usepackage{iflang}  % for language switchcase in titlepage
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, fit, backgrounds}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+
+% theorem-like environments used in the foundations chapter
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]

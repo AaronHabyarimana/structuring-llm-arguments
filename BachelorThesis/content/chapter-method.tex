@@ -1,0 +1,176 @@
+% !TEX root = ../my-thesis.tex
+%
+\chapter{Method: The Pipeline}
+\label{sec:method}
+
+This chapter describes the pipeline that turns raw debate text into a formally
+evaluated Dung framework. Section~\ref{sec:method:overview} gives an overview,
+and the remaining sections describe the five steps in turn, each with the design
+decision behind it.
+
+\section{Overview}
+\label{sec:method:overview}
+
+The pipeline runs in five steps. Step one acquires arguments and atomizes them
+into self-contained claims. Step two examines every pair of claims and proposes
+categorized attack candidates. Step three filters those candidates by confidence
+and verifies the borderline cases. Step four converts the accepted candidates
+into binary Dung attack facts. Step five solves the resulting framework under
+grounded, preferred, and stable semantics with a Prolog solver.
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[
+    node distance = 6mm and 10mm,
+    box/.style = {draw, rounded corners=3pt, fill=blue!8,
+                  minimum width=82mm, minimum height=8mm,
+                  align=center, font=\small},
+    arr/.style = {-Stealth, thick},
+  ]
+    \node[box]                  (atom)   {Step 1: Argument Acquisition and Atomization\\
+                                          \textit{LLM zero-shot generation or corpus atomization}};
+    \node[box, below=of atom]   (batch)  {Step 2: Attack Detection and Classification\\
+                                          \textit{propose labeled attack candidates per pair}};
+    \node[box, below=of batch]  (filter) {Step 3: Confidence Filtering and Verification\\
+                                          \textit{route by confidence score}};
+    \node[box, below=of filter] (aaf)    {Step 4: AAF Conversion\\
+                                          \textit{prune attacks to traced att/2 facts}};
+    \node[box, below=of aaf]    (prolog) {Step 5: Solving under Dung Semantics\\
+                                          \textit{grounded / preferred / stable extensions}};
+    \draw[arr] (atom)   -- (batch);
+    \draw[arr] (batch)  -- (filter);
+    \draw[arr] (filter) -- (aaf);
+    \draw[arr] (aaf)    -- (prolog);
+  \end{tikzpicture}
+  \caption{Overview of the pipeline, from raw debate text to formally evaluated
+  Dung extensions in five steps.}
+  \label{fig:method:pipeline}
+\end{figure}
+
+\section{Step 1: Argument Acquisition and Atomization}
+\label{sec:method:atomize}
+
+Arguments enter the pipeline in one of three ways. They are generated from
+scratch by prompting an LLM to produce $n$ pro and $n$ con arguments on a topic,
+extracted from an existing text corpus, or loaded directly from an argument
+database. In all cases an argument is represented by a tuple of an identifier, a
+stance label, and the argument text.
+
+Natural-language arguments frequently bundle several claims. A compound sentence
+such as ``Although nuclear energy produces waste, it is cleaner than coal''
+mixes a concession with a main claim, and treating it as one unit would distort
+the attack relations extracted next. The pipeline therefore prompts an LLM to
+split each argument into self-contained atomic claims under three rules.
+
+\begin{enumerate}
+  \item \textbf{Drop concessive fragments.} Every component introduced by
+    ``although'', ``while'', ``despite'', and similar markers is a rhetorical
+    hedge rather than a standalone argument and is dropped.
+  \item \textbf{Resolve pronouns.} A pronoun that clearly refers to a specific
+    subject is replaced by that subject. A fragment whose referent cannot be
+    recovered is removed, so that every atom is understandable in isolation.
+  \item \textbf{Filter non-argumentative content.} A statement that neither
+    supports nor opposes the claim under debate is dropped.
+\end{enumerate}
+
+A fourth, implicit rule keeps the stance intact. Reported or conceded positions
+of the opposing side, such as ``opponents argue X'', are not promoted to their
+own atom, because read in isolation they would carry the opposite stance of the
+speaker. Each argument is atomized independently, which allows parallelization.
+The resulting set of atomic arguments is denoted $\mathcal{A}'$ and forms the
+input to the next step. Every atom keeps the identifier of its source argument
+with a unique suffix, so that for instance \texttt{pro5} can yield the atoms
+\texttt{pro5} and \texttt{pro5b}, which share the base \texttt{pro5}.
+
+\section{Step 2: Attack Detection and Classification}
+\label{sec:method:extraction}
+
+With the atomic arguments in place, the pipeline examines every pair in
+$\mathcal{A}'$ for a potential attack, regardless of stance, since same-stance
+arguments can also conflict. Two pro-nuclear arguments may, for example,
+prioritise incompatible safety strategies. Pairs of atoms that share a base are
+skipped, since they originate from the same source argument.
+
+Rather than a binary decision, the pipeline prompts the LLM to detect and
+categorize each potential attack at once and to return a confidence score and a
+justification. Asking for the type rather than a mere yes or no forces the model
+to engage with the argumentative structure of the pair instead of pattern
+matching on opposite stances, and the score and justification make each decision
+traceable and provide a routing signal for the next step. Each candidate carries
+four fields.
+
+\begin{lstlisting}[caption={Fields of an attack candidate.},label={lst:method:candidate}]
+direction:   A_ATTACKS_B | B_ATTACKS_A | NONE
+attack_type: rebuttal | undercutting | undermining | NONE
+confidence:  integer in [0, 100]
+reason:      one-sentence justification
+\end{lstlisting}
+
+The prompt provides the full definitions of the three attack types from
+Section~\ref{sec:foundations:typology} and enforces that if
+\texttt{direction} is \texttt{NONE} then \texttt{attack\_type} is \texttt{NONE}
+and \texttt{confidence} is zero, which keeps the output internally consistent.
+Rebuttals are treated as symmetric, so the reverse edge is added automatically,
+as motivated in Section~\ref{sec:foundations:typology}. All $\binom{|\mathcal{A}'|}{2}$
+pairs are grouped into batches of size $b$, which reduces the number of API
+calls from quadratic to $\binom{|\mathcal{A}'|}{2} / b$. Pairs for which the
+model returns malformed output are retried individually.
+
+This typed prompt is exactly the component whose value the ablation in
+Section~\ref{sec:evaluation:ablation} measures, by comparing it against a binary
+variant that omits the attack type.
+
+\section{Step 3: Confidence Filtering and Verification}
+\label{sec:method:filter}
+
+Not all candidates are equally reliable. The confidence score, which is an
+indication of the model's certainty rather than a calibrated probability, routes
+each candidate through a three-way decision with two thresholds
+$\theta_{\text{acc}}$ and $\theta_{\text{ver}}$.
+
+\begin{equation}
+\text{decision}(c) =
+\begin{cases}
+  \textbf{accept} & c \geq \theta_{\text{acc}} \\
+  \textbf{verify} & \theta_{\text{ver}} \leq c < \theta_{\text{acc}} \\
+  \textbf{reject} & c < \theta_{\text{ver}}
+\end{cases}
+\end{equation}
+
+Borderline candidates in the verify region are re-examined by a dedicated
+verifier prompt that asks the model to confirm or reject the attack given the two
+arguments and the proposed type, but without access to the original confidence
+score or justification. Withholding both keeps the verifier from anchoring on the
+extractor's judgment. Accepted and confirmed candidates pass to the next step,
+and rejected ones are discarded.
+
+\section{Step 4: AAF Conversion}
+\label{sec:method:conversion}
+
+Every accepted candidate is converted to a binary Dung fact
+$\texttt{att}(A, B)$, deliberately dropping the attack type from the formal
+semantics. Unlike gradual QBAF semantics, which assign each argument a numerical
+strength, Dung semantics ask which arguments can be jointly accepted, a set-based
+rather than numerical question, so binary attack facts are the natural
+representation. The attack type, the confidence score, and the justification are
+not lost. They are retained as comments and metadata and remain available for
+analysis and error inspection.
+
+\section{Step 5: Solving under Dung Semantics}
+\label{sec:method:solver}
+
+The framework is solved by an AAF solver implemented in Prolog under the three
+semantics of Section~\ref{sec:foundations:aaf}, using standard fixed-point and
+enumeration procedures~\cite{cerutti2014}. The grounded extension is computed by
+iterating the characteristic function from the empty set in polynomial time.
+Computing preferred and stable extensions requires enumerating conflict-free
+sets, which is exponential in the worst case.
+
+To keep this tractable the solver applies a \emph{grounded-first reduction}. The
+grounded extension and the arguments it attacks are fixed before the search, so
+the exponential enumeration is restricted to the undecided arguments that remain.
+This reduction is key to the scalability of the pipeline. On the frameworks in
+the evaluation it brings the preferred and stable computation down to a fraction
+of a second per topic, where a naive enumeration times out. The solver is
+parametrised by the framework file and returns its results as JSON, which the
+Python driver reads back.

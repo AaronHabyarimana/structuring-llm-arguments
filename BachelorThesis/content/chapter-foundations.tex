@@ -1,0 +1,149 @@
+% !TEX root = ../my-thesis.tex
+%
+\chapter{Foundations}
+\label{sec:foundations}
+
+This chapter introduces the formal and conceptual background the thesis builds
+on. Section~\ref{sec:foundations:aaf} defines Dung's abstract argumentation
+frameworks and the three semantics the pipeline computes.
+Section~\ref{sec:foundations:typology} introduces the attack typology of Pollock
+and ASPIC+ that the extraction step uses. Section~\ref{sec:foundations:am}
+sketches argument mining, and Section~\ref{sec:foundations:llm} covers the
+aspects of large language models relevant to this work.
+
+\section{Abstract Argumentation Frameworks}
+\label{sec:foundations:aaf}
+
+Abstract Argumentation Frameworks (AAFs), introduced by Phan Minh
+Dung in 1995~\cite{dung1995}, are the most established formal model of
+argumentation. The framework is deliberately abstract. It treats arguments as
+atomic entities without internal structure and represents only the conflicts
+between them.
+
+\begin{definition}[Argumentation Framework]
+An argumentation framework is a pair $AF = \langle \mathcal{A}, \mathcal{R}
+\rangle$, where $\mathcal{A}$ is a finite set of arguments and $\mathcal{R}
+\subseteq \mathcal{A} \times \mathcal{A}$ is a binary attack relation. We say
+that an argument $a$ attacks an argument $b$ if $(a,b) \in \mathcal{R}$.
+\end{definition}
+
+The central question is which sets of arguments can rationally be accepted
+together. The following notions, all due to Dung~\cite{dung1995}, build up to
+an answer.
+
+\begin{definition}[Conflict-freeness and defense]
+A set $S \subseteq \mathcal{A}$ is \emph{conflict-free} if there are no
+arguments $a, b \in S$ with $(a, b) \in \mathcal{R}$. An argument $a$ is
+\emph{defended} by $S$ if for every $b$ with $(b, a) \in \mathcal{R}$ there is
+some $c \in S$ with $(c, b) \in \mathcal{R}$.
+\end{definition}
+
+\begin{definition}[Admissibility and characteristic function]
+A conflict-free set $S$ is \emph{admissible} if it defends every one of its
+elements. The characteristic function $F_{AF} : 2^{\mathcal{A}} \to
+2^{\mathcal{A}}$ maps a set to the arguments it defends,
+$F_{AF}(S) = \{ a \in \mathcal{A} \mid S \text{ defends } a \}$.
+\end{definition}
+
+On top of admissibility, Dung defines several \emph{semantics}, each formalising
+a different standard of collective acceptability. This thesis computes three of
+them, chosen to span a wide spectrum of strictness.
+
+\begin{itemize}
+  \item The \textbf{grounded extension} is the least fixed point of $F_{AF}$,
+    obtained by iterating $F_{AF}$ from the empty set. It is the most cautious
+    semantics, it always exists, and it is unique for finite frameworks.
+  \item A \textbf{preferred extension} is a maximal admissible set. It represents
+    the largest internally coherent position a debate supports. A framework can
+    have several preferred extensions.
+  \item A \textbf{stable extension} is a conflict-free set $S$ that attacks every
+    argument outside $S$. Stable extensions are the strictest of the three and
+    are not guaranteed to exist.
+\end{itemize}
+
+The grounded semantics collapses a debate to a single cautious set, whereas
+preferred and stable extensions, which may be multiple, reveal whether a topic
+supports several internally consistent positions. This distinction is central to
+the evaluation in Chapter~\ref{sec:evaluation}.
+
+% TODO: kleines durchgerechnetes Beispiel mit eigener Abbildung einfuegen,
+% das einen 4--5-Knoten-Graphen mit MEHREREN preferred extensions zeigt,
+% damit der Unterschied zwischen grounded und preferred/stable sichtbar wird.
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.8\linewidth}{\centering\vspace{2.5cm} Placeholder:
+  worked example of a small framework with several preferred extensions.
+  \vspace{2.5cm}}}
+  \caption{Running example of a small argumentation framework. To be replaced
+  with a TikZ figure and a step-by-step computation of the grounded, preferred,
+  and stable extensions.}
+  \label{fig:foundations:example}
+\end{figure}
+
+\section{Attack Typology}
+\label{sec:foundations:typology}
+
+Dung's framework is abstract in that it does not say \emph{why} one argument
+attacks another. For the extraction step, however, the kind of attack matters.
+Pollock~\cite{pollock1992} distinguishes three attack types in natural-language
+debate, a distinction also used in the ASPIC+ framework~\cite{modgil2014}.
+
+\begin{itemize}
+  \item A \textbf{rebuttal} contradicts the \emph{conclusion} of the target. An
+    example is the pair ``nuclear power is clean'' against ``nuclear plants cause
+    catastrophic contamination''.
+  \item An \textbf{undercutting} attack challenges the \emph{inference} from
+    premises to conclusion. The conclusion does not follow even if the premises
+    hold, for example when low CO\textsubscript{2} emissions are taken to imply
+    the absence of any long-term risk.
+  \item An \textbf{undermining} attack hits a \emph{premise} the target relies
+    on, without engaging the conclusion directly. The claim ``containment makes
+    plants safe'' is undermined by ``radiation cannot be contained
+    indefinitely''.
+\end{itemize}
+
+A property that matters for the construction of the framework is that a rebuttal
+is inherently mutual. If two conclusions negate the same proposition, then one is
+true only if the other is false, so the conflict holds in both directions.
+Without a preference or strength ordering, which Dung's abstract framework does
+not provide, neither side takes precedence. The pipeline therefore symmetrizes
+rebuttals, in line with the treatment of rebuttals in ASPIC+~\cite{modgil2014}.
+Undercutting and undermining attacks, by contrast, remain directed. This
+asymmetry has consequences for the cycles that appear in the resulting
+frameworks, which Chapter~\ref{sec:evaluation} discusses.
+
+\section{Argument Mining}
+\label{sec:foundations:am}
+
+Argument mining (AM) aims to automatically identify argumentative components,
+such as claims and premises, and the relations between them from natural-language
+text. Traditional approaches decompose the problem into subtasks including
+argument detection, stance classification, and relation prediction, and address
+them with supervised learning on annotated corpora~\cite{lawrence2019argument}.
+More recently, LLMs have begun to replace task-specific classifiers with
+prompt-based methods that perform extraction, relation identification, stance
+assessment, summarization, and generation in a single
+framework~\cite{li2025large}. Attack relation extraction in particular benefits
+from this shift, since LLMs can use contextual understanding to identify subtle
+argumentative relations that surface-level classifiers miss. Most existing work,
+however, evaluates AM subtasks in isolation and stops before connecting the
+extracted relations to formal reasoning, which leaves the question of which
+arguments are collectively acceptable unanswered. This thesis targets exactly
+that gap.
+
+\section{Large Language Models}
+\label{sec:foundations:llm}
+
+Large language models are neural networks trained on large text corpora to
+predict the next token, and through that objective they acquire a broad ability
+to follow instructions given in natural language. Only a few properties matter
+for this thesis. First, model behaviour is steered through \emph{prompts}, so
+the wording of the task, including whether the model is asked to classify an
+attack type, directly shapes the output. Second, the sampling
+\emph{temperature} controls randomness, and a temperature of zero makes the
+output as deterministic as the model allows, which the pipeline uses for
+reproducibility. Determinism is not absolute, since server-side execution can
+still introduce small variations. Third, the pipeline uses an open-weight model,
+which keeps the experiments reproducible and independent of a proprietary
+service. The concrete model and parameters are given in
+Section~\ref{sec:evaluation:setup}.
