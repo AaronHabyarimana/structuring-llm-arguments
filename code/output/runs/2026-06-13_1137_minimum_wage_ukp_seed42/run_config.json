@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-06-13_1137_minimum_wage_ukp_seed42",
+  "timestamp": "2026-06-13T11:37:29",
+  "topic_file": "minimum_wage",
+  "topic_label": "Minimum Wage",
+  "source": "ukp",
+  "split": "test",
+  "limit": 15,
+  "balanced": true,
+  "seed": 42,
+  "atomize": true,
+  "batch_size": 10,
+  "max_workers": 2,
+  "confidence_accept": 70,
+  "confidence_verify": 50,
+  "model_extract": "GPT OSS 120B",
+  "model_attacks": "GPT OSS 120B",
+  "prompt_versions": {
+    "atomize": "atomize_v3",
+    "classify_batch": "classify_batch_v3",
+    "classify_single": "classify_single_v3",
+    "verify": "verify_v3",
+    "generate": "generate_v1"
+  },
+  "n_args_before_atomize": 14
+}

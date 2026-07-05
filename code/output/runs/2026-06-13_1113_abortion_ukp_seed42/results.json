@@ -1,0 +1,132 @@
+{
+  "run_id": "2026-06-13_1113_abortion_ukp_seed42",
+  "topic": "Abortion",
+  "n_args": 25,
+  "n_attacks": 25,
+  "u_size": 2,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con109",
+    "con109b",
+    "con140",
+    "con140b",
+    "con8",
+    "pro27",
+    "pro29",
+    "pro29b",
+    "pro36a",
+    "pro36b",
+    "pro36c",
+    "pro58"
+  ],
+  "preferred": [
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con23",
+      "con8",
+      "pro27",
+      "pro29",
+      "pro29b",
+      "pro36a",
+      "pro36b",
+      "pro36c",
+      "pro58"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con8",
+      "pro27",
+      "pro29",
+      "pro29b",
+      "pro36a",
+      "pro36b",
+      "pro36c",
+      "pro58",
+      "pro63"
+    ]
+  ],
+  "stable": [
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con23",
+      "con8",
+      "pro27",
+      "pro29",
+      "pro29b",
+      "pro36a",
+      "pro36b",
+      "pro36c",
+      "pro58"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con8",
+      "pro27",
+      "pro29",
+      "pro29b",
+      "pro36a",
+      "pro36b",
+      "pro36c",
+      "pro58",
+      "pro63"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.073,
+    "atomize": 21.935,
+    "attack_extraction": 328.708,
+    "prolog_solver": 0.21,
+    "total": 350.97
+  },
+  "graph_stats": {
+    "n_args": 25,
+    "n_attacks": 25,
+    "density": 0.0417,
+    "avg_in_degree": 1.0,
+    "avg_out_degree": 1.0,
+    "isolated_nodes": [
+      "pro29",
+      "pro29b",
+      "pro58",
+      "pro36a",
+      "pro36b",
+      "pro36c",
+      "con140"
+    ],
+    "isolated_ratio": 0.28,
+    "cross_stance_attacks": 12,
+    "same_stance_attacks": 13,
+    "cross_stance_ratio": 0.48,
+    "same_stance_ratio": 0.52,
+    "attack_type_counts": {
+      "undermining": 15,
+      "rebuttal": 10
+    },
+    "attack_type_ratios": {
+      "undermining": 0.6,
+      "rebuttal": 0.4
+    },
+    "n_scc": 21,
+    "largest_scc_size": 5,
+    "has_cycles": true,
+    "n_self_attacks": 0
+  }
+}

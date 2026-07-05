@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-06-13_1208_autonomous_vehicles_llm",
+  "n_args": 20,
+  "n_attacks": 39,
+  "density": 0.1026,
+  "avg_in_degree": 1.95,
+  "avg_out_degree": 1.95,
+  "isolated_nodes": [
+    "pro4",
+    "pro10",
+    "con7"
+  ],
+  "isolated_ratio": 0.15,
+  "cross_stance_attacks": 35,
+  "same_stance_attacks": 4,
+  "cross_stance_ratio": 0.8974,
+  "same_stance_ratio": 0.1026,
+  "attack_type_counts": {
+    "undermining": 34,
+    "undercutting": 1,
+    "rebuttal": 4
+  },
+  "attack_type_ratios": {
+    "undermining": 0.8718,
+    "undercutting": 0.0256,
+    "rebuttal": 0.1026
+  },
+  "n_scc": 17,
+  "largest_scc_size": 4,
+  "has_cycles": true,
+  "n_self_attacks": 0
+}

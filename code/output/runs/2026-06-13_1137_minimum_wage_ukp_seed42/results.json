@@ -1,0 +1,141 @@
+{
+  "run_id": "2026-06-13_1137_minimum_wage_ukp_seed42",
+  "topic": "Minimum Wage",
+  "n_args": 22,
+  "n_attacks": 59,
+  "u_size": 11,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con14b",
+    "con87",
+    "con87b",
+    "con87c",
+    "pro95",
+    "pro95b"
+  ],
+  "preferred": [
+    [
+      "con12",
+      "con14",
+      "con14b",
+      "con18",
+      "con76",
+      "con76b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro36",
+      "pro95",
+      "pro95b"
+    ],
+    [
+      "con12",
+      "con14b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro29",
+      "pro36",
+      "pro4",
+      "pro95",
+      "pro95b"
+    ],
+    [
+      "con14b",
+      "con70",
+      "con70b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro29",
+      "pro4",
+      "pro4b",
+      "pro95",
+      "pro95b"
+    ]
+  ],
+  "stable": [
+    [
+      "con12",
+      "con14",
+      "con14b",
+      "con18",
+      "con76",
+      "con76b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro36",
+      "pro95",
+      "pro95b"
+    ],
+    [
+      "con12",
+      "con14b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro29",
+      "pro36",
+      "pro4",
+      "pro95",
+      "pro95b"
+    ],
+    [
+      "con14b",
+      "con70",
+      "con70b",
+      "con87",
+      "con87b",
+      "con87c",
+      "pro29",
+      "pro4",
+      "pro4b",
+      "pro95",
+      "pro95b"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.101,
+    "atomize": 25.706,
+    "attack_extraction": 295.156,
+    "prolog_solver": 0.213,
+    "total": 321.213
+  },
+  "graph_stats": {
+    "n_args": 22,
+    "n_attacks": 59,
+    "density": 0.1277,
+    "avg_in_degree": 2.6818,
+    "avg_out_degree": 2.6818,
+    "isolated_nodes": [
+      "pro95",
+      "pro95b"
+    ],
+    "isolated_ratio": 0.0909,
+    "cross_stance_attacks": 52,
+    "same_stance_attacks": 7,
+    "cross_stance_ratio": 0.8814,
+    "same_stance_ratio": 0.1186,
+    "attack_type_counts": {
+      "undermining": 37,
+      "undercutting": 14,
+      "rebuttal": 8
+    },
+    "attack_type_ratios": {
+      "undermining": 0.6271,
+      "undercutting": 0.2373,
+      "rebuttal": 0.1356
+    },
+    "n_scc": 18,
+    "largest_scc_size": 3,
+    "has_cycles": true,
+    "n_self_attacks": 0
+  }
+}

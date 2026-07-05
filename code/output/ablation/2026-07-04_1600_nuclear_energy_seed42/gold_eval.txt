@@ -1,0 +1,62 @@
+Gold: C:\Users\habya\OneDrive\Dokumente\Aaron\Uni\Bachelorarbeit\Bachelorarbeit-1\code\output\gold\nuclear_energy_seed42\gold_template.csv
+  20 gerichtete Kanten, 15 Konfliktpaare, 201 Paare gesamt
+
+===== typed =====
+  Ebene                     n   TP       P       R      F1
+  gerichtet final          24   13   0.542   0.650   0.591
+  gerichtet roh            19   10   0.526   0.500   0.513
+  ungerichtet (Paare)      19   10   0.526   0.667   0.588
+  Falsch positiv (11):
+    con140   -> pro36     conf= 80 out=accept type=undermining
+    con140b  -> pro36     conf= 80 out=accept type=undermining
+    con23    -> pro36     conf= 75 out=accept type=undermining
+    con27    -> pro36     conf= 80 out=accept type=undermining
+    con27b   -> pro29     conf= 75 out=accept type=undermining
+    con27b   -> pro36     conf= 85 out=accept type=undermining
+    con36    -> pro36     conf= 90 out=accept type=undermining
+    con9b    -> pro82b    conf= 70 out=accept type=undermining
+    pro15a   -> con9b     conf= 95 out=symmetric-rebuttal type=rebuttal
+    pro15b   -> con9b     conf= 75 out=accept type=undermining
+    pro29    -> con109    conf= 70 out=symmetric-rebuttal type=rebuttal
+  Falsch negativ (7):
+    con109b  -> pro29
+    con109b  -> pro36
+    con23    -> pro15a
+    con9     -> pro15a
+    con9     -> pro82
+    pro29    -> con109b
+    pro36    -> con109b
+
+===== binary =====
+  Ebene                     n   TP       P       R      F1
+  gerichtet final          30   12   0.400   0.600   0.480
+  gerichtet roh            30   12   0.400   0.600   0.480
+  ungerichtet (Paare)      30   13   0.433   0.867   0.578
+  Falsch positiv (18):
+    con140   -> pro29     conf= 75 out=accept type=NONE
+    con140   -> pro36     conf= 85 out=accept type=NONE
+    con140b  -> pro36     conf= 85 out=accept type=NONE
+    con23    -> pro29     conf= 70 out=accept type=NONE
+    con23    -> pro32     conf= 70 out=accept type=NONE
+    con23    -> pro36     conf= 80 out=accept type=NONE
+    con23    -> pro82b    conf= 70 out=accept type=NONE
+    con27    -> pro29     conf= 70 out=accept type=NONE
+    con27b   -> pro29     conf= 85 out=accept type=NONE
+    con27b   -> pro36     conf= 90 out=accept type=NONE
+    con27c   -> pro29     conf= 70 out=accept type=NONE
+    con36    -> pro29     conf= 75 out=accept type=NONE
+    con36    -> pro36     conf= 95 out=accept type=NONE
+    con9     -> pro29     conf= 55 out=verify-accept type=NONE
+    con9b    -> pro29     conf= 55 out=verify-accept type=NONE
+    con9b    -> pro82b    conf= 80 out=accept type=NONE
+    pro15a   -> con9b     conf= 80 out=accept type=NONE
+    pro15b   -> con9b     conf= 85 out=accept type=NONE
+  Falsch negativ (8):
+    con23    -> pro15a
+    con9     -> pro15a
+    con9b    -> pro15a
+    pro15a   -> con36
+    pro29    -> con109b
+    pro36    -> con109b
+    pro82    -> con36
+    pro82b   -> con36

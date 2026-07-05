@@ -1,0 +1,68 @@
+Gold: C:\Users\habya\OneDrive\Dokumente\Aaron\Uni\Bachelorarbeit\Bachelorarbeit-1\code\output\gold\nuclear_energy_seed42\gold_template.csv
+  20 gerichtete Kanten, 15 Konfliktpaare, 201 Paare gesamt
+
+===== typed =====
+  Ebene                     n   TP       P       R      F1
+  gerichtet final          43   17   0.395   0.850   0.540
+  gerichtet roh            37   13   0.351   0.650   0.456
+  ungerichtet (Paare)      37   13   0.351   0.867   0.500
+  Falsch positiv (26):
+    con140   -> pro36     conf= 75 out=accept type=undermining
+    con140b  -> pro29     conf= 70 out=accept type=undermining
+    con140b  -> pro36     conf= 75 out=accept type=undermining
+    con152   -> pro29     conf= 70 out=accept type=undermining
+    con23    -> pro29     conf= 70 out=accept type=undermining
+    con23    -> pro32     conf= 80 out=accept type=undermining
+    con23    -> pro36     conf= 70 out=accept type=undermining
+    con23    -> pro95     conf= 70 out=accept type=undermining
+    con27    -> pro29     conf= 70 out=accept type=undermining
+    con27    -> pro36     conf= 70 out=accept type=undermining
+    con27b   -> pro29     conf= 80 out=accept type=undermining
+    con27b   -> pro36     conf= 80 out=accept type=undermining
+    con27c   -> pro29     conf= 70 out=accept type=undermining
+    con36    -> pro29     conf= 80 out=accept type=undermining
+    con36    -> pro36     conf= 80 out=accept type=undercutting
+    con9     -> pro32     conf= 75 out=accept type=undermining
+    con9     -> pro36     conf= 71 out=accept type=undermining
+    con9     -> pro95     conf= 70 out=accept type=undermining
+    con9b    -> pro32     conf= 75 out=accept type=undermining
+    con9b    -> pro36     conf= 71 out=accept type=undermining
+    con9b    -> pro82b    conf= 70 out=accept type=undermining
+    con9b    -> pro95     conf= 70 out=accept type=undermining
+    pro15b   -> con9b     conf= 80 out=accept type=undermining
+    pro29    -> con109    conf= 90 out=symmetric-rebuttal type=rebuttal
+    pro82    -> con23     conf= 80 out=symmetric-rebuttal type=rebuttal
+    pro95    -> con36     conf= 70 out=accept type=undermining
+  Falsch negativ (3):
+    con23    -> pro15a
+    con9     -> pro15a
+    pro29    -> con109b
+
+===== binary =====
+  Ebene                     n   TP       P       R      F1
+  gerichtet final          27   13   0.481   0.650   0.553
+  gerichtet roh            27   13   0.481   0.650   0.553
+  ungerichtet (Paare)      27   13   0.481   0.867   0.619
+  Falsch positiv (14):
+    con109   -> pro29b    conf= 70 out=accept type=NONE
+    con140   -> pro36     conf= 85 out=accept type=NONE
+    con140b  -> pro36     conf= 85 out=accept type=NONE
+    con152   -> pro15a    conf= 80 out=accept type=NONE
+    con23    -> pro36     conf= 80 out=accept type=NONE
+    con27    -> pro36     conf= 90 out=accept type=NONE
+    con27b   -> pro29     conf= 85 out=accept type=NONE
+    con27b   -> pro36     conf= 90 out=accept type=NONE
+    con36    -> pro29     conf= 70 out=accept type=NONE
+    con36    -> pro36     conf= 95 out=accept type=NONE
+    con9     -> pro36     conf= 85 out=accept type=NONE
+    con9b    -> pro36     conf= 80 out=accept type=NONE
+    con9b    -> pro82b    conf= 80 out=accept type=NONE
+    pro15b   -> con9b     conf= 70 out=accept type=NONE
+  Falsch negativ (7):
+    con23    -> pro15a
+    con36    -> pro82b
+    con9     -> pro15a
+    pro15a   -> con36
+    pro29    -> con109b
+    pro36    -> con109b
+    pro82    -> con36

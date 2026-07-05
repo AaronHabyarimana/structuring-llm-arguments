@@ -1,0 +1,154 @@
+{
+  "run_id": "2026-06-12_2039_abortion_ukp_seed42",
+  "topic": "Abortion",
+  "n_args": 17,
+  "n_attacks": 26,
+  "u_size": 5,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con130",
+    "con155a",
+    "con155b",
+    "con60",
+    "pro109",
+    "pro36",
+    "pro9"
+  ],
+  "preferred": [
+    [
+      "con130",
+      "con140",
+      "con144",
+      "con155a",
+      "con155b",
+      "con60",
+      "pro109",
+      "pro36",
+      "pro9"
+    ],
+    [
+      "con130",
+      "con140",
+      "con155a",
+      "con155b",
+      "con56",
+      "con60",
+      "con7",
+      "pro109",
+      "pro36",
+      "pro9"
+    ],
+    [
+      "con130",
+      "con144",
+      "con155a",
+      "con155b",
+      "con60",
+      "pro109",
+      "pro36",
+      "pro63",
+      "pro9"
+    ],
+    [
+      "con130",
+      "con155a",
+      "con155b",
+      "con56",
+      "con60",
+      "con7",
+      "pro109",
+      "pro36",
+      "pro63",
+      "pro9"
+    ]
+  ],
+  "stable": [
+    [
+      "con130",
+      "con140",
+      "con144",
+      "con155a",
+      "con155b",
+      "con60",
+      "pro109",
+      "pro36",
+      "pro9"
+    ],
+    [
+      "con130",
+      "con140",
+      "con155a",
+      "con155b",
+      "con56",
+      "con60",
+      "con7",
+      "pro109",
+      "pro36",
+      "pro9"
+    ],
+    [
+      "con130",
+      "con144",
+      "con155a",
+      "con155b",
+      "con60",
+      "pro109",
+      "pro36",
+      "pro63",
+      "pro9"
+    ],
+    [
+      "con130",
+      "con155a",
+      "con155b",
+      "con56",
+      "con60",
+      "con7",
+      "pro109",
+      "pro36",
+      "pro63",
+      "pro9"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.034,
+    "atomize": 28.511,
+    "attack_extraction": 93.495,
+    "prolog_solver": 0.141,
+    "total": 122.211
+  },
+  "graph_stats": {
+    "n_args": 17,
+    "n_attacks": 26,
+    "density": 0.0956,
+    "avg_in_degree": 1.5294,
+    "avg_out_degree": 1.5294,
+    "isolated_nodes": [
+      "pro109",
+      "pro9"
+    ],
+    "isolated_ratio": 0.1176,
+    "cross_stance_attacks": 18,
+    "same_stance_attacks": 8,
+    "cross_stance_ratio": 0.6923,
+    "same_stance_ratio": 0.3077,
+    "attack_type_counts": {
+      "undermining": 14,
+      "rebuttal": 12
+    },
+    "attack_type_ratios": {
+      "undermining": 0.5385,
+      "rebuttal": 0.4615
+    },
+    "n_scc": 11,
+    "largest_scc_size": 6,
+    "has_cycles": true,
+    "n_self_attacks": 0
+  }
+}

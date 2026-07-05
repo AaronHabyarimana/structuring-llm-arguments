@@ -1,0 +1,120 @@
+{
+  "run_id": "2026-06-13_1123_death_penalty_ukp_seed42",
+  "topic": "Death Penalty",
+  "n_args": 18,
+  "n_attacks": 61,
+  "u_size": 15,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "pro4b",
+    "pro82"
+  ],
+  "preferred": [
+    [
+      "con140",
+      "con174",
+      "con189",
+      "con190",
+      "con229",
+      "con27",
+      "con36",
+      "pro4b",
+      "pro82"
+    ],
+    [
+      "pro15",
+      "pro15b",
+      "pro32",
+      "pro32b",
+      "pro32c",
+      "pro4",
+      "pro4b",
+      "pro82",
+      "pro95"
+    ],
+    [
+      "pro32",
+      "pro32b",
+      "pro32c",
+      "pro36",
+      "pro4",
+      "pro4b",
+      "pro82"
+    ]
+  ],
+  "stable": [
+    [
+      "con140",
+      "con174",
+      "con189",
+      "con190",
+      "con229",
+      "con27",
+      "con36",
+      "pro4b",
+      "pro82"
+    ],
+    [
+      "pro15",
+      "pro15b",
+      "pro32",
+      "pro32b",
+      "pro32c",
+      "pro4",
+      "pro4b",
+      "pro82",
+      "pro95"
+    ],
+    [
+      "pro32",
+      "pro32b",
+      "pro32c",
+      "pro36",
+      "pro4",
+      "pro4b",
+      "pro82"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.112,
+    "atomize": 21.827,
+    "attack_extraction": 244.321,
+    "prolog_solver": 0.429,
+    "total": 266.724
+  },
+  "graph_stats": {
+    "n_args": 18,
+    "n_attacks": 61,
+    "density": 0.1993,
+    "avg_in_degree": 3.3889,
+    "avg_out_degree": 3.3889,
+    "isolated_nodes": [
+      "pro4b"
+    ],
+    "isolated_ratio": 0.0556,
+    "cross_stance_attacks": 56,
+    "same_stance_attacks": 5,
+    "cross_stance_ratio": 0.918,
+    "same_stance_ratio": 0.082,
+    "attack_type_counts": {
+      "undermining": 32,
+      "rebuttal": 28,
+      "undercutting": 1
+    },
+    "attack_type_ratios": {
+      "undermining": 0.5246,
+      "rebuttal": 0.459,
+      "undercutting": 0.0164
+    },
+    "n_scc": 6,
+    "largest_scc_size": 13,
+    "has_cycles": true,
+    "n_self_attacks": 0
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "run_id": "2026-06-12_2129_abortion_ukp_seed42",
+  "topic": "Abortion",
+  "n_args": 16,
+  "n_attacks": 29,
+  "u_size": 9,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con109",
+    "con109b",
+    "con140",
+    "con140b",
+    "pro29",
+    "pro36",
+    "pro58"
+  ],
+  "preferred": [
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con152",
+      "con23",
+      "con8",
+      "con9",
+      "pro29",
+      "pro36",
+      "pro58"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con23",
+      "pro29",
+      "pro29b",
+      "pro36",
+      "pro58",
+      "pro71"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con8",
+      "pro29",
+      "pro36",
+      "pro58",
+      "pro63b",
+      "pro7"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "pro29",
+      "pro29b",
+      "pro36",
+      "pro58",
+      "pro63",
+      "pro63b",
+      "pro7",
+      "pro71"
+    ]
+  ],
+  "stable": [
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con152",
+      "con23",
+      "con8",
+      "con9",
+      "pro29",
+      "pro36",
+      "pro58"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con23",
+      "pro29",
+      "pro29b",
+      "pro36",
+      "pro58",
+      "pro71"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "con8",
+      "pro29",
+      "pro36",
+      "pro58",
+      "pro63b",
+      "pro7"
+    ],
+    [
+      "con109",
+      "con109b",
+      "con140",
+      "con140b",
+      "pro29",
+      "pro29b",
+      "pro36",
+      "pro58",
+      "pro63",
+      "pro63b",
+      "pro7",
+      "pro71"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 0.054,
+    "atomize": 19.79,
+    "attack_extraction": 222.258,
+    "prolog_solver": 0.15,
+    "total": 242.271
+  },
+  "graph_stats": {
+    "n_args": 16,
+    "n_attacks": 29,
+    "density": 0.1208,
+    "avg_in_degree": 1.8125,
+    "avg_out_degree": 1.8125,
+    "isolated_nodes": [
+      "pro29",
+      "pro58",
+      "pro36",
+      "con140",
+      "con140b",
+      "con109",
+      "con109b"
+    ],
+    "isolated_ratio": 0.4375,
+    "cross_stance_attacks": 29,
+    "same_stance_attacks": 0,
+    "cross_stance_ratio": 1.0,
+    "same_stance_ratio": 0.0,
+    "attack_type_counts": {
+      "rebuttal": 28,
+      "undermining": 1
+    },
+    "attack_type_ratios": {
+      "rebuttal": 0.9655,
+      "undermining": 0.0345
+    },
+    "n_scc": 8,
+    "largest_scc_size": 9,
+    "has_cycles": true,
+    "n_self_attacks": 0
+  }
+}

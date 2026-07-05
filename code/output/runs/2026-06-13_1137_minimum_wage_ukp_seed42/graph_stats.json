@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-06-13_1137_minimum_wage_ukp_seed42",
+  "n_args": 22,
+  "n_attacks": 59,
+  "density": 0.1277,
+  "avg_in_degree": 2.6818,
+  "avg_out_degree": 2.6818,
+  "isolated_nodes": [
+    "pro95",
+    "pro95b"
+  ],
+  "isolated_ratio": 0.0909,
+  "cross_stance_attacks": 52,
+  "same_stance_attacks": 7,
+  "cross_stance_ratio": 0.8814,
+  "same_stance_ratio": 0.1186,
+  "attack_type_counts": {
+    "undermining": 37,
+    "undercutting": 14,
+    "rebuttal": 8
+  },
+  "attack_type_ratios": {
+    "undermining": 0.6271,
+    "undercutting": 0.2373,
+    "rebuttal": 0.1356
+  },
+  "n_scc": 18,
+  "largest_scc_size": 3,
+  "has_cycles": true,
+  "n_self_attacks": 0
+}

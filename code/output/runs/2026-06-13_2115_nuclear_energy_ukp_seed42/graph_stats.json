@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-06-13_2115_nuclear_energy_ukp_seed42",
+  "n_args": 12,
+  "n_attacks": 13,
+  "density": 0.0985,
+  "avg_in_degree": 1.0833,
+  "avg_out_degree": 1.0833,
+  "isolated_nodes": [
+    "pro95",
+    "con71",
+    "con71c"
+  ],
+  "isolated_ratio": 0.25,
+  "cross_stance_attacks": 13,
+  "same_stance_attacks": 0,
+  "cross_stance_ratio": 1.0,
+  "same_stance_ratio": 0.0,
+  "attack_type_counts": {
+    "undermining": 7,
+    "rebuttal": 6
+  },
+  "attack_type_ratios": {
+    "undermining": 0.5385,
+    "rebuttal": 0.4615
+  },
+  "n_scc": 8,
+  "largest_scc_size": 5,
+  "has_cycles": true,
+  "n_self_attacks": 0
+}

@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-06-09_2057_autonomous_vehicles_llm",
+  "timestamp": "2026-06-09T20:57:41",
+  "topic_file": "Autonomous Vehicles",
+  "topic_label": "Autonomous Vehicles",
+  "source": "llm",
+  "split": null,
+  "limit": 20,
+  "balanced": null,
+  "seed": null,
+  "atomize": false,
+  "batch_size": 10,
+  "max_workers": 2,
+  "confidence_accept": 70,
+  "confidence_verify": 50,
+  "model_extract": "GPT OSS 120B",
+  "model_attacks": "GPT OSS 120B",
+  "prompt_versions": {
+    "atomize": "atomize_v1",
+    "classify_batch": "classify_batch_v1",
+    "classify_single": "classify_single_v1",
+    "verify": "verify_v1",
+    "generate": "generate_v1"
+  },
+  "n_args_before_atomize": 20
+}

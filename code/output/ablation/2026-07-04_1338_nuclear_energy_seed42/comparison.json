@@ -1,0 +1,67 @@
+{
+  "topic_file": "nuclear_energy",
+  "topic_label": "Nuclear Energy",
+  "n_atoms": 22,
+  "typed": {
+    "n_edges_raw": 36,
+    "n_edges_final": 44,
+    "grounded": 14,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 127.764,
+      "solve_s": 1.196
+    }
+  },
+  "binary": {
+    "n_edges_raw": 39,
+    "n_edges_final": 39,
+    "grounded": 15,
+    "n_preferred": 1,
+    "n_stable": 1,
+    "semantics": [
+      "grounded",
+      "preferred",
+      "stable"
+    ],
+    "runtime": {
+      "extract_s": 272.459,
+      "solve_s": 0.149
+    }
+  },
+  "jaccard_directed_raw": 0.6667,
+  "jaccard_directed_final": 0.6275,
+  "jaccard_undirected": 0.7857,
+  "directed_raw": {
+    "intersection": 30,
+    "typed_only": [
+      "con152->pro82b",
+      "con36->pro29",
+      "con36->pro95",
+      "con9b->pro15b",
+      "pro15->con36",
+      "pro82->con36"
+    ],
+    "binary_only": [
+      "con109b->pro29",
+      "con109b->pro32",
+      "con23->pro32",
+      "con27->pro36",
+      "con36->pro15",
+      "con36->pro82",
+      "con9->pro32",
+      "pro15b->con9b",
+      "pro29b->pro4"
+    ]
+  },
+  "undirected": {
+    "intersection": 33,
+    "typed_only": 3,
+    "binary_only": 6
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "run_id": "2026-06-13_1208_autonomous_vehicles_llm",
+  "topic": "Autonomous Vehicles",
+  "n_args": 20,
+  "n_attacks": 39,
+  "u_size": 0,
+  "semantics": [
+    "grounded",
+    "preferred",
+    "stable"
+  ],
+  "grounded": [
+    "con1",
+    "con10",
+    "con3",
+    "con4",
+    "con5",
+    "con7",
+    "con8",
+    "con9",
+    "pro10",
+    "pro4"
+  ],
+  "preferred": [
+    [
+      "con1",
+      "con10",
+      "con3",
+      "con4",
+      "con5",
+      "con7",
+      "con8",
+      "con9",
+      "pro10",
+      "pro4"
+    ]
+  ],
+  "stable": [
+    [
+      "con1",
+      "con10",
+      "con3",
+      "con4",
+      "con5",
+      "con7",
+      "con8",
+      "con9",
+      "pro10",
+      "pro4"
+    ]
+  ],
+  "error": null,
+  "warning": null,
+  "runtime_s": {
+    "load_arguments": 7.721,
+    "attack_extraction": 113.223,
+    "prolog_solver": 0.236,
+    "total": 121.226
+  },
+  "graph_stats": {
+    "n_args": 20,
+    "n_attacks": 39,
+    "density": 0.1026,
+    "avg_in_degree": 1.95,
+    "avg_out_degree": 1.95,
+    "isolated_nodes": [
+      "pro4",
+      "pro10",
+      "con7"
+    ],
+    "isolated_ratio": 0.15,
+    "cross_stance_attacks": 35,
+    "same_stance_attacks": 4,
+    "cross_stance_ratio": 0.8974,
+    "same_stance_ratio": 0.1026,
+    "attack_type_counts": {
+      "undermining": 34,
+      "undercutting": 1,
+      "rebuttal": 4
+    },
+    "attack_type_ratios": {
+      "undermining": 0.8718,
+      "undercutting": 0.0256,
+      "rebuttal": 0.1026
+    },
+    "n_scc": 17,
+    "largest_scc_size": 4,
+    "has_cycles": true,
+    "n_self_attacks": 0
+  }
+}

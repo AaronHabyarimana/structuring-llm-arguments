@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-06-12_2139_gun_control_ukp_seed42",
+  "n_args": 23,
+  "n_attacks": 22,
+  "density": 0.0435,
+  "avg_in_degree": 0.9565,
+  "avg_out_degree": 0.9565,
+  "isolated_nodes": [
+    "pro29",
+    "pro7",
+    "pro71b",
+    "pro63",
+    "pro63b",
+    "pro58",
+    "pro36b",
+    "con9b",
+    "con24",
+    "con56"
+  ],
+  "isolated_ratio": 0.4348,
+  "cross_stance_attacks": 21,
+  "same_stance_attacks": 1,
+  "cross_stance_ratio": 0.9545,
+  "same_stance_ratio": 0.0455,
+  "attack_type_counts": {
+    "rebuttal": 16,
+    "undercutting": 1,
+    "undermining": 5
+  },
+  "attack_type_ratios": {
+    "rebuttal": 0.7273,
+    "undercutting": 0.0455,
+    "undermining": 0.2273
+  },
+  "n_scc": 15,
+  "largest_scc_size": 7,
+  "has_cycles": true,
+  "n_self_attacks": 0
+}

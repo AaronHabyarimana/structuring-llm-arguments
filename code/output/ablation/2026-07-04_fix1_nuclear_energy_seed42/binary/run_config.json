@@ -1,0 +1,15 @@
+{
+  "experiment": "ablation_typed_binary",
+  "variant": "binary",
+  "typed": false,
+  "topic_file": "nuclear_energy",
+  "topic_label": "Nuclear Energy",
+  "source": "ukp",
+  "seed": 42,
+  "limit": 15,
+  "batch_size": 10,
+  "conf_accept": 85,
+  "conf_verify": 60,
+  "symmetrize_rebuttals": false,
+  "n_atoms": 21
+}
