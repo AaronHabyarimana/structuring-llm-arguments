@@ -1,7 +1,7 @@
 {
   "experiment": "ablation_typed_binary",
-  "variant": "typed",
-  "typed": true,
+  "variant": "binary",
+  "typed": false,
   "topic_file": "nuclear_energy",
   "topic_label": "Nuclear Energy",
   "source": "ukp",
@@ -10,6 +10,6 @@
   "batch_size": 10,
   "conf_accept": 70,
   "conf_verify": 50,
-  "symmetrize_rebuttals": true,
-  "n_atoms": 22
+  "symmetrize_rebuttals": false,
+  "n_atoms": 21
 }

@@ -1,53 +1,50 @@
 {
   "grounded": [
     "con109",
-    "con109b",
     "con140",
     "con140b",
+    "con152",
     "con23",
     "con27",
     "con27b",
     "con27c",
     "con36",
     "con9",
-    "con9b",
-    "pro95"
+    "con9b"
   ],
   "preferred": [
     [
       "con109",
-      "con109b",
       "con140",
       "con140b",
+      "con152",
       "con23",
       "con27",
       "con27b",
       "con27c",
       "con36",
       "con9",
-      "con9b",
-      "pro95"
+      "con9b"
     ]
   ],
   "stable": [
     [
       "con109",
-      "con109b",
       "con140",
       "con140b",
+      "con152",
       "con23",
       "con27",
       "con27b",
       "con27c",
       "con36",
       "con9",
-      "con9b",
-      "pro95"
+      "con9b"
     ]
   ],
   "u_size": 0,
-  "n_args": 22,
-  "n_attacks": 45,
+  "n_args": 21,
+  "n_attacks": 32,
   "semantics": [
     "grounded",
     "preferred",

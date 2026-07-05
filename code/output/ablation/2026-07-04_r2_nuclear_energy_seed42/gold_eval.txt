@@ -1,11 +1,11 @@
 Gold: C:\Users\habya\OneDrive\Dokumente\Aaron\Uni\Bachelorarbeit\Bachelorarbeit-1\code\output\gold\nuclear_energy_seed42\gold_template.csv
-  20 gerichtete Kanten, 15 Konfliktpaare, 201 Paare gesamt
+  16 gerichtete Kanten, 11 Konfliktpaare, 201 Paare gesamt
 
 ===== typed =====
   Ebene                     n   TP       P       R      F1
-  gerichtet final          22   11   0.500   0.550   0.524
-  gerichtet roh            18    9   0.500   0.450   0.474
-  ungerichtet (Paare)      18    9   0.500   0.600   0.545
+  gerichtet final          22   11   0.500   0.688   0.579
+  gerichtet roh            18    9   0.500   0.562   0.529
+  ungerichtet (Paare)      18    9   0.500   0.818   0.621
   Falsch positiv (11):
     con140   -> pro36     conf= 70 out=accept type=undermining
     con140b  -> pro36     conf= 70 out=accept type=undermining
@@ -18,23 +18,19 @@ Gold: C:\Users\habya\OneDrive\Dokumente\Aaron\Uni\Bachelorarbeit\Bachelorarbeit-
     pro15b   -> con9b     conf= 80 out=accept type=undermining
     pro36    -> con109    conf= 85 out=symmetric-rebuttal type=rebuttal
     pro82    -> con9b     conf= 90 out=symmetric-rebuttal type=rebuttal
-  Falsch negativ (9):
+  Falsch negativ (5):
     con109b  -> pro29
     con109b  -> pro36
-    con23    -> pro15a
-    con23    -> pro82
-    con9     -> pro15a
-    con9     -> pro82
     pro29    -> con109b
     pro36    -> con109b
     pro82    -> con36
 
 ===== binary =====
   Ebene                     n   TP       P       R      F1
-  gerichtet final          35   13   0.371   0.650   0.473
-  gerichtet roh            35   13   0.371   0.650   0.473
-  ungerichtet (Paare)      35   13   0.371   0.867   0.520
-  Falsch positiv (22):
+  gerichtet final          35   11   0.314   0.688   0.431
+  gerichtet roh            35   11   0.314   0.688   0.431
+  ungerichtet (Paare)      35   11   0.314   1.000   0.478
+  Falsch positiv (24):
     con109b  -> pro32     conf= 75 out=accept type=NONE
     con140   -> pro29     conf= 70 out=accept type=NONE
     con140   -> pro36     conf= 85 out=accept type=NONE
@@ -44,6 +40,7 @@ Gold: C:\Users\habya\OneDrive\Dokumente\Aaron\Uni\Bachelorarbeit\Bachelorarbeit-
     con152   -> pro29     conf= 75 out=accept type=NONE
     con23    -> pro32     conf= 70 out=accept type=NONE
     con23    -> pro36     conf= 80 out=accept type=NONE
+    con23    -> pro82     conf= 80 out=accept type=NONE
     con27    -> pro29     conf= 70 out=accept type=NONE
     con27    -> pro36     conf= 85 out=accept type=NONE
     con27b   -> pro29     conf= 80 out=accept type=NONE
@@ -54,12 +51,11 @@ Gold: C:\Users\habya\OneDrive\Dokumente\Aaron\Uni\Bachelorarbeit\Bachelorarbeit-
     con36    -> pro36     conf= 95 out=accept type=NONE
     con9     -> pro29     conf= 65 out=verify-accept type=NONE
     con9     -> pro36     conf= 70 out=accept type=NONE
+    con9     -> pro82     conf= 85 out=accept type=NONE
     con9b    -> pro36     conf= 70 out=accept type=NONE
     con9b    -> pro82b    conf= 85 out=accept type=NONE
     pro15b   -> con9b     conf= 85 out=accept type=NONE
-  Falsch negativ (7):
-    con23    -> pro15a
-    con9     -> pro15a
+  Falsch negativ (5):
     pro15a   -> con36
     pro29    -> con109b
     pro36    -> con109b

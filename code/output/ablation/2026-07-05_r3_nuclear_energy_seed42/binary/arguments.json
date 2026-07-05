@@ -1,20 +1,20 @@
 [
   {
     "id": "pro82",
-    "text": "Storage is safe and secure.",
+    "text": "Storage is safe and secure",
     "stance": "pro",
     "atomized_from": "pro82",
     "original_text": "Storage is safe and secure , plans are well in hand for eventual disposal ."
   },
   {
     "id": "pro82b",
-    "text": "Plans for eventual disposal are well in hand.",
+    "text": "Plans are well in hand for eventual disposal",
     "stance": "pro",
     "atomized_from": "pro82",
     "original_text": "Storage is safe and secure , plans are well in hand for eventual disposal ."
   },
   {
-    "id": "pro15",
+    "id": "pro15a",
     "text": "Civil waste and spent fuel storage is robust.",
     "stance": "pro",
     "atomized_from": "pro15",
@@ -26,13 +26,6 @@
     "stance": "pro",
     "atomized_from": "pro15",
     "original_text": "Civil waste and spent fuel storage is also robust and often below ground level ."
-  },
-  {
-    "id": "pro4",
-    "text": "They have to varying degrees either changed their public stance , or conceded that since nuclear power is virtually emission-free regarding CO2 , it merits at least grudging support as part of the response to increasing atmospheric CO2 levels and depletion of fossil fuels .",
-    "stance": "pro",
-    "atomized_from": "pro4",
-    "original_text": "They have to varying degrees either changed their public stance , or conceded that since nuclear power is virtually emission-free regarding CO2 , it merits at least grudging support as part of the response to increasing atmospheric CO2 levels and depletion of fossil fuels ."
   },
   {
     "id": "pro95",
@@ -57,14 +50,14 @@
   },
   {
     "id": "pro29",
-    "text": "Nuclear is much cheaper than wind or photovoltaic (PV).",
+    "text": "Nuclear is much cheaper than wind or photovoltaic systems.",
     "stance": "pro",
     "atomized_from": "pro29",
     "original_text": "Nuclear is much cheaper than wind or PV and for wind and solar greens always argue , yes the costs high , but we have to bear them for the sake of the environment ."
   },
   {
     "id": "pro29b",
-    "text": "We have to bear the high costs of wind and solar for the sake of the environment.",
+    "text": "Society must bear the high costs of wind and solar for the sake of the environment.",
     "stance": "pro",
     "atomized_from": "pro29",
     "original_text": "Nuclear is much cheaper than wind or PV and for wind and solar greens always argue , yes the costs high , but we have to bear them for the sake of the environment ."
@@ -92,7 +85,7 @@
   },
   {
     "id": "con27c",
-    "text": "Uranium sources produce considerable environmental waste, including greenhouse gases, during mining, refining, and transport processes.",
+    "text": "Uranium sources produce considerable environmental waste, including greenhouse gases, during all of these processes.",
     "stance": "con",
     "atomized_from": "con27",
     "original_text": "* Uranium sources are just as finite as other fuel sources , such as coal , natural gas , etc. , and are expensive to mine , refine , and transport , and produce considerable environmental waste ( including greenhouse gasses ) during all of these processes ."
@@ -106,7 +99,7 @@
   },
   {
     "id": "con140b",
-    "text": "The drawing and releasing of that water can affect aquatic wildlife.",
+    "text": "The drawing and releasing of large amounts of water for cooling can affect aquatic wildlife.",
     "stance": "con",
     "atomized_from": "con140",
     "original_text": "Cooling those operations often requires a whole lot of water , the drawing and releasing of which can affect aquatic wildlife ."
@@ -127,14 +120,14 @@
   },
   {
     "id": "con109",
-    "text": "Recent price estimates for a large plant in Florida are $12 billion to $18 billion, and that is before considering the nuclear industry's history of 250 percent cost overruns.",
+    "text": "Recent price estimates for a large nuclear plant in Florida are $12 billion to $18 billion, and the nuclear industry has a history of 250 percent cost overruns.",
     "stance": "con",
     "atomized_from": "con109",
     "original_text": "But as Michael Grunwald noted in Time , recent price estimates for a large plant in Florida came in at $ 12 billion to $ 18 billion , and that 's before you consider the fact that the nuclear industry has a history of 250-percent cost overruns.Some analysts say alternative methods would yield much more climate-saving bang for our buck than nuclear power ."
   },
   {
     "id": "con109b",
-    "text": "Alternative methods would yield much more climate‑saving bang for our buck than nuclear power.",
+    "text": "Alternative methods would yield much more climate‑saving bang for our buck than nuclear power, according to some analysts.",
     "stance": "con",
     "atomized_from": "con109",
     "original_text": "But as Michael Grunwald noted in Time , recent price estimates for a large plant in Florida came in at $ 12 billion to $ 18 billion , and that 's before you consider the fact that the nuclear industry has a history of 250-percent cost overruns.Some analysts say alternative methods would yield much more climate-saving bang for our buck than nuclear power ."
