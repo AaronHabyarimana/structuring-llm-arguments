@@ -35,8 +35,8 @@ client = OpenAI(
 MODEL_EXTRACT = "GPT OSS 120B"
 MODEL_ATTACKS  = "GPT OSS 120B"
 
-CONFIDENCE_ACCEPT = 70    # ab hier: direkt akzeptieren, kein Verify nötig  
-CONFIDENCE_VERIFY = 50    # ab hier:Verify-Schritt, bei Zustimmung akzeptieren
+CONFIDENCE_ACCEPT = 70    # ab hier: direkt akzeptieren, kein Verify nötig
+CONFIDENCE_VERIFY = 50    # ab hier: Verify-Schritt, bei Zustimmung akzeptieren
 
 MAX_WORKERS   = 2                # parallele API-Calls — Rate-Limit der Uni-API
 BATCH_SIZE    = 10                 # Paare pro Classify-Call
@@ -46,7 +46,7 @@ SOURCE = "ukp"  # "ukp" → load_ukp  |  "llm" → extract_arguments
 
 # Default-Parameter für UKP-Läufe (zentral, damit run_config.json sie spiegeln kann)
 UKP_SPLIT    = "test"
-UKP_LIMIT    = 15
+UKP_LIMIT    = 8
 UKP_BALANCED = True
 UKP_SEED     = 42
 ATOMIZE      = True
@@ -54,10 +54,19 @@ ATOMIZE      = True
 # Prompt-Versionen — für reproduzierbare Prompt-Vergleiche in den Logs
 PROMPT_VERSIONS = {
     "atomize":         "atomize_v3",   # v3: zitierte/konzessive Fremdpositionen nicht mehr promoten (Polaritäts-Flip)
-    "classify_batch":  "classify_batch_v3",   # v3: deskriptiv≠normativ kann nicht rebutten (Kategorienfehler)
-    "classify_single": "classify_single_v3",  # v3: deskriptiv≠normativ kann nicht rebutten (Kategorienfehler)
-    "verify":          "verify_v3",            # v3: deskriptiv≠normativ kann nicht rebutten (Kategorienfehler)
+    # v4: Opposing-Stance-/Subtopic-Ausschluss gilt explizit fuer ALLE Angriffstypen
+    # (nicht mehr nur rebuttal); undermining muss die angegriffene Praemisse benennen,
+    # undercutting zielt auf die Inferenz. Motiviert durch Gold-Fehleranalyse
+    # nuclear_energy_seed42 (2026-07-04): Sammelbecken-FPs "conX underminet/
+    # undercuttet proY" bei bloss thematischer Opposition.
+    "classify_batch":  "classify_batch_v4",
+    "classify_single": "classify_single_v4",
+    "verify":          "verify_v4",
     "generate":        "generate_v1",
+    # Binäre Arm (RQ2-Ablation): nur Angriff ja/nein + Richtung, ohne Typ.
+    "classify_batch_binary":  "classify_batch_binary_v1",
+    "classify_single_binary": "classify_single_binary_v1",
+    "verify_binary":          "verify_binary_v1",
 }
 
 # Rebuttals sind per Definition gegenseitig (Pollock 1992; ASPIC+): wenn die
@@ -291,21 +300,33 @@ An attack exists when one argument:
 - undermines a premise the other relies on (undermining), OR
 - shows the other's conclusion does not follow even if its premise is true (undercutting)
 
+NOT an attack — this applies to ALL three types: merely taking the opposing stance,
+addressing a different sub-topic, or generally "arguing for the other side".
+A con argument does not attack every pro argument (and vice versa). Test: if both
+specific claims can be true at the same time without tension, there is NO attack
+and direction MUST be NONE.
+
 {pairs}
 
 direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
 attack_type  = one of: rebuttal / undercutting / undermining / NONE
   rebuttal:     the two conclusions are logically incompatible — they negate the SAME
-                proposition, so one claim is true only if the other is false. Merely
-                taking the opposing stance, addressing a different sub-topic, or
-                "arguing for the other side" is NOT a rebuttal; there must be a direct
-                contradiction between the two specific claims. A descriptive/empirical
-                claim (what people believe or do, statistics, trends) and a normative
-                claim (what ought to be) are NOT logically incompatible — they cannot
-                rebut each other (at most undermining/undercutting). A rebuttal is
-                inherently MUTUAL (it holds in both directions); pick either direction.
-  undercutting: attacker shows target's conclusion doesn't follow even if target's premise holds
-  undermining:  attacker directly attacks a premise the target relies on
+                proposition, so one claim is true only if the other is false; there
+                must be a direct contradiction between the two specific claims.
+                A descriptive/empirical claim (what people believe or do, statistics,
+                trends) and a normative claim (what ought to be) are NOT logically
+                incompatible — they cannot rebut each other (at most undermining/
+                undercutting). A rebuttal is inherently MUTUAL (it holds in both
+                directions); pick either direction.
+  undercutting: attacker shows the target's conclusion doesn't follow even if the
+                target's premise holds — it targets the INFERENCE of that specific
+                argument. A general counter-consideration on the same topic is NOT
+                undercutting.
+  undermining:  attacker directly attacks a premise the target relies on. The premise
+                must be a SPECIFIC claim the target states or presupposes — the
+                target's overall stance or the general attractiveness of its position
+                is NOT a premise. In "reason", name the attacked premise; if you
+                cannot name it, the type is not undermining.
   If direction=NONE, attack_type MUST be NONE.
 confidence   = integer 0-100: probability that ANY attack exists between the two arguments
   (0 = definitely no attack, 100 = definitely attack)
@@ -327,19 +348,31 @@ Propose an attack candidate if one exists. An attack exists when one argument:
 - undermines a premise the other relies on (undermining), OR
 - shows the other's conclusion does not follow even if its premise is true (undercutting)
 
+NOT an attack — this applies to ALL three types: merely taking the opposing stance,
+addressing a different sub-topic, or generally "arguing for the other side".
+A con argument does not attack every pro argument (and vice versa). Test: if both
+specific claims can be true at the same time without tension, there is NO attack
+and direction MUST be NONE.
+
 direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
 attack_type  = one of: rebuttal / undercutting / undermining / NONE
   rebuttal:     the two conclusions are logically incompatible — they negate the SAME
-                proposition, so one claim is true only if the other is false. Merely
-                taking the opposing stance, addressing a different sub-topic, or
-                "arguing for the other side" is NOT a rebuttal; there must be a direct
-                contradiction between the two specific claims. A descriptive/empirical
-                claim (what people believe or do, statistics, trends) and a normative
-                claim (what ought to be) are NOT logically incompatible — they cannot
-                rebut each other (at most undermining/undercutting). A rebuttal is
-                inherently MUTUAL (it holds in both directions); pick either direction.
-  undercutting: attacker shows target's conclusion doesn't follow even if target's premise holds
-  undermining:  attacker directly attacks a premise the target relies on
+                proposition, so one claim is true only if the other is false; there
+                must be a direct contradiction between the two specific claims.
+                A descriptive/empirical claim (what people believe or do, statistics,
+                trends) and a normative claim (what ought to be) are NOT logically
+                incompatible — they cannot rebut each other (at most undermining/
+                undercutting). A rebuttal is inherently MUTUAL (it holds in both
+                directions); pick either direction.
+  undercutting: attacker shows the target's conclusion doesn't follow even if the
+                target's premise holds — it targets the INFERENCE of that specific
+                argument. A general counter-consideration on the same topic is NOT
+                undercutting.
+  undermining:  attacker directly attacks a premise the target relies on. The premise
+                must be a SPECIFIC claim the target states or presupposes — the
+                target's overall stance or the general attractiveness of its position
+                is NOT a premise. In "reason", name the attacked premise; if you
+                cannot name it, the type is not undermining.
   If direction=NONE, attack_type MUST be NONE.
 confidence   = integer 0-100: probability that ANY attack exists
   (0 = definitely no attack, 100 = definitely attack)
@@ -356,13 +389,72 @@ VERIFY_PROMPT = """Two arguments from a debate on "{topic}":
 A previous analysis claims: {claimed}
 
 Does this attack relation genuinely hold?
-Does A undermine a premise B relies on (undermining)?
+Does A undermine a premise B relies on (undermining)? The premise must be a SPECIFIC
+claim B states or presupposes — B's overall stance or the general attractiveness of
+its position is NOT a premise. If you cannot name the attacked premise, it is not
+undermining.
 Do A and B assert logically incompatible conclusions that negate the same proposition,
 so that one is true only if the other is false (rebuttal)? Opposing stance alone is NOT enough.
 A descriptive claim (what people believe/do, statistics) and a normative claim (what ought
 to be) are NOT logically incompatible and cannot rebut each other.
 Does A show B's conclusion doesn't follow even if B's premise is true (undercutting)?
-If any of these holds, confirm=true.
+A general counter-consideration on the same topic is NOT undercutting.
+Decisive test: if both specific claims can be true at the same time without tension,
+there is NO attack — merely being on opposite sides of the debate is not enough.
+If any of the three genuinely holds, confirm=true.
+
+Respond ONLY with JSON, no markdown:
+{{"confirms": true, "reason": "one sentence"}}"""
+
+
+# ---------------------------------------------------------------------------
+# BINÄRE PROMPT-VARIANTEN (RQ2-Ablation: typed vs. binary)
+# Gleiche Angriffs-Definition wie oben, aber das Modell muss den Angriffstyp
+# NICHT benennen/begründen. Nur Richtung + Confidence. Dadurch entfällt auch die
+# Rebuttal-Symmetrisierung (kein Typ vorhanden). So wird allein der Effekt der
+# Typisierung isoliert, die Atom-Menge bleibt identisch.
+# ---------------------------------------------------------------------------
+
+BATCH_PAIR_PROMPT_BINARY = """Propose attack candidates for the following argument pairs from a debate on "{topic}".
+
+An attack exists when one argument is logically incompatible with the other's conclusion, undermines a premise the other relies on, or shows that the other's conclusion does not follow even if its premise holds. Merely taking the opposing stance, addressing a different sub-topic, or arguing for the other side is NOT enough. There must be a genuine conflict between the two specific claims.
+
+{pairs}
+
+direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
+confidence   = integer 0-100: probability that ANY attack exists between the two arguments
+  (0 = definitely no attack, 100 = definitely attack)
+  If direction=NONE, confidence MUST be 0.
+
+Respond ONLY with a JSON array, same order as the pairs above, no markdown:
+[
+  {{"pair": "id_a:id_b", "direction": "A_ATTACKS_B", "confidence": 85, "reason": "one sentence"}},
+  ...
+]"""
+
+SINGLE_PAIR_PROMPT_BINARY = """Two arguments from a debate on "{topic}":
+
+A=[{id_a}] ({stance_a}) {text_a}
+B=[{id_b}] ({stance_b}) {text_b}
+
+Propose an attack candidate if one exists. An attack exists when one argument is logically incompatible with the other's conclusion, undermines a premise the other relies on, or shows that the other's conclusion does not follow even if its premise holds. Merely taking the opposing stance, addressing a different sub-topic, or arguing for the other side is NOT enough. There must be a genuine conflict between the two specific claims.
+
+direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
+confidence   = integer 0-100: probability that ANY attack exists
+  (0 = definitely no attack, 100 = definitely attack)
+  If direction=NONE, confidence MUST be 0.
+
+Respond ONLY with JSON, no markdown:
+{{"direction": "A_ATTACKS_B", "confidence": 85, "reason": "one sentence"}}"""
+
+VERIFY_PROMPT_BINARY = """Two arguments from a debate on "{topic}":
+
+[{id_a}] ({stance_a}) {text_a}
+[{id_b}] ({stance_b}) {text_b}
+
+A previous analysis claims: {claimed}
+
+Does this attack relation genuinely hold? An attack exists when accepting one argument gives a genuine reason to reject the other, whether by contradicting its conclusion, undermining a premise it relies on, or showing its conclusion does not follow. Opposing stance alone is NOT enough.
 
 Respond ONLY with JSON, no markdown:
 {{"confirms": true, "reason": "one sentence"}}"""
@@ -460,10 +552,18 @@ def _parse_json(content: str) -> dict | list | None:
     return None
 
 
-def _classify_batch(pairs: list[tuple[dict, dict]], topic: str) -> dict[tuple, dict | None]:
+def _classify_batch(pairs: list[tuple[dict, dict]], topic: str,
+                    typed: bool = True) -> dict[tuple, dict | None]:
     out: dict[tuple, dict | None] = {(a["id"], b["id"]): None for a, b in pairs}
 
-    prompt = BATCH_PAIR_PROMPT.format(
+    # typed=True: kategorisiertes Prompting (rebuttal/undercutting/undermining).
+    # typed=False: binärer Arm der RQ2-Ablation (nur Richtung + Confidence).
+    batch_tmpl   = BATCH_PAIR_PROMPT  if typed else BATCH_PAIR_PROMPT_BINARY
+    single_tmpl  = SINGLE_PAIR_PROMPT if typed else SINGLE_PAIR_PROMPT_BINARY
+    batch_phase  = "classify_batch"   if typed else "classify_batch_binary"
+    single_phase = "classify_single"  if typed else "classify_single_binary"
+
+    prompt = batch_tmpl.format(
         topic=topic,
         pairs="\n\n".join(
             f"Pair {a['id']}:{b['id']}\n"
@@ -477,7 +577,7 @@ def _classify_batch(pairs: list[tuple[dict, dict]], topic: str) -> dict[tuple, d
     batch_ids = [pid for a, b in pairs for pid in (a["id"], b["id"])]
     for attempt in range(2):
         content = _llm(prompt, max_tokens=300 * len(pairs),
-                       phase="classify_batch", input_ids=batch_ids)
+                       phase=batch_phase, input_ids=batch_ids)
         if not content:
             continue
         parsed = _parse_json(content)
@@ -498,11 +598,11 @@ def _classify_batch(pairs: list[tuple[dict, dict]], topic: str) -> dict[tuple, d
         print(f"  [FALLBACK] {len(missing)} Paare einzeln klassifiziert")
         for a, b in missing:
             time.sleep(1)
-            content = _llm(SINGLE_PAIR_PROMPT.format(
+            content = _llm(single_tmpl.format(
                 topic=topic,
                 id_a=a["id"], stance_a=a["stance"], text_a=a["text"],
                 id_b=b["id"], stance_b=b["stance"], text_b=b["text"],
-            ), phase="classify_single", input_ids=[a["id"], b["id"]])
+            ), phase=single_phase, input_ids=[a["id"], b["id"]])
             if content:
                 result = _parse_json(content)
                 if isinstance(result, dict):
@@ -511,18 +611,21 @@ def _classify_batch(pairs: list[tuple[dict, dict]], topic: str) -> dict[tuple, d
     return out
 
 
-def _verify_pair(a: dict, b: dict, direction: str, topic: str) -> tuple[bool, str]:
+def _verify_pair(a: dict, b: dict, direction: str, topic: str,
+                 typed: bool = True) -> tuple[bool, str]:
     """Rückgabe: (confirms, reason) — reason für pair_decisions.jsonl erhalten."""
     claimed = {
         "A_ATTACKS_B": f"[{a['id']}] attacks [{b['id']}]",
         "B_ATTACKS_A": f"[{b['id']}] attacks [{a['id']}]"
     }.get(direction, direction)
-    content = _llm(VERIFY_PROMPT.format(
+    verify_tmpl  = VERIFY_PROMPT if typed else VERIFY_PROMPT_BINARY
+    verify_phase = "verify"      if typed else "verify_binary"
+    content = _llm(verify_tmpl.format(
         topic=topic,
         id_a=a["id"], stance_a=a["stance"], text_a=a["text"],
         id_b=b["id"], stance_b=b["stance"], text_b=b["text"],
         claimed=claimed,
-    ), phase="verify", input_ids=[a["id"], b["id"]])
+    ), phase=verify_phase, input_ids=[a["id"], b["id"]])
     if not content:
         return False, ""
     result = _parse_json(content)
@@ -595,12 +698,19 @@ def _log_pair_decision(a: dict, b: dict, cl: dict | None, outcome: str,
     })
 
 
-def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
+def extract_attacks(arguments: list[dict], topic: str = "",
+                    typed: bool = True) -> list[dict]:
     """
     Gibt eine Liste akzeptierter Attack-Kandidaten zurück.
     Jeder Eintrag: {"attacker", "target", "type", "confidence", "reason"}
     Typen (rebuttal/undercutting/undermining) verbessern die Extraktion;
     für die Dung-Auswertung werden sie zu binären att/2-Fakten kollabiert.
+
+    typed=True (Default): kategorisiertes Prompting wie im Paper.
+    typed=False: binärer Arm der RQ2-Ablation (nur Angriff ja/nein + Richtung).
+      Ohne Typ entfällt die Rebuttal-Symmetrisierung. Damit der Vergleich fair
+      bleibt, MUSS dieselbe (bereits atomisierte) Argumentmenge an beide Arme
+      gehen — siehe ablation_typed_binary.py.
     """
     seen: set[tuple] = set()
     result: list[dict] = []
@@ -622,7 +732,7 @@ def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
 
     classify: dict[tuple, tuple[dict, dict, dict | None]] = {}
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        futures = {ex.submit(_classify_batch, batch, topic): batch for batch in batches}
+        futures = {ex.submit(_classify_batch, batch, topic, typed): batch for batch in batches}
         for future in as_completed(futures):
             batch = futures[future]
             batch_result = future.result()
@@ -641,7 +751,7 @@ def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
     if to_verify:
         with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
             futures_v = {
-                ex.submit(_verify_pair, a, b, d, topic): (a["id"], b["id"])
+                ex.submit(_verify_pair, a, b, d, topic, typed): (a["id"], b["id"])
                 for a, b, d in to_verify
             }
             for future in as_completed(futures_v):
@@ -685,7 +795,9 @@ def extract_attacks(arguments: list[dict], topic: str = "") -> list[dict]:
     # Symmetrisierung: Rebuttals gelten per Definition gegenseitig (Pollock 1992;
     # ASPIC+). Für jeden akzeptierten Rebuttal die Gegenkante ergänzen, sofern die
     # Gegenrichtung nicht ohnehin schon (aus einer anderen Klassifikation) existiert.
-    if SYMMETRIZE_REBUTTALS:
+    # Im binären Arm (typed=False) gibt es keinen Rebuttal-Typ, also keine
+    # Symmetrisierung — das ist gerade der zu isolierende Unterschied.
+    if SYMMETRIZE_REBUTTALS and typed:
         added = []
         for atk in result:
             if atk["type"] != "rebuttal":
@@ -753,8 +865,8 @@ if __name__ == "__main__":
     topic_label = "nuclear energy" 
 
     if SOURCE == "ukp":
-        print(f"=== Schritt 0a: UKP-Daten laden (topic={topic_file}, split=test, limit=10) ===")
-        args = load_ukp(topic_file, split="test", limit=15)
+        print(f"=== Schritt 0a: UKP-Daten laden (topic={topic_file}, split=test, limit=8) ===")
+        args = load_ukp(topic_file, split="test", limit=UKP_LIMIT)
 
         for a in args:
             print(f"  [{a['id']}] {a['stance']:3}  {a['text'][:70]}")
