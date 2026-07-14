@@ -7,19 +7,25 @@
 This thesis presents an end-to-end pipeline that generates, structures, and
 formally evaluates Abstract Argumentation Frameworks from natural-language debate
 topics using large language models. Rather than treating attack detection as a
-binary decision, the system prompts a language model to produce categorized
+binary decision, the system prompts a language model to produce typed
 attack candidates, each annotated with an attack type, namely rebuttal,
 undercutting, or undermining, a confidence score, and a natural-language
 justification. A two-stage confidence filter routes candidates to acceptance,
 rejection, or verification. Accepted attacks are reduced to binary facts and
 handed to a Prolog solver that computes grounded, preferred, and stable
 extensions under Dung semantics. Evaluated on eight topics from the UKP
-Sentential Argument Mining Corpus, every framework is cyclic and six of eight
+Sentential Argument Mining Corpus, five of eight frameworks
 admit several preferred and stable extensions, each corresponding to an
 internally coherent position that a standalone language model leaves implicit.
-Beyond this cross-topic analysis, the thesis sets up an ablation that isolates
-the effect of typed against binary prompting and a gold-standard evaluation of
-the extraction quality.
+An ablation on identical atomized argument sets shows that typed and binary
+prompting extract substantially different attack relations, and that the
+multiplicity of extensions arises entirely through the symmetrization of
+rebuttals, which only typed extraction makes possible. An evaluation against a
+manual reference annotation of 201 argument pairs on one topic, created under
+written guidelines on a frozen argument set, shows that the typed extraction is
+measurably closer to this annotation than the binary baseline. It
+recovers three quarters of the annotated attacks and reaches a directed F1 of
+0.615 against 0.458.
 
 \IfLanguageName{english}{
 \vspace*{20mm}
@@ -33,17 +39,27 @@ the extraction quality.
 Diese Arbeit stellt eine durchgängige Pipeline vor, die mithilfe großer
 Sprachmodelle aus natürlichsprachlichen Debattenthemen abstrakte
 Argumentationsframeworks erzeugt, strukturiert und formal auswertet. Statt die
-Angriffserkennung als binaere Entscheidung zu behandeln, erzeugt das System
-kategorisierte Angriffskandidaten, die jeweils mit einem Angriffstyp (Rebuttal,
+Angriffserkennung als binäre Entscheidung zu behandeln, erzeugt das System
+typisierte Angriffskandidaten, die jeweils mit einem Angriffstyp (Rebuttal,
 Undercutting oder Undermining), einem Konfidenzwert und einer Begründung
 versehen sind. Ein zweistufiger Konfidenzfilter leitet die Kandidaten zur
 Annahme, Ablehnung oder Verifikation. Angenommene Angriffe werden auf binäre
 Fakten reduziert und an einen Prolog-Solver übergeben, der grounded, preferred
 und stable Extensions unter Dung-Semantik berechnet. In der Auswertung auf acht
-Themen des UKP-Korpus ist jedes Framework zyklisch, und sechs von acht Themen
-besitzen mehrere preferred und stable Extensions, die jeweils einer in sich
-konsistenten Position entsprechen. Ergänzend bereitet die Arbeit eine Ablation
-zum Vergleich von typisiertem und binärem Prompting vor.
+Themen des UKP-Korpus besitzen fünf von acht Themen
+mehrere preferred und stable Extensions, die jeweils einer in sich
+konsistenten Position entsprechen, welche ein einzelnes Sprachmodell nur
+implizit lässt. Eine Ablation auf identischen atomisierten
+Argumentmengen zeigt, dass typisiertes und binäres Prompting deutlich
+verschiedene Angriffsrelationen extrahieren und dass die Mehrfach-Extensions
+vollständig durch die Symmetrisierung der Rebuttals entstehen, die nur die
+typisierte Extraktion ermöglicht. Eine Auswertung gegen eine manuell
+annotierte Referenz aus 201 Argumentpaaren auf einem Thema, erstellt nach
+schriftlichen Richtlinien auf einer eingefrorenen Argumentmenge, zeigt, dass
+die typisierte Extraktion dieser Annotation
+messbar näher kommt als die binäre Baseline. Sie findet drei Viertel der
+annotierten Angriffe und erreicht einen gerichteten F1 von 0,615 gegenüber
+0,458 für die Baseline.
 
 % reset to english
 \selectlanguage{english}

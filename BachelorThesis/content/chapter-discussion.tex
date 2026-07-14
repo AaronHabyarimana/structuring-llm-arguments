@@ -3,44 +3,155 @@
 \chapter{Discussion}
 \label{sec:discussion}
 
-\section{What the Formal Layer Adds}
+\section{The Added Value of the Formal Layer}
 \label{sec:discussion:value}
 
-The cross-topic results in Section~\ref{sec:evaluation:crosstopic} show that the
-formal layer does uncover structure. Six of eight topics support several
-internally consistent positions, and every framework is cyclic. At the same time
-the value of the expensive preferred and stable enumeration over the cheap
-grounded extension is uneven. On several topics the grounded extension already
-decides most arguments, so preferred and stable add little, because the
-extraction tends to produce nearly acyclic graphs outside the symmetrized
-rebuttals. The clearest payoff appears on topics such as Death Penalty, Gun
-Control, and Minimum Wage, where three distinct stable extensions emerge. An
-honest reading is therefore that the formal layer is most useful where the
-debate genuinely splits into competing coherent camps, and closer to redundant
-where one side dominates.
+How much the formal layer adds varies strongly across the eight topics of
+Section~\ref{sec:evaluation:crosstopic}. The clearest payoff appears on
+Abortion, where four preferred extensions over an undecided core of nine
+arguments make competing internally consistent positions explicit, and on
+Death Penalty with three extensions over a core of eight. On Gun Control,
+Marijuana Legalization, and School Uniforms, by contrast, the undecided core
+is empty, the grounded extension already decides every argument, and the
+enumeration adds nothing beyond the cautious core. That every extracted
+framework is cyclic is a precondition for this payoff rather than a merit in
+itself, since in an acyclic framework the grounded, preferred, and stable
+semantics coincide on a single extension~\cite{dung1995}. An honest reading is
+therefore that the formal layer is most useful where the debate genuinely
+splits into competing coherent camps, and closer to redundant where one side
+dominates the sampled arguments.
 
-\section{Threats to Validity}
+The ablation sharpens this picture. The formal richness that the pipeline
+reports is not a free observation about the debates but a consequence of one
+deliberate modelling decision, the symmetrization of rebuttals, which only
+typed extraction makes available. This is a feature and a caveat at once. It is a feature
+because the mutual attack is the semantically correct rendering of a genuine
+contradiction between conclusions. It is a caveat because every mislabelled
+rebuttal buys an unjustified cycle, and Section~\ref{sec:evaluation:errors}
+shows that such mislabelling occurs. The computational price of the richness
+stays low. The undecided cores remain at nine or fewer arguments, and all three
+semantics solve in under half a second per topic.
+
+Read against the motivation of Chapter~\ref{sec:intro}, the multiple
+extensions are more than a structural statistic. A standalone LLM that is
+asked to summarise the positions of a debate returns another fluent generation
+without a guarantee of internal consistency. The extensions computed here
+carry that guarantee by construction, since every preferred extension is
+conflict-free and admissible, and every acceptance is traceable to the
+extracted attack edges that produce it. On Abortion the difference becomes
+concrete, since the four extensions separate a legally framed camp from a
+morally framed one, a finer distinction than the binary stance labels of the
+corpus. The formal layer thus delivers what a raw model answer leaves
+implicit, a set of debate positions whose joint acceptability is checkable
+rather than asserted.
+
+These results also feed back into the related work of
+Chapter~\ref{sec:related}. They supply the empirical layer that
+ARGUS~\cite{argus} leaves open, showing that such a pipeline produces sparse
+and cyclic frameworks with small undecided cores rather than intractable
+graphs. They refine the finding of Gorur et al.~\cite{gorur2025relMining} that
+LLMs identify attack relations reliably, since the reference evaluation locates the
+benefit of typed prompting in precision rather than recall. And they qualify
+the quantitative route of ArgLLMs~\cite{argLLMs}, because a single strength
+value per argument could not have represented the four incompatible Abortion
+positions that the set-based semantics make explicit.
+
+\section{Limitations}
 \label{sec:discussion:threats}
 
-Several threats qualify the results. The confidence score is a routing signal
-and not a calibrated probability, so the thresholds are design choices rather
-than learned values. In the LLM-generated setting the arguments, the attacks,
-and the confidence scores all come from the same model, so there is no
-independent quality signal, and that setting is treated as a qualitative check
-rather than a second evaluation. The UKP samples are small, with a balanced
-draw per topic, which limits how far the cross-topic numbers generalise. Finally,
-all results stem from a single model at temperature zero, and server-side
-execution does not guarantee perfect determinism.
+Four limitations qualify the results, namely the sensitivity of the extraction to
+prompt wording, the small samples, the possible familiarity of the model with
+the corpus, and the reliance on a single model and a single annotator.
+
+\paragraph{Prompt sensitivity.} The extraction is sensitive to the exact
+wording of the prompts. When the attack prompt was revised during development,
+among other things to add the descriptive-versus-normative rule, the accepted
+edge sets of otherwise identical runs changed substantially, on some topics by
+dozens of edges, and the number of extensions changed with them. The final
+revision before the reference evaluation run, which tightened all three type definitions,
+roughly halved the accepted typed edges on Nuclear Energy from 43 to 23. The
+cross-topic and ablation numbers therefore come from one canonical batch with
+one versioned prompt, the reference scores from one dedicated run with the final
+revision, and all of them should be read as results about the pipeline with
+these exact prompts, not
+about typed prompting in the abstract. The prompt versioning of
+Section~\ref{sec:method:logging} makes this dependency explicit and traceable
+rather than removing it.
+
+\paragraph{Sampling and scale.} The UKP samples are small, with seven pro and seven con
+arguments per topic, which limits how far the cross-topic numbers generalise to
+larger argument sets. The residual nondeterminism of the atomization, described
+in Section~\ref{sec:evaluation:setup}, is controlled by the frozen atom sets
+within this evaluation, but it means that an independent reproduction will
+operate on a slightly different atom set.
+
+\paragraph{Data contamination.} The UKP corpus has been publicly available
+since 2018 and may therefore have been part of the training data of
+GPT-OSS-120B, whose exact composition is not disclosed. In that case the model
+may recognise the arguments and their stances rather than judge them from
+scratch. The pairwise attack judgments, however, cannot be memorised. The reference
+annotation of Section~\ref{sec:evaluation:gold} was created for this thesis on
+a frozen atom set and is unpublished, and the atomized claims the model
+judges mostly differ in wording from the corpus sentences. Familiarity with the
+arguments could still make the task easier than it would be on genuinely
+unseen debates, so the absolute scores should be read with this reservation.
+
+\paragraph{Model and self-evaluation.} All results stem from a single model at
+temperature zero. In the LLM-generated setting the arguments, the attacks, and
+the confidence scores all come from the same model, so there is no independent
+quality signal, and that setting is treated as a qualitative check rather than
+a second evaluation. The reference annotation of Section~\ref{sec:evaluation:gold} is
+created by a single annotator, the author, and no inter-annotator agreement
+can be reported, a limitation that is common for a thesis but should be kept in
+mind when reading the scores. The same person also designed the pipeline and
+its prompts, so annotation decisions and extraction behaviour could share blind
+spots, which the written guidelines and the strict object reading mitigate but
+cannot rule out. The reference set is moreover small, with 16 directed edges on
+a single topic, so every individual edge moves recall by six points and small
+F1 differences between configurations should not be over-interpreted.
 
 \section{Design Trade-offs}
 \label{sec:discussion:tradeoffs}
 
-Three design decisions shape the frameworks and deserve explicit discussion. The
-symmetrization of rebuttals is well motivated by the absence of a preference
-ordering in Dung's abstract framework, but it is also the single source of every
-cycle, which makes a mislabelled rebuttal costly. Dropping the attack type when
-converting to binary attack facts is consistent with the set-based question Dung
-semantics answer, yet it discards information that a richer formalism could use.
-The confidence thresholds trade precision against recall, and the verification
-step exists precisely to recover borderline cases without lowering the
-acceptance threshold for everyone.
+Four design decisions shape the frameworks and deserve explicit discussion.
+
+The symmetrization of rebuttals is well motivated by the absence of a
+preference ordering in Dung's abstract framework, but as
+Section~\ref{sec:discussion:value} discusses, it is also the single source of
+every multi-extension result, which makes a mislabelled rebuttal costly. On
+the manually annotated topic the mechanism proves its worth, since three of the four reverse
+edges it adds are confirmed by the reference annotation. A natural refinement would be to symmetrize only
+above a confidence threshold, or to let the verifier confirm specifically the
+mutuality of the contradiction rather than the attack as such.
+
+Dropping the attack type when converting to binary attack facts is consistent
+with the set-based question Dung semantics answer, yet it means the pipeline
+extracts information it then discards. The types, confidence scores, and
+justifications are retained as metadata, and this thesis itself demonstrates
+their analytical value, since the error analysis and the ablation both rely on
+them. A formalism that consumes them in the semantics, such as ASPIC+ or a
+weighted framework, is the obvious next step and is discussed as future work.
+
+The confidence thresholds are design choices rather than learned values, since
+the score is a routing signal and not a calibrated probability. The logged
+decisions of Section~\ref{sec:evaluation:crosstopic} show that the
+verification stage acts almost
+exclusively as an additional reject filter, since it confirmed only six of the
+68 borderline candidates across the canonical batch, and the reference evaluation run of
+Section~\ref{sec:evaluation:gold} gives a first, small-sample indication that
+this filtering points in the right direction. Whether the six rescued accepts
+justify the extra LLM call per borderline case is a question these few cases
+cannot settle. Now that a reference annotation exists, a natural follow-up
+would be to tune both thresholds against it, for instance to maximise the F1
+score, which was ruled out at design time because no labels were available
+and tuning on the evaluation data would have leaked information.
+
+The exhaustive pairwise querying, finally, bounds the scale the pipeline can
+handle. The number of queried pairs grows quadratically with the atom count.
+The 21 Nuclear Energy atoms already produce 201 pairs, and extraction takes
+between two and eight minutes per topic at this size, so a realistic debate with
+hundreds of arguments would produce tens of thousands of pairs and hours of
+extraction. Applying the pipeline at that scale requires a cheaper candidate
+filter before the LLM call, for example an embedding-based prescreening that
+discards clearly unrelated pairs, at the price of missing conflicts the
+filter does not anticipate.

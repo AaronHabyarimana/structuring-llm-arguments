@@ -1,6 +1,6 @@
 % !TEX root = ../my-thesis.tex
 %
-\chapter{Method: The Pipeline}
+\chapter{Method: A Pipeline from Debate Text to Formal Extensions}
 \label{sec:method}
 
 This chapter describes the pipeline that turns raw debate text into a formally
@@ -11,11 +11,12 @@ decision behind it.
 \section{Overview}
 \label{sec:method:overview}
 
-The pipeline runs in five steps. Step one acquires arguments and atomizes them
-into self-contained claims. Step two examines every pair of claims and proposes
-categorized attack candidates. Step three filters those candidates by confidence
-and verifies the borderline cases. Step four converts the accepted candidates
-into binary Dung attack facts. Step five solves the resulting framework under
+The pipeline runs in five steps, summarised in
+Figure~\ref{fig:method:pipeline}. Step one acquires arguments and atomizes
+them into self-contained claims, step two proposes typed attack candidates for
+every pair of claims, step three routes the candidates by confidence and
+verifies the borderline cases, step four converts the accepted candidates into
+binary Dung attack facts, and step five solves the resulting framework under
 grounded, preferred, and stable semantics with a Prolog solver.
 
 \begin{figure}[t]
@@ -28,13 +29,13 @@ grounded, preferred, and stable semantics with a Prolog solver.
     arr/.style = {-Stealth, thick},
   ]
     \node[box]                  (atom)   {Step 1: Argument Acquisition and Atomization\\
-                                          \textit{LLM zero-shot generation or corpus atomization}};
+                                          \textit{LLM generation or corpus input, split into atomic claims}};
     \node[box, below=of atom]   (batch)  {Step 2: Attack Detection and Classification\\
-                                          \textit{propose labeled attack candidates per pair}};
+                                          \textit{propose typed attack candidates per pair}};
     \node[box, below=of batch]  (filter) {Step 3: Confidence Filtering and Verification\\
                                           \textit{route by confidence score}};
-    \node[box, below=of filter] (aaf)    {Step 4: AAF Conversion\\
-                                          \textit{prune attacks to traced att/2 facts}};
+    \node[box, below=of filter] (aaf)    {Step 4: AF Conversion\\
+                                          \textit{convert accepted attacks to binary Dung facts}};
     \node[box, below=of aaf]    (prolog) {Step 5: Solving under Dung Semantics\\
                                           \textit{grounded / preferred / stable extensions}};
     \draw[arr] (atom)   -- (batch);
@@ -73,14 +74,31 @@ split each argument into self-contained atomic claims under three rules.
     supports nor opposes the claim under debate is dropped.
 \end{enumerate}
 
-A fourth, implicit rule keeps the stance intact. Reported or conceded positions
-of the opposing side, such as ``opponents argue X'', are not promoted to their
-own atom, because read in isolation they would carry the opposite stance of the
-speaker. Each argument is atomized independently, which allows parallelization.
-The resulting set of atomic arguments is denoted $\mathcal{A}'$ and forms the
-input to the next step. Every atom keeps the identifier of its source argument
-with a unique suffix, so that for instance \texttt{pro5} can yield the atoms
-\texttt{pro5} and \texttt{pro5b}, which share the base \texttt{pro5}.
+A fourth rule keeps the stance intact. Reported or conceded positions of the
+opposing side, such as ``opponents argue X'', are not promoted to their own
+atom. Read in isolation, such a fragment states a claim of the opposing side
+while carrying the stance label of its speaker, so the extraction step would
+treat it as a claim the speaker actually holds. Every attack decision that
+involves such an atom would then rest on a wrongly attributed claim, for
+instance a con argument attacking a supposed pro atom that no pro speaker
+asserts.
+
+A concrete case from the evaluation illustrates the step. The contra sentence
+on meltdown statistics states that in two out of three meltdowns there would
+be no deaths, in one out of five there would be over a thousand deaths, and in
+one out of one hundred thousand there would be fifty thousand deaths, and thus
+bundles three separable claims. Atomization splits it into three atoms, each
+carrying one scenario, so that the extraction step can judge each claim on its
+own. Each argument is atomized independently, which allows
+parallelization. The resulting set of atomic arguments is denoted
+$\mathcal{A}'$ and forms the input to the next step. Every atom keeps the
+identifier of its source argument. The first atom keeps the bare identifier
+and every further atom appends a letter suffix, so that for instance
+\texttt{pro5} can yield the atoms \texttt{pro5} and \texttt{pro5b}, which share
+the base \texttt{pro5}. The first atom deliberately does not receive a suffix
+of its own, so that an argument that needs no splitting passes through the
+step with its identifier unchanged. The full atomization prompt is given in
+Appendix~\ref{sec:appendix:prompts}.
 
 \section{Step 2: Attack Detection and Classification}
 \label{sec:method:extraction}
@@ -99,7 +117,7 @@ matching on opposite stances, and the score and justification make each decision
 traceable and provide a routing signal for the next step. Each candidate carries
 four fields.
 
-\begin{lstlisting}[caption={Fields of an attack candidate.},label={lst:method:candidate}]
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 direction:   A_ATTACKS_B | B_ATTACKS_A | NONE
 attack_type: rebuttal | undercutting | undermining | NONE
 confidence:  integer in [0, 100]
@@ -111,14 +129,39 @@ Section~\ref{sec:foundations:typology} and enforces that if
 \texttt{direction} is \texttt{NONE} then \texttt{attack\_type} is \texttt{NONE}
 and \texttt{confidence} is zero, which keeps the output internally consistent.
 Rebuttals are treated as symmetric, so the reverse edge is added automatically,
-as motivated in Section~\ref{sec:foundations:typology}. All $\binom{|\mathcal{A}'|}{2}$
+as motivated in Section~\ref{sec:foundations:typology}.
+
+Beyond the type definitions, the prompt encodes two rules that emerged from
+inspecting misclassifications in early runs, and both target the rebuttal
+label, the only label whose misuse creates spurious cycles through
+symmetrization. The first rule demands a genuine contradiction. Two claims
+rebut each other only if they negate the same proposition, so that one can be
+true only if the other is false. Merely taking the opposing stance, addressing
+a different sub-topic, or arguing for the other side is explicitly ruled out as
+a rebuttal. The second rule blocks a recurring category error. A descriptive or
+empirical claim, such as a statistic or a report of what people believe, and a
+normative claim about what ought to be done are not logically incompatible and
+therefore cannot rebut each other, although the descriptive claim may still
+undermine a premise of the normative one. Both rules restrict when the mutual,
+cycle-creating attack pattern may be asserted, and every prompt is versioned so
+that results are always tied to the exact wording that produced them. A final
+revision of the prompt, used by the reference evaluation run of
+Section~\ref{sec:evaluation:gold}, adds a third rule that applies to all three
+attack types. It rejects a pair whenever both specific claims can be true at
+the same time without tension, and it requires an undermining attack to name
+the premise it hits. The full
+prompts are listed in Appendix~\ref{sec:appendix:prompts}.
+
+The remaining
 pairs are grouped into batches of size $b$, which reduces the number of API
-calls from quadratic to $\binom{|\mathcal{A}'|}{2} / b$. Pairs for which the
+calls by a factor of $b$. Pairs for which the
 model returns malformed output are retried individually.
+Algorithm~\ref{alg:method:extraction} summarises this classification step.
 
 This typed prompt is exactly the component whose value the ablation in
 Section~\ref{sec:evaluation:ablation} measures, by comparing it against a binary
-variant that omits the attack type.
+variant that omits the attack type, the type definitions, and both rules above,
+and asks only whether an attack exists.
 
 \section{Step 3: Confidence Filtering and Verification}
 \label{sec:method:filter}
@@ -128,23 +171,60 @@ indication of the model's certainty rather than a calibrated probability, routes
 each candidate through a three-way decision with two thresholds
 $\theta_{\text{acc}}$ and $\theta_{\text{ver}}$.
 
-\begin{equation}
+\begin{equation*}
 \text{decision}(c) =
 \begin{cases}
   \textbf{accept} & c \geq \theta_{\text{acc}} \\
   \textbf{verify} & \theta_{\text{ver}} \leq c < \theta_{\text{acc}} \\
   \textbf{reject} & c < \theta_{\text{ver}}
 \end{cases}
-\end{equation}
+\end{equation*}
 
 Borderline candidates in the verify region are re-examined by a dedicated
 verifier prompt that asks the model to confirm or reject the attack given the two
 arguments and the proposed type, but without access to the original confidence
-score or justification. Withholding both keeps the verifier from anchoring on the
-extractor's judgment. Accepted and confirmed candidates pass to the next step,
+score or justification. Withholding both keeps the verifier from simply
+adopting the extractor's judgment instead of forming an independent one.
+Accepted and confirmed candidates pass to the next step,
 and rejected ones are discarded.
 
-\section{Step 4: AAF Conversion}
+The thresholds are set to $\theta_{\text{acc}} = 70$ and
+$\theta_{\text{ver}} = 50$ by default. They are design choices made after inspecting the
+confidence values of early runs, in which the model concentrated its scores at
+round values and separated clear attacks, which typically received 80 or more,
+from speculative ones in the range around 50 to 65. The thresholds were
+deliberately not tuned against any evaluation data, since no annotated labels
+existed at design time and tuning them on the data used for the evaluation
+would leak information. The verification step exists precisely so that the
+acceptance threshold can stay high without silently losing every borderline
+case, because the middle band gets a second, independent judgment instead of a
+hard cut.
+
+\begin{algorithm}[tb]
+\caption{Typed attack candidate extraction}
+\label{alg:method:extraction}
+\begin{algorithmic}[1]
+\Require atomized arguments $\mathcal{A}'$, topic $T$, batch size $b$
+\Ensure set of typed attack candidates $C$
+\State $\mathit{pairs} \gets \{(a_i, a_j) \mid i < j,\;
+  \mathrm{base}(a_i) \neq \mathrm{base}(a_j)\}$
+  \Comment{exclude same-base pairs}
+\State $C \gets \emptyset$
+\For{each $\mathit{batch} \in \mathrm{chunk}(\mathit{pairs}, b)$
+  \textbf{in parallel}}
+  \State $\mathit{raw} \gets \mathrm{ClassifyTyped}(\mathit{batch}, T)$
+    \Comment{direction, type, confidence, reason per pair}
+  \If{$\mathit{raw}$ parses as a JSON list}
+    \State $C \gets C \cup \mathit{raw}$
+  \Else
+    \State retry the batch once, then classify missing pairs individually
+  \EndIf
+\EndFor
+\State \Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+\section{Step 4: AF Conversion}
 \label{sec:method:conversion}
 
 Every accepted candidate is converted to a binary Dung fact
@@ -159,18 +239,79 @@ analysis and error inspection.
 \section{Step 5: Solving under Dung Semantics}
 \label{sec:method:solver}
 
-The framework is solved by an AAF solver implemented in Prolog under the three
+The framework is solved by an AF solver implemented in Prolog under the three
 semantics of Section~\ref{sec:foundations:aaf}, using standard fixed-point and
-enumeration procedures~\cite{cerutti2014}. The grounded extension is computed by
+enumeration procedures~\cite{cerutti2017}. The grounded extension is computed by
 iterating the characteristic function from the empty set in polynomial time.
 Computing preferred and stable extensions requires enumerating conflict-free
 sets, which is exponential in the worst case.
 
-To keep this tractable the solver applies a \emph{grounded-first reduction}. The
-grounded extension and the arguments it attacks are fixed before the search, so
-the exponential enumeration is restricted to the undecided arguments that remain.
-This reduction is key to the scalability of the pipeline. On the frameworks in
-the evaluation it brings the preferred and stable computation down to a fraction
-of a second per topic, where a naive enumeration times out. The solver is
+To keep this tractable the solver applies a \emph{grounded-first reduction}.
+The underlying idea is not new. Computing the cheap grounded labelling first
+and restricting the expensive search to the arguments it leaves undecided is a
+standard simplification in computational argumentation~\cite{baroni2011,
+charwat2015}, and this section describes its concrete form in the pipeline.
+The reduction rests on the inclusion hierarchy from
+Section~\ref{sec:foundations:aaf}. Let $G$ be the grounded extension and let
+$U$ be the set of arguments that are neither in $G$ nor attacked by $G$. This
+set is called the \emph{undecided core} in the following. The name comes from
+the labelling view of argumentation semantics~\cite{baroni2011}, in which the
+grounded labelling marks the members of $G$ as \textsc{in}, the arguments
+attacked by $G$ as \textsc{out}, and precisely the arguments in $U$ as
+\textsc{undec}, that is, undecided. Every complete extension, and hence every
+preferred and stable extension, contains $G$ and excludes all arguments $G$
+attacks, so the only freedom left lies in $U$. Moreover, no argument in $U$
+attacks or is attacked by $G$, since an attacker of a member of $G$ is itself
+attacked by $G$ by definition of defense, and any argument attacked by $G$ is
+excluded from $U$ by construction. Attacks into $U$ from arguments that $G$
+attacks are neutralised in every complete extension, because $G$ already
+counterattacks the attacker. Proposition~\ref{prop:method:reduction} states the
+correctness of the reduction in the form the solver uses. The property follows
+from known results on complete labellings~\cite{baroni2011}. A self-contained
+proof sketch is given in Appendix~\ref{sec:appendix:proof}.
+
+\begin{proposition}[Grounded-first reduction]
+\label{prop:method:reduction}
+Let $\sigma$ be the complete, the preferred, or the stable semantics. The
+$\sigma$-extensions of $AF$ are exactly the sets $G \cup E$ where $E$ is a
+$\sigma$-extension of the framework restricted to $U$, with attacks from
+outside $U$ into $U$ discounted as neutralised.
+\end{proposition}
+
+The exponential enumeration therefore runs only over $U$ instead of over all
+arguments. In the running example of Figure~\ref{fig:foundations:example}, the
+grounded extension is $\{d, e\}$, the argument $c$ is attacked by it, and the
+enumeration only has to decide the two-element core $U = \{a, b\}$. The effect
+on real frameworks is drastic, because the extracted graphs are sparse and
+their undecided cores are small. On a framework with 24 atoms from an early
+run, a naive enumeration over all arguments exceeded a 40 second timeout, while
+the reduction solved the identical framework in 0.32 seconds. Since the
+enumeration is exponential in $|U|$ and not in the total number of arguments,
+the solver additionally guards the computation with a bound of
+$|U| \leq \mathit{MaxU} = 18$, determined empirically from solve times, and
+falls back to reporting only the grounded extension if the bound is exceeded or
+a timeout is reached. In the evaluation of Chapter~\ref{sec:evaluation}, the
+undecided cores stay at nine or fewer arguments and the guard never triggers.
+Algorithm~\ref{alg:method:solver} in Appendix~\ref{sec:appendix:proof}
+summarises the procedure. The solver is
 parametrised by the framework file and returns its results as JSON, which the
 Python driver reads back.
+
+\section{Implementation and Logging}
+\label{sec:method:logging}
+
+The pipeline is implemented in Python, with the solver in
+SWI-Prolog~\cite{swiprolog2012}. Every run writes a self-contained log
+directory that makes each reported number traceable to its origin, from the
+full run configuration and the version identifier of every prompt down to one
+record per queried argument pair and per LLM call.
+Appendix~\ref{sec:appendix:repro} lists the contents in detail.
+
+Two details of this infrastructure matter for the experiments. Prompt
+versioning ties every result to the exact prompt wording and makes the effect
+of prompt revisions measurable instead of anecdotal, while the frozen and
+reusable atom sets are what allow the ablation in
+Section~\ref{sec:evaluation:ablation} to feed the identical atomized arguments
+to both extraction variants and the reference annotation of
+Section~\ref{sec:evaluation:gold} to be created on exactly the pair set
+the pipeline judged.

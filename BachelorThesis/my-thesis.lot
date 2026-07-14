@@ -6,13 +6,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Cross-topic results over the eight UKP topics. ``Acc'' is the number of accepted attacks, that is the edges of the framework, and ``Acc\%'' is their share among all queried pairs. ``Cyc'' indicates a cycle, ``Grnd'' is the size of the grounded extension, and \#Pr and \#St are the numbers of preferred and stable extensions.}}{18}{table.caption.5}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Arguments available in the UKP test splits after discarding \texttt {NoArgument} sentences. The evaluation samples seven pro and seven con arguments per topic with seed 42.}}{24}{table.caption.6}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Cross-topic results over the eight UKP topics. ``Atoms'' is the number of atomic arguments after atomization, and ``Pairs'' is the number of queried pairs, excluding pairs of atoms that stem from the same source argument. ``Acc'' is the number of accepted attacks, that is the edges of the framework, and ``Acc\%'' is their share among all queried pairs. ``Iso'' counts atoms without incident attacks, ``Grnd'' is the size of the grounded extension, $|U|$ the size of the undecided core, and \#Pr and \#St the numbers of preferred and stable extensions.}}{25}{table.caption.7}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Composition of the accepted attacks per topic. ``Reb'', ``Und'', and ``Cut'' count edges labelled rebuttal, undermining, and undercutting, including symmetrized reverse edges. ``Sym'' is the number of edges added by rebuttal symmetrization and is contained in ``Reb''. ``Ver'' counts candidates that were accepted only after verification. ``Extract'' is the wall-clock extraction time in seconds. The three type counts per topic sum to the Acc column of Table~\ref {tab:evaluation:crosstopic}.}}{26}{table.caption.8}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Typed versus binary prompting on identical atom sets. ``$|E|$'' columns give the number of accepted directed edges for the typed arm, the typed arm without symmetrized edges (raw), and the binary arm. ``$J$'' columns give the Jaccard similarity of typed-raw and binary edge sets, directed and undirected. \#Pr counts preferred extensions per arm, and the numbers of stable extensions are identical to \#Pr in every cell. ``Same-st.'' counts accepted attacks between arguments of the same stance, for the typed arm on the final edge set including symmetrized edges.}}{28}{table.caption.9}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Precision, recall, and F1 of both extraction arms against the manual reference annotation on Nuclear Energy. ``$n$'' is the number of predicted edges or pairs, TP the number of true positives. The reference annotation contains 16 directed edges and 11 undirected conflict pairs.}}{31}{table.caption.16}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces This is a caption text.}}{33}{table.caption.11}%
-\contentsline {table}{\numberline {A.2}{\ignorespaces This is a caption text.}}{34}{table.caption.12}%
 \babel@toc {ngerman}{}\relax 
 \babel@toc {english}{}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

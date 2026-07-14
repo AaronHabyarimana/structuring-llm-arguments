@@ -14,7 +14,7 @@ aspects of large language models relevant to this work.
 \section{Abstract Argumentation Frameworks}
 \label{sec:foundations:aaf}
 
-Abstract Argumentation Frameworks (AAFs), introduced by Phan Minh
+Abstract argumentation frameworks (AFs), introduced by Phan Minh
 Dung in 1995~\cite{dung1995}, are the most established formal model of
 argumentation. The framework is deliberately abstract. It treats arguments as
 atomic entities without internal structure and represents only the conflicts
@@ -46,47 +46,141 @@ $F_{AF}(S) = \{ a \in \mathcal{A} \mid S \text{ defends } a \}$.
 \end{definition}
 
 On top of admissibility, Dung defines several \emph{semantics}, each formalising
-a different standard of collective acceptability. This thesis computes three of
-them, chosen to span a wide spectrum of strictness.
+a different standard of collective acceptability. The following notion of a
+complete extension is the common core of all semantics used in this thesis.
+
+\begin{definition}[Complete extension]
+An admissible set $S$ is a \emph{complete extension} if it contains every
+argument it defends, that is, if $F_{AF}(S) = S$.
+\end{definition}
+
+A complete extension is a position that is both defensible and exhaustive. It
+contains nothing it cannot defend, and it leaves out nothing it could defend.
+This thesis computes three semantics that refine completeness, chosen to span a
+wide spectrum of strictness.
 
 \begin{itemize}
   \item The \textbf{grounded extension} is the least fixed point of $F_{AF}$,
-    obtained by iterating $F_{AF}$ from the empty set. It is the most cautious
-    semantics, it always exists, and it is unique for finite frameworks.
-  \item A \textbf{preferred extension} is a maximal admissible set. It represents
-    the largest internally coherent position a debate supports. A framework can
-    have several preferred extensions.
+    obtained by iterating $F_{AF}$ from the empty set. It is the smallest
+    complete extension, it is the most cautious of the semantics, it always
+    exists, and it is unique.
+  \item A \textbf{preferred extension} is a maximal admissible set. Every
+    preferred extension is complete, and it represents the largest internally
+    coherent position a debate supports. A framework can have several preferred
+    extensions.
   \item A \textbf{stable extension} is a conflict-free set $S$ that attacks every
     argument outside $S$. Stable extensions are the strictest of the three and
     are not guaranteed to exist.
 \end{itemize}
+
+The semantics form an inclusion hierarchy~\cite{dung1995}. Every stable
+extension is preferred, every preferred extension is complete, and the grounded
+extension is contained in every complete extension. The last property matters
+twice in this thesis. Conceptually, the grounded extension is the uncontroversial
+core that every rational position must accept. Computationally, it is the basis
+of the solver optimization described in Section~\ref{sec:method:solver}.
 
 The grounded semantics collapses a debate to a single cautious set, whereas
 preferred and stable extensions, which may be multiple, reveal whether a topic
 supports several internally consistent positions. This distinction is central to
 the evaluation in Chapter~\ref{sec:evaluation}.
 
-% TODO: kleines durchgerechnetes Beispiel mit eigener Abbildung einfuegen,
-% das einen 4--5-Knoten-Graphen mit MEHREREN preferred extensions zeigt,
-% damit der Unterschied zwischen grounded und preferred/stable sichtbar wird.
-\begin{figure}[t]
+\subsection*{A worked example}
+
+\begin{figure}[tb]
   \centering
-  \fbox{\parbox{0.8\linewidth}{\centering\vspace{2.5cm} Placeholder:
-  worked example of a small framework with several preferred extensions.
-  \vspace{2.5cm}}}
-  \caption{Running example of a small argumentation framework. To be replaced
-  with a TikZ figure and a step-by-step computation of the grounded, preferred,
-  and stable extensions.}
+  \begin{minipage}[c]{0.58\linewidth}
+    \centering
+    \begin{tikzpicture}[
+      >={Stealth[length=2mm]},
+      node distance=11mm and 13mm,
+      arg/.style={draw, circle, minimum size=7mm, inner sep=1pt, font=\small},
+      gr/.style={fill=gray!25},
+    ]
+      \node[arg]     (a) {$a$};
+      \node[arg, right=of a] (b) {$b$};
+      \node[arg, below=of a] (c) {$c$};
+      \node[arg, right=of c, gr] (d) {$d$};
+      \node[arg, left=of c, gr]  (e) {$e$};
+      \draw[->] (a) to[bend left=15] (b);
+      \draw[->] (b) to[bend left=15] (a);
+      \draw[->] (e) -- (c);
+      \draw[->] (c) -- (d);
+    \end{tikzpicture}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.38\linewidth}
+    \centering
+    \begin{tikzpicture}[
+      >={Stealth[length=2mm]},
+      arg/.style={draw, circle, minimum size=7mm, inner sep=1pt, font=\small},
+    ]
+      \node[arg] (x) at (90:1.1)  {$x$};
+      \node[arg] (y) at (210:1.1) {$y$};
+      \node[arg] (z) at (330:1.1) {$z$};
+      \draw[->] (x) -- (y);
+      \draw[->] (y) -- (z);
+      \draw[->] (z) -- (x);
+    \end{tikzpicture}
+  \end{minipage}
+  \caption{Two small argumentation frameworks. Left: the running example
+  $AF_1$ with a mutual attack between $a$ and $b$. Filled nodes form the
+  grounded extension $\{d, e\}$, and the two preferred extensions
+  $\{a, d, e\}$ and $\{b, d, e\}$ extend it in incompatible ways. Right: the
+  odd-length cycle $AF_2$, whose only complete extension is the empty set and
+  which has no stable extension.}
   \label{fig:foundations:example}
 \end{figure}
+
+The difference between the three semantics is best seen on a small example.
+Consider the framework $AF_1$ on the left of
+Figure~\ref{fig:foundations:example}, with arguments
+$\mathcal{A} = \{a, b, c, d, e\}$ and attacks
+$\mathcal{R} = \{(a,b), (b,a), (e,c), (c,d)\}$. The structure mirrors a debate
+in miniature. The arguments $a$ and $b$ are the cores of two opposing camps
+that directly contradict each other, for instance the claim from the UKP
+nuclear-energy topic that waste storage is safe and secure against the claim
+that nuclear waste storage remains an unresolved safety problem. Each holds
+only if the other fails, so the conflict runs both ways, which the mutual
+attack between $a$ and $b$ captures. The argument $c$ raises an objection that
+attacks a further pro claim $d$, for instance that nuclear power is virtually
+carbon-free, and $c$ is in turn refuted by $e$.
+
+Iterating the characteristic function from the empty set yields
+$F_{AF}(\emptyset) = \{e\}$, since $e$ is the only unattacked argument, and
+then $F_{AF}(\{e\}) = \{d, e\}$, since $e$ defends $d$ against its only
+attacker $c$. A third step adds nothing, so the grounded extension is
+$\{d, e\}$. It accepts the uncontroversial arguments and stays silent on the
+conflict between $a$ and $b$. The preferred semantics goes further. Both
+$\{a, d, e\}$ and $\{b, d, e\}$ are admissible, since $a$ and $b$ defend
+themselves against each other, and neither set can be enlarged without a
+conflict, so the framework has two preferred extensions, one per camp, each
+containing the grounded extension as the inclusion hierarchy predicts. Both
+sets are also stable, since each attacks every outside argument. The example
+shows the division of labour that this thesis exploits. The grounded extension
+identifies the safe core, and the preferred and stable extensions make the
+incompatible ways of completing that core explicit.
+
+The odd-length cycle $AF_2$ on the right of
+Figure~\ref{fig:foundations:example}
+illustrates why stable extensions are not guaranteed to exist. No single
+argument in this example can defend itself against its attacker, so the empty set is the only
+admissible and hence the only complete and preferred extension. The empty set
+attacks nothing, so it is not stable, and $AF_2$ has no stable extension at
+all.
 
 \section{Attack Typology}
 \label{sec:foundations:typology}
 
 Dung's framework is abstract in that it does not say \emph{why} one argument
 attacks another. For the extraction step, however, the kind of attack matters.
-Pollock~\cite{pollock1992} distinguishes three attack types in natural-language
-debate, a distinction also used in the ASPIC+ framework~\cite{modgil2014}.
+Pollock~\cite{pollock1992} distinguishes two kinds of defeaters in
+natural-language reasoning, rebutting defeaters that contradict a conclusion
+and undercutting defeaters that break the inference leading to it.
+ASPIC+~\cite{modgil2014}, a structured argumentation framework that builds
+Dung-style attack graphs from explicitly represented premises, inference
+rules, and conclusions, adds undermining as an attack on a premise and gives
+each attack a precise structural target. This yields the three-way typology
+that the extraction step of this thesis uses.
 
 \begin{itemize}
   \item A \textbf{rebuttal} contradicts the \emph{conclusion} of the target. An
@@ -94,8 +188,10 @@ debate, a distinction also used in the ASPIC+ framework~\cite{modgil2014}.
     catastrophic contamination''.
   \item An \textbf{undercutting} attack challenges the \emph{inference} from
     premises to conclusion. The conclusion does not follow even if the premises
-    hold, for example when low CO\textsubscript{2} emissions are taken to imply
-    the absence of any long-term risk.
+    hold. The claim ``nuclear power is safe because its CO\textsubscript{2}
+    emissions are low'' is undercut by ``low emissions say nothing about
+    accident or waste risks'', which grants the premise but severs the step to
+    the conclusion.
   \item An \textbf{undermining} attack hits a \emph{premise} the target relies
     on, without engaging the conclusion directly. The claim ``containment makes
     plants safe'' is undermined by ``radiation cannot be contained
@@ -121,29 +217,24 @@ text. Traditional approaches decompose the problem into subtasks including
 argument detection, stance classification, and relation prediction, and address
 them with supervised learning on annotated corpora~\cite{lawrence2019argument}.
 More recently, LLMs have begun to replace task-specific classifiers with
-prompt-based methods that perform extraction, relation identification, stance
-assessment, summarization, and generation in a single
-framework~\cite{li2025large}. Attack relation extraction in particular benefits
-from this shift, since LLMs can use contextual understanding to identify subtle
-argumentative relations that surface-level classifiers miss. Most existing work,
-however, evaluates AM subtasks in isolation and stops before connecting the
-extracted relations to formal reasoning, which leaves the question of which
-arguments are collectively acceptable unanswered. This thesis targets exactly
-that gap.
+prompt-based methods that cover these subtasks in a single
+framework~\cite{li2025large}. Most existing work, however, evaluates AM
+subtasks in isolation and stops before connecting the extracted relations to
+formal reasoning, which leaves the question of which arguments are collectively
+acceptable unanswered. This thesis targets exactly that gap.
 
 \section{Large Language Models}
 \label{sec:foundations:llm}
 
 Large language models are neural networks trained on large text corpora to
 predict the next token, and through that objective they acquire a broad ability
-to follow instructions given in natural language. Only a few properties matter
-for this thesis. First, model behaviour is steered through \emph{prompts}, so
-the wording of the task, including whether the model is asked to classify an
-attack type, directly shapes the output. Second, the sampling
-\emph{temperature} controls randomness, and a temperature of zero makes the
-output as deterministic as the model allows, which the pipeline uses for
-reproducibility. Determinism is not absolute, since server-side execution can
-still introduce small variations. Third, the pipeline uses an open-weight model,
-which keeps the experiments reproducible and independent of a proprietary
-service. The concrete model and parameters are given in
-Section~\ref{sec:evaluation:setup}.
+to follow instructions given in natural language. Two properties matter for
+this thesis. Model behaviour is steered through \emph{prompts}, so the
+wording of the task directly shapes the output, and even small changes to a
+prompt can shift the results markedly~\cite{sclar2024}. This sensitivity is the very
+lever that the typed extraction of this thesis relies on, and at the same time
+a threat to stability, so the pipeline versions every prompt and
+Section~\ref{sec:discussion:threats} discusses the observed effect of prompt
+revisions. A sampling \emph{temperature} of zero in turn makes the output as
+deterministic as the model allows, but not absolutely deterministic, since
+server-side batching and numerical effects can still alter the sampled tokens.

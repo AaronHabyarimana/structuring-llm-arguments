@@ -7,7 +7,9 @@ This chapter reviews work that combines language models with formal or
 relational argumentation and positions the present thesis against it. It first
 discusses end-to-end pipelines that turn text into argumentation frameworks,
 then work that uses LLMs specifically for relation extraction, the use of the
-UKP corpus, and finally related formalisms.
+UKP corpus, and finally related formalisms. In short, the thesis adopts the
+end-to-end perspective of the pipeline systems below and supplies the
+empirical evaluation that the closest prior systems leave undone.
 
 \section{LLM-based End-to-End Argumentation Pipelines}
 \label{sec:related:pipelines}
@@ -20,20 +22,17 @@ and to delegate the acceptability question to a formal solver. It sets out the
 architecture and the Dung-semantics perspective but does not report an empirical
 evaluation of the resulting frameworks, so it leaves open how many attacks such a
 pipeline accepts, whether the resulting frameworks are cyclic, and how many
-extensions they admit. The present work adopts this end-to-end perspective and
-supplies exactly that missing empirical layer, a reproducible implementation with
-logged runs and a cross-topic analysis over eight topics.
+extensions they admit. Chapter~\ref{sec:evaluation} answers exactly these
+questions.
 
 ArgLLMs~\cite{argLLMs} also augments LLMs with formal argumentative reasoning but
 takes a quantitative route. Instead of asking which arguments can be jointly
 accepted, it builds Quantitative Bipolar Argumentation Frameworks (QBAFs) in
 which each argument carries a numerical strength that gradual semantics propagate
 along support and attack edges. The system is evaluated on binary claim
-verification, where the aggregated strength of the arguments for a claim is
-turned into an accept or reject decision. This differs from the present thesis in
-two respects. The output is a single scalar per claim rather than a set of
-jointly admissible arguments, and the evaluation targets a downstream
-verification task rather than the structure of the argumentation itself.
+verification, so its output is a single scalar per claim rather than a set of
+jointly admissible arguments, and its evaluation targets a downstream task
+rather than the structure of the argumentation itself.
 
 A further recent example of an end-to-end LLM system for argument mining is the
 work of Pirozelli et al.~\cite{pirozelli2026llm}, which applies LLMs to the
@@ -41,11 +40,11 @@ argument mining subtasks within a single system rather than through separate
 task-specific classifiers. It reflects the broader trend that LLMs are becoming
 the default engine for extraction, but like most argument mining work it stops at
 the extracted structure and does not connect the result to Dung semantics or
-evaluate the collective acceptability of the mined arguments. The pipeline in
-this thesis differs from all three systems in its use of categorized attack
-candidates with explicit justifications and confidence-based filtering, and in
-computing set-based Dung extensions rather than numerical strengths or raw
-extracted relations.
+evaluate the collective acceptability of the mined arguments. The pipeline of
+this thesis differs from ArgLLMs and Pirozelli et al. by computing set-based
+Dung extensions rather than numerical strengths or raw extracted relations,
+and from the Dung-based ARGUS by extracting typed, confidence-filtered attacks
+and evaluating the resulting frameworks empirically.
 
 \section{LLMs for Attack Relation Extraction}
 \label{sec:related:extraction}
@@ -55,15 +54,19 @@ pair of atomic arguments, is most directly related to work that studies LLMs on
 relation-based argument mining. Gorur et al.~\cite{gorur2025relMining} ask
 precisely whether large language models can identify the relations, such as
 support and attack, that hold between arguments, the subtask on which the present
-pipeline depends. Their perspective is diagnostic, in that they measure how well
+pipeline depends. They find that suitably prompted LLMs are competitive with and
+often better than task-specific relation classifiers, which supports the design
+decision of this thesis to let an LLM propose the attack candidates. Their
+perspective remains diagnostic, in that they measure how well
 LLMs recover these relations in isolation, whereas the present thesis treats
 relation extraction as one stage of a larger pipeline and feeds its output into a
-formal solver. Two design choices set the extraction here apart. First, the LLM
-is asked not only whether an attack exists but also which of the three Pollock
-types~\cite{pollock1992} it instantiates, which forces engagement with the
-argumentative structure rather than a surface judgment on opposing stances.
-Second, each decision carries a confidence score that routes borderline cases to
-a separate verification prompt instead of accepting them outright. The value of
+formal solver. Two design choices set the extraction here apart. The LLM is asked not only
+whether an attack exists but also which of the three attack types of
+Section~\ref{sec:foundations:typology} it instantiates, which forces engagement
+with the argumentative structure rather than a surface judgment on opposing
+stances. Each decision moreover carries a confidence score that routes
+borderline cases to a separate verification prompt instead of accepting them
+outright. The value of
 the typed prompt over a plain binary one is measured directly in the ablation of
 Section~\ref{sec:evaluation:ablation}.
 
@@ -74,39 +77,36 @@ The evaluation uses the UKP Sentential Argument Mining
 Corpus~\cite{stab2018}, which provides sentence-level stance annotations for
 eight controversial topics. Prior work of the supervising group applies
 knowledge-based graph argument mining with topic modeling to the same
-corpus~\cite{kramer2021} and reports an F1 around 67 percent. That number serves
-as a reference point for the gold-standard evaluation in
-Section~\ref{sec:evaluation:gold}.
+corpus~\cite{kramer2021}. Their task differs from the one studied here. They
+classify \emph{single sentences} as argument or non-argument for a given topic,
+without stance and without any relation between arguments, and report an
+accuracy of 85 percent alongside an F1 score of 67 percent. Two lessons carry
+over to this thesis. The 18 point gap between their accuracy and their F1
+illustrates how strongly a majority of negative instances inflates accuracy
+on this corpus, which is why the reference evaluation in
+Section~\ref{sec:evaluation:gold} reports precision, recall, and F1 on the
+attack class rather than accuracy. Their F1 also gives a rough sense of how
+demanding the corpus is for a related sentence-level subtask, though it is not
+a directly comparable benchmark, since pairwise attack detection is a different
+and arguably harder problem with a lower positive rate.
 
 \section{Related Formalisms}
 \label{sec:related:formalisms}
 
-Most closely related on the formal side is the recent work of
+Most closely related on the symbolic reasoning side is the recent work of
 Alfano et al.~\cite{alfano2026}, which connects LLM-based argument mining with
-argumentation and description logics through a FAKB and QBAF framework. Their
-approach enriches the formal layer, both by adding logical structure through
-description logics and by retaining numerical strengths through the QBAF, which
-makes it more expressive but also heavier, since it commits to a strength
-ordering that has to be justified. The present thesis deliberately stays with
-Dung's abstract framework instead. The reason is that the question of interest
-here is set-based, namely which arguments can be jointly accepted, rather than
-numerical, namely how strong each argument is. Without a preference or strength
-ordering, binary attack facts are the natural representation for that question,
+argumentation and description logics, a family of decidable knowledge
+representation logics designed for ontological reasoning. Their system extracts
+a Fuzzy Argumentative Knowledge Base (FAKB) from raw text and combines it with
+a QBAF. This enriches the formal layer and makes it more expressive but also
+heavier, since it
+commits to a strength ordering that has to be justified. The present thesis deliberately stays with
+Dung's abstract framework instead, since the question of interest is which
+arguments can be jointly accepted rather than how strong each argument is, and
+without a preference ordering binary attack facts are the natural
+representation for it,
 as Chapter~\ref{sec:method} argues in more detail. The typed attacks and
 confidence scores are not discarded but retained as metadata, which keeps the
 door open to a richer formalism such as ASPIC+~\cite{modgil2014} or a QBAF as
 future work.
 
-\section{Positioning}
-\label{sec:related:positioning}
-
-In short, this thesis takes the end-to-end perspective of ARGUS and of the LLM
-argument mining systems above, grounds it in a concrete and reproducible
-implementation, and evaluates the resulting frameworks empirically, which the
-closest prior systems leave undone. It differs from the gradual and
-logic-augmented approaches of ArgLLMs and Alfano et al. by computing classical
-Dung extensions rather than numerical strengths, and it goes beyond diagnostic
-relation-extraction studies such as Gorur et al. by connecting the extracted
-attacks to a formal solver. Its methodological contribution, a typed attack
-extraction with confidence-based filtering, is measured directly in the ablation
-of Section~\ref{sec:evaluation:ablation}.

@@ -1,41 +1,265 @@
 % !TEX root = ../my-thesis.tex
 %
-\chapter{Example Appendix}
+\chapter{Prompts, Reproducibility, and Proof Details}
 \label{sec:appendix}
 
-\Blindtext[1][1]
+\section{Prompts}
+\label{sec:appendix:prompts}
 
-\section{Appendix Section 1}
-\label{sec:appendix:sec1}
+This appendix lists the prompts of the final configuration verbatim, in
+the versions used by the reference evaluation run of
+Section~\ref{sec:evaluation:gold} (\texttt{classify\_batch\_v4} and
+\texttt{verify\_v4}). Placeholders in curly braces are filled by the pipeline
+at run time. The typed classification prompt and the verifier prompt contain
+the two rebuttal rules discussed in Section~\ref{sec:method:extraction} as
+well as the general not-an-attack rule of the final revision. The cross-topic
+and ablation batch of Sections~\ref{sec:evaluation:crosstopic}
+and~\ref{sec:evaluation:ablation} used the preceding version
+(\texttt{classify\_batch\_v3} and \texttt{verify\_v3}), which states the
+stance rule only inside the rebuttal definition and lacks the general
+not-an-attack test and the specificity requirements for undercutting and
+undermining. The binary prompt (\texttt{classify\_batch\_binary\_v1}) is
+identical in both batches and omits the
+attack type, the type definitions, and these rules.
 
-\Blindtext[1][1]
+\subsection*{Atomization prompt}
 
-\begin{table}[h]
-    \caption{This is a caption text.}
-	\begin{tabularx}{\textwidth}{X | X | X}
-		%\hline
-		Alpha		& Beta			& Gamma			\\ \hline
-		0			& 1				& 2				\\ \hline
-		3			& 4				& 5				\\ %\hline
-	\end{tabularx}
-	\label{tab:table1}
-\end{table}
+\begin{lstlisting}[breaklines=true, basicstyle=\ttfamily\footnotesize]
+You receive an argument from a debate on "{topic}".
+Check whether it bundles multiple distinct claims into one sentence.
+If yes, split it into atomic arguments (one claim each), preserving the stance.
+If it already expresses a single claim, return it unchanged.
 
-\section{Appendix Section 2}
-\label{sec:appendix:sec2}
+Important: Only promote claims the speaker actually ASSERTS as their own.
+- Concessive/contrastive clauses (markers: "but", "although", "while",
+  "despite", "even though", "yet") are rhetorical hedges, NOT independent
+  arguments. Keep them attached to the main claim or drop them - never make
+  them a separate atom.
+- Reported or conceded positions of the opposing side (e.g. "opponents argue
+  X", "greens always argue X", "some claim X, but ...") are NOT the speaker's
+  own claim. Do NOT promote them to a separate atom; drop them.
+This prevents atoms that, read in isolation, carry the OPPOSITE stance of the
+speaker (e.g. a pro-nuclear sentence must never yield a pro-renewable atom).
 
-\Blindtext[1][1]
+Self-containment rule: Every output argument MUST be understandable without
+any surrounding context. If a fragment contains pronouns like "it", "them",
+"this", "they" without a clear referent, replace the pronoun with the explicit
+noun from the original sentence. If the referent cannot be recovered, drop
+the fragment entirely.
 
-\begin{table}[h]
-    \caption{This is a caption text.}
-	\begin{tabularx}{\textwidth}{X | X | X}
-		%\hline
-		Alpha		& Beta			& Gamma			\\ \hline
-		0			& 1				& 2				\\ \hline
-		3			& 4				& 5				\\ %\hline
-	\end{tabularx}
+Argument [{id}] ({stance}):
+{text}
 
-	\label{tab:table2}
-\end{table}
+Respond ONLY with a JSON array, no markdown. Use IDs like "{id}", "{id}b", ...:
+[
+  {"id": "{id}",  "text": "...", "stance": "{stance}"},
+  {"id": "{id}b", "text": "...", "stance": "{stance}"}
+]
+\end{lstlisting}
 
-\Blindtext[1][2]
+\subsection*{Typed classification prompt (batched)}
+
+\begin{lstlisting}[breaklines=true, basicstyle=\ttfamily\footnotesize]
+Propose attack candidates for the following argument pairs from a debate on
+"{topic}".
+
+An attack exists when one argument:
+- asserts a conclusion logically incompatible with the other's conclusion -
+  the one claim can be true only if the other is false (rebuttal), OR
+- undermines a premise the other relies on (undermining), OR
+- shows the other's conclusion does not follow even if its premise is true
+  (undercutting)
+
+NOT an attack - this applies to ALL three types: merely taking the opposing
+stance, addressing a different sub-topic, or generally "arguing for the other
+side". A con argument does not attack every pro argument (and vice versa).
+Test: if both specific claims can be true at the same time without tension,
+there is NO attack and direction MUST be NONE.
+
+{pairs}
+
+direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
+attack_type  = one of: rebuttal / undercutting / undermining / NONE
+  rebuttal:     the two conclusions are logically incompatible - they negate
+                the SAME proposition, so one claim is true only if the other
+                is false; there must be a direct contradiction between the two
+                specific claims. A descriptive/empirical claim (what people
+                believe or do, statistics, trends) and a normative claim (what
+                ought to be) are NOT logically incompatible - they cannot
+                rebut each other (at most undermining/undercutting). A
+                rebuttal is inherently MUTUAL (it holds in both directions);
+                pick either direction.
+  undercutting: attacker shows the target's conclusion doesn't follow even if
+                the target's premise holds - it targets the INFERENCE of that
+                specific argument. A general counter-consideration on the same
+                topic is NOT undercutting.
+  undermining:  attacker directly attacks a premise the target relies on. The
+                premise must be a SPECIFIC claim the target states or
+                presupposes - the target's overall stance or the general
+                attractiveness of its position is NOT a premise. In "reason",
+                name the attacked premise; if you cannot name it, the type is
+                not undermining.
+  If direction=NONE, attack_type MUST be NONE.
+confidence   = integer 0-100: probability that ANY attack exists between the
+  two arguments (0 = definitely no attack, 100 = definitely attack)
+  If direction=NONE, confidence MUST be 0.
+
+Respond ONLY with a JSON array, same order as the pairs above, no markdown:
+[
+  {"pair": "id_a:id_b", "direction": "A_ATTACKS_B", "attack_type": "rebuttal",
+   "confidence": 85, "reason": "one sentence"},
+  ...
+]
+\end{lstlisting}
+
+\subsection*{Binary classification prompt (batched, ablation arm)}
+
+\begin{lstlisting}[breaklines=true, basicstyle=\ttfamily\footnotesize]
+Propose attack candidates for the following argument pairs from a debate on
+"{topic}".
+
+An attack exists when one argument is logically incompatible with the other's
+conclusion, undermines a premise the other relies on, or shows that the
+other's conclusion does not follow even if its premise holds. Merely taking
+the opposing stance, addressing a different sub-topic, or arguing for the
+other side is NOT enough. There must be a genuine conflict between the two
+specific claims.
+
+{pairs}
+
+direction    = exactly one of: A_ATTACKS_B / B_ATTACKS_A / NONE
+confidence   = integer 0-100: probability that ANY attack exists between the
+  two arguments (0 = definitely no attack, 100 = definitely attack)
+  If direction=NONE, confidence MUST be 0.
+
+Respond ONLY with a JSON array, same order as the pairs above, no markdown:
+[
+  {"pair": "id_a:id_b", "direction": "A_ATTACKS_B", "confidence": 85,
+   "reason": "one sentence"},
+  ...
+]
+\end{lstlisting}
+
+\subsection*{Verifier prompt (typed)}
+
+\begin{lstlisting}[breaklines=true, basicstyle=\ttfamily\footnotesize]
+Two arguments from a debate on "{topic}":
+
+[{id_a}] ({stance_a}) {text_a}
+[{id_b}] ({stance_b}) {text_b}
+
+A previous analysis claims: {claimed}
+
+Does this attack relation genuinely hold?
+Does A undermine a premise B relies on (undermining)? The premise must be a
+SPECIFIC claim B states or presupposes - B's overall stance or the general
+attractiveness of its position is NOT a premise. If you cannot name the
+attacked premise, it is not undermining.
+Do A and B assert logically incompatible conclusions that negate the same
+proposition, so that one is true only if the other is false (rebuttal)?
+Opposing stance alone is NOT enough.
+A descriptive claim (what people believe/do, statistics) and a normative claim
+(what ought to be) are NOT logically incompatible and cannot rebut each other.
+Does A show B's conclusion doesn't follow even if B's premise is true
+(undercutting)?
+A general counter-consideration on the same topic is NOT undercutting.
+Decisive test: if both specific claims can be true at the same time without
+tension, there is NO attack - merely being on opposite sides of the debate is
+not enough.
+If any of the three genuinely holds, confirm=true.
+
+Respond ONLY with JSON, no markdown:
+{"confirms": true, "reason": "one sentence"}
+\end{lstlisting}
+
+\section{Reproducibility}
+\label{sec:appendix:repro}
+
+All experiments use the following canonical configuration. The model is
+GPT-OSS-120B~\cite{gptoss2025}, called through the university-hosted inference
+endpoint at temperature zero with a batch size of ten pairs per classification
+call. Per
+topic, 14 arguments are sampled from the UKP test split, seven pro and seven
+con, with random seed 42. Candidates are accepted at confidence 70 or above,
+verified between 50 and 69, and rejected below 50. Rebuttal symmetrization is
+enabled in the typed arm and structurally impossible in the binary arm. The
+solver computes preferred and stable extensions with the grounded-first
+reduction and skips them if the undecided core exceeds 18 arguments, which did
+not occur in the evaluation.
+
+Every run writes a log directory containing the run configuration, the frozen
+atomized argument set, one record per queried pair with the model output and
+routing outcome, the accepted attacks, the generated Prolog facts, and the
+solver results. The ablation additionally stores, per topic, the shared atom
+set and one full run log per extraction arm, together with a comparison file
+holding the edge sets and Jaccard values. All tables in
+Chapter~\ref{sec:evaluation} are generated by a single script from these
+artifacts, so that every reported number is reproducible from the logged runs
+without further API calls.
+
+The complete implementation, the run logs of all reported experiments, the
+reference annotation, and the table generation script are available from the
+author on request. The UKP corpus itself is not redistributed and must be
+obtained from its original authors under their license agreement.
+
+\section{Algorithm and Proof Sketch for the Grounded-First Reduction}
+\label{sec:appendix:proof}
+
+Algorithm~\ref{alg:method:solver} summarises the grounded-first solving
+procedure of Section~\ref{sec:method:solver}.
+
+\begin{algorithm}[tb]
+\caption{Grounded-first solving with undecided-core guard}
+\label{alg:method:solver}
+\begin{algorithmic}[1]
+\Require framework $AF = \langle \mathcal{A}, \mathcal{R} \rangle$,
+  bound $\mathit{MaxU}$
+\Ensure grounded extension $G$, preferred set $\mathcal{P}$,
+  stable set $\mathcal{S}$
+\State $G \gets \emptyset$
+\Repeat \Comment{fixed-point iteration, polynomial}
+  \State $G \gets F_{AF}(G)$
+\Until{$G$ unchanged}
+\State $U \gets \{x \in \mathcal{A} \mid x \notin G \text{ and no }
+  g \in G \text{ attacks } x\}$
+\If{$|U| > \mathit{MaxU}$}
+  \State \Return $(G, \bot, \bot)$
+    \Comment{enumeration skipped, only grounded reported}
+\EndIf
+\State $\mathcal{P}_U \gets$ maximal admissible subsets of $AF|_U$, with
+  attacks from outside $U$ discounted as neutralised
+\State $\mathcal{S}_U \gets$ conflict-free $E \subseteq U$ that attack every
+  $x \in U \setminus E$
+\State \Return $(G,\; \{G \cup E \mid E \in \mathcal{P}_U\},\;
+  \{G \cup E \mid E \in \mathcal{S}_U\})$
+\end{algorithmic}
+\end{algorithm}
+
+The rest of this section gives the proof sketch for
+Proposition~\ref{prop:method:reduction}, which states that the
+$\sigma$-extensions of $AF$ for
+$\sigma \in \{\text{complete}, \text{preferred}, \text{stable}\}$ are exactly
+the sets $G \cup E$ where $E$ is a $\sigma$-extension of the framework
+restricted to the undecided core $U$.
+
+\begin{proof}[Proof sketch]
+Let $S$ be a complete extension of $AF$. Since the grounded extension is the
+least complete extension, $G \subseteq S$, and conflict-freeness excludes from
+$S$ every argument attacked by $G$, so $S = G \cup E$ for some $E \subseteq U$.
+By definition of $U$, no attacker of an argument in $U$ lies in $G$, so every
+attacker of an argument in $E$ is either attacked by $G$, and hence neutralised
+in $S$, or lies in $U$ itself. Defense within $S$ therefore coincides with
+defense within the discounted restriction to $U$. In the other direction,
+$G \cup E$ is conflict-free for every conflict-free $E \subseteq U$, because an
+attacker of a member of $G$ is itself attacked by $G$ and therefore lies
+outside $U$, and the same case analysis shows that $G \cup E$ is complete in
+$AF$ whenever $E$ is complete in the restriction. Together,
+$S \mapsto S \setminus G$
+is a one-to-one correspondence between the complete extensions of $AF$ and
+those of the restriction. Preferred extensions are the maximal complete ones,
+and the correspondence preserves inclusion, which settles the preferred case.
+For the stable case, an argument outside $G \cup E$ is either attacked by $G$
+or lies in $U \setminus E$, where stability of $E$ in the restriction requires
+an attack from $E$, so $G \cup E$ attacks every outside argument, and the
+converse direction follows by restricting a stable extension of $AF$ to $U$.
+\end{proof}

@@ -4,37 +4,73 @@
 \label{sec:conclusion}
 
 This thesis presented an end-to-end pipeline that turns natural-language debate
-text into a formally evaluated Dung argumentation framework, from categorized
+text into a formally evaluated Dung argumentation framework, from typed
 attack extraction through confidence filtering to a Prolog solver under grounded,
 preferred, and stable semantics.
 
 Returning to the research questions, RQ1 is answered in the affirmative. The
-pipeline runs end to end across eight topics and produces well-defined frameworks
-whose extensions can be computed in a fraction of a second per topic thanks to
-the grounded-first reduction. RQ4 is answered by the cross-topic analysis. All
-frameworks are cyclic, and six of eight admit several preferred and stable
-extensions, so the formal layer can make explicit several internally consistent
-positions that the raw argument set leaves implicit, although its advantage over
-the grounded extension is uneven across topics. The answers to RQ2 and RQ3 rest
-on the typed-versus-binary ablation and the gold-standard evaluation, which are
-set up in Chapter~\ref{sec:evaluation} and will be completed before submission.
+pipeline runs end-to-end across eight UKP topics and an LLM-generated setting,
+and it produces well-defined frameworks whose extensions are computed in a
+fraction of a second per topic thanks to the grounded-first reduction, since
+the undecided cores never exceeded nine arguments in the evaluation.
 
-% TODO: nach Durchfuehrung der Experimente die Antworten auf RQ2 und RQ3 hier
-% konkret zusammenfassen.
+RQ2 is answered by the ablation. Typed and binary prompting extract
+substantially different attack sets on identical atomized arguments, with
+directed Jaccard similarities between 0.08 and 0.71, so the categorization
+changes what the model asserts rather than rephrasing it. The structural effect
+on the frameworks, however, runs entirely through rebuttal symmetrization.
+Without the symmetrized edges, typed and binary frameworks alike collapse to a
+single extension on every topic. Typing also changes the error profile, since
+on the affected topics it suppresses most of the implausible same-stance
+attacks that the binary prompt accepts, while introducing failure modes of its
+own. The evaluation against the manual reference annotation confirms that this
+filtering pays off in accuracy.
+
+RQ3 is answered by the reference evaluation on the frozen Nuclear Energy
+atom set. The typed arm recovers twelve of the sixteen manually annotated
+directed attacks at a precision of 0.522, a directed F1 of 0.615 against 0.458
+for the binary arm, with a spread of 0.579 to 0.615 across three repeated runs
+of the same configuration. The errors are systematic rather than random. The
+false positives assert attacks across sub-topic boundaries that the strict
+object reading of the annotation guidelines excludes, and the missed attacks
+concentrate on hedged contradictions. Typed extraction is thus measurably
+closer to the manual annotation than the binary baseline.
+
+RQ4 is answered by the cross-topic analysis. Five of eight topics admit
+several preferred and stable extensions, and the formal layer makes explicit
+several internally consistent positions that the raw argument set leaves
+implicit. The advantage of the enumeration over the
+grounded extension varies across topics, since on three topics the grounded
+extension already decides every argument.
 
 Overall the results demonstrate the feasibility of integrating modern language
 models with established formal argumentation, and they suggest that formal
 semantics can provide a transparent reasoning layer on top of LLM-generated
-argumentative content.
+argumentative content, provided that the modelling decisions which create the
+formal structure, above all the treatment of rebuttals, are made explicit and
+kept under experimental control.
 
 \section{Future Work}
 \label{sec:conclusion:future}
 
-Several directions remain open. The extraction quality should be evaluated
-against annotated subtask datasets beyond the single gold standard used here.
-The typed attacks and confidence scores, which the current pipeline discards
-when converting to binary facts, could be used directly by a richer formalism
-such as ASPIC+ or a quantitative bipolar framework. Finally, the pipeline should
-be compared qualitatively against other methods, including a standalone LLM asked
-to summarise the positions in a debate, and across several models rather than a
-single one.
+Several directions remain open. The most immediate one is to broaden the
+empirical basis. The extraction quality should be evaluated against annotated
+datasets beyond the single-topic manual annotation of this thesis, ideally
+with a second annotator so that inter-annotator agreement can be reported, and
+the experiments should be repeated across several models to separate
+pipeline-specific from model-specific behaviour.
+
+A second direction deepens the symbolic reasoning side. The typed attacks and confidence
+scores, which the current pipeline retains only as metadata outside the formal
+semantics, could be consumed directly by a richer formalism such as ASPIC+ or
+a weighted bipolar framework, and the symmetrization decision could be made
+confidence-dependent instead of unconditional.
+
+A third direction concerns the pipeline in use. The exhaustive pairwise
+querying bounds it to small argument sets, so scaling to realistic debates
+with hundreds of arguments depends on the cheaper candidate prescreening
+sketched in Section~\ref{sec:discussion:tradeoffs}, whose price in missed
+conflicts would itself have to be measured. The pipeline should also be
+compared qualitatively against a standalone LLM that is asked to summarise the
+coherent positions of a debate, which would test whether the formal extensions
+capture positions that free generation misses.

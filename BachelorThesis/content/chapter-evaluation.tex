@@ -5,12 +5,13 @@
 
 This chapter evaluates the pipeline. Section~\ref{sec:evaluation:setup} describes
 the experimental setup. Section~\ref{sec:evaluation:crosstopic} reports the
-cross-topic results over the eight UKP topics (RQ1, RQ4).
-Section~\ref{sec:evaluation:ablation} compares typed against binary prompting
-(RQ2), and Section~\ref{sec:evaluation:gold} evaluates the attack quality against
-a manual gold standard (RQ3). Section~\ref{sec:evaluation:case} works through a
-small case study, and Section~\ref{sec:evaluation:errors} analyses the recurring
-error types.
+cross-topic results over the eight UKP topics (RQ1, RQ4), and
+Section~\ref{sec:evaluation:llm} adds a qualitative check on LLM-generated
+arguments. Section~\ref{sec:evaluation:ablation} compares typed against binary
+prompting (RQ2), and Section~\ref{sec:evaluation:gold} describes the
+evaluation of the attack quality against a manual reference annotation (RQ3).
+Section~\ref{sec:evaluation:case} closes the chapter with a small case study
+and an analysis of the recurring error types.
 
 \section{Experimental Setup}
 \label{sec:evaluation:setup}
@@ -19,131 +20,438 @@ The pipeline is evaluated in two settings. The first starts from argument sets o
 the UKP Sentential Argument Mining Corpus~\cite{stab2018}, which provides
 sentence-level stance annotations for eight controversial topics. Each sentence
 is labelled \texttt{Argument\_for}, \texttt{Argument\_against}, or
-\texttt{NoArgument}. The \texttt{NoArgument} sentences are discarded and the test
-splits are used. For each topic a balanced sample of pro and con arguments is
-drawn with a fixed random seed for reproducibility. The second setting uses
-LLM-generated arguments on the topic of allowing autonomous vehicles in public,
-with ten pro and ten con arguments. Since the generation prompt already
-constrains each argument to a single claim, atomization is skipped in that
-setting.
+\texttt{NoArgument}. The \texttt{NoArgument} sentences are discarded and the
+test splits are used. Table~\ref{tab:evaluation:corpus} lists the material
+available per topic. From each topic a balanced sample of 14 arguments, seven
+pro and seven con, is drawn with the fixed random seed 42, so that the sample
+is reproducible. The second setting covers the case the pipeline ultimately
+targets, arguments produced by an LLM, and uses LLM-generated arguments on the
+topic of allowing autonomous vehicles in public, with ten pro and ten con
+arguments. Since the generation prompt already constrains each argument to a
+single claim, atomization is skipped in that setting. The corpus setting
+carries the quantitative evaluation, because its arguments are not produced by
+the model under test and therefore provide an independent reference, while the
+generated setting is a qualitative demonstration that the same pipeline runs
+on LLM-produced input, as Section~\ref{sec:evaluation:llm} discusses.
 
-In both settings the extractor and the verifier call the open-weight model
-GPT-OSS-120B at temperature zero, with argument pairs processed in batches of
-$b = 10$. Candidates are accepted at confidence $c \geq \theta_{\text{acc}} = 70$,
-forwarded to the verifier at $50 = \theta_{\text{ver}} \leq c < 70$, and rejected
-below $\theta_{\text{ver}}$. All runs are logged with their configuration, seed,
-and per-pair decisions, so that every number reported here can be traced back to
-a concrete run.
+\begin{table}[tb]
+  \centering
+  \caption{Arguments available in the UKP test splits after discarding
+  \texttt{NoArgument} sentences. The evaluation samples seven pro and seven con
+  arguments per topic with seed 42.}
+  \label{tab:evaluation:corpus}
+  \input{tables/tab-corpus}
+\end{table}
+
+In both settings the extractor and the verifier call
+GPT-OSS-120B~\cite{gptoss2025}, an open-weight mixture-of-experts model with
+117 billion parameters, through a university-hosted endpoint at temperature
+zero, with argument pairs processed in batches of $b = 10$. Candidates are accepted at
+confidence $c \geq \theta_{\text{acc}} = 70$, forwarded to the verifier at
+$\theta_{\text{ver}} \leq c < \theta_{\text{acc}}$ with
+$\theta_{\text{ver}} = 50$, and rejected below $\theta_{\text{ver}}$. Since
+the model is open weight, the experiments do not depend on a proprietary
+service remaining available or unchanged, and the same weights can in
+principle be redeployed by anyone.
+
+The reproducibility discussion in Section~\ref{sec:foundations:llm} shapes
+the setup in two ways. Atomization is not perfectly deterministic even at
+temperature zero and produced 21 atoms in one run and 22 in another for the
+same topic despite identical inputs and seed, so each topic is atomized
+exactly once and all experiments on it, including both arms of the ablation
+and the reference annotation, operate on the same frozen atom set. For the same
+reason, the cross-topic and ablation numbers stem from one canonical batch of
+runs with one prompt version, and the reference evaluation scores of
+Section~\ref{sec:evaluation:gold} from one dedicated run with the final
+prompt revision, so that no table mixes results from different prompt
+wordings. The logging infrastructure of Section~\ref{sec:method:logging}
+ties every reported number to a concrete run.
 
 \section{Cross-Topic Results}
 \label{sec:evaluation:crosstopic}
 
 Table~\ref{tab:evaluation:crosstopic} reports, for each of the eight UKP topics,
-the number of atomic arguments, the number of queried pairs, the number of
-accepted attacks and their share among all pairs, whether the framework contains
-a cycle, the size of the grounded extension, and the numbers of preferred and
-stable extensions.
+the number of atomic arguments after atomization, the number of queried pairs,
+the number of accepted attacks and their share among all queried pairs, the
+number of isolated atoms without any incident attack, the size of the grounded
+extension, the size of the undecided core $|U|$ from
+Section~\ref{sec:method:solver}, and the numbers of preferred and stable
+extensions.
 
-\begin{table}[t]
+\begin{table}[tb]
   \centering
-  \caption{Cross-topic results over the eight UKP topics. ``Acc'' is the number
-  of accepted attacks, that is the edges of the framework, and ``Acc\%'' is their
-  share among all queried pairs. ``Cyc'' indicates a cycle, ``Grnd'' is the size
-  of the grounded extension, and \#Pr and \#St are the numbers of preferred and
-  stable extensions.}
+  \caption{Cross-topic results over the eight UKP topics. ``Atoms'' is the
+  number of atomic arguments after atomization, and ``Pairs'' is the number of
+  queried pairs, excluding pairs of atoms that stem from the same source
+  argument. ``Acc'' is the number
+  of accepted attacks, that is the edges of the framework, and ``Acc\%'' is
+  their share among all queried pairs. ``Iso'' counts atoms without incident
+  attacks, ``Grnd'' is the size of the grounded extension, $|U|$ the size of
+  the undecided core, and \#Pr and \#St the numbers of preferred and stable
+  extensions.}
   \label{tab:evaluation:crosstopic}
-  \begin{tabular}{lrrrrcrrr}
-    \toprule
-    Topic & Atoms & Pairs & Acc & Acc\% & Cyc & Grnd & \#Pr & \#St \\
-    \midrule
-    Abortion          & 25 & 272 & 20 &  7.4 & yes & 12 & 2 & 2 \\
-    Cloning           & 16 & 118 & 34 & 28.8 & yes &  5 & 1 & 1 \\
-    Death Penalty     & 18 & 148 & 47 & 31.8 & yes &  2 & 3 & 3 \\
-    Gun Control       & 23 & 244 & 20 &  8.2 & yes & 12 & 3 & 3 \\
-    Marijuana Legal.  & 21 & 199 & 10 &  5.0 & yes & 16 & 2 & 2 \\
-    Minimum Wage      & 22 & 221 & 55 & 24.9 & yes &  6 & 3 & 3 \\
-    Nuclear Energy    & 20 & 183 & 35 & 19.1 & yes & 10 & 3 & 3 \\
-    School Uniforms   & 21 & 202 & 28 & 13.9 & yes & 14 & 1 & 1 \\
-    \bottomrule
-  \end{tabular}
+  \small
+  \input{tables/tab-crosstopic}
 \end{table}
 
-Two observations stand out. First, every framework contains cycles, a direct
+Three observations stand out. Every framework contains cycles, a direct
 consequence of the rebuttal symmetrization described in
-Section~\ref{sec:foundations:typology}. Second, six of the eight topics admit
+Section~\ref{sec:foundations:typology}, since every topic has at least three
+symmetrized rebuttal edges (column ``Sym'' of
+Table~\ref{tab:evaluation:types}) and each symmetrized pair forms a two-cycle.
+Five of the eight topics admit
 several preferred extensions, and the number of stable extensions matches the
-number of preferred extensions in every case. Only Cloning and School Uniforms
-reduce to a single extension. These multiple positions are not asserted by a free
-generation. They are derived from the model's own pairwise attack judgments
-through the fixed semantics, and each is conflict-free and admissible by
-construction. The acceptance rate varies widely, from 5.0 percent for Marijuana
-Legalization to 31.8 percent for Death Penalty, which reflects genuine
-differences in how directly the sampled arguments engage each other.
+number of preferred extensions in every case. So although
+Section~\ref{sec:foundations:aaf} shows that stable extensions can fail to
+exist, here every preferred extension is also stable. Each maximal position
+attacks everything it does not contain, and none of the extracted frameworks
+behaves like the odd-length cycle of Figure~\ref{fig:foundations:example}, whose
+undecided conflicts leave no stable extension. These multiple positions are not
+asserted by a free generation. They are derived from the model's own pairwise
+attack judgments through the fixed semantics, and each is conflict-free and
+admissible by construction. The undecided core, finally, stays small
+everywhere, with at most nine arguments, which confirms the sparsity
+assumption behind the grounded-first reduction. On three topics the grounded extension already
+decides every argument and $U$ is empty, so the formal layer adds nothing
+beyond the cautious core there. The acceptance rate varies widely, from 12.8
+percent for Gun Control to 45.9 percent for Death Penalty, which reflects
+genuine differences in how directly the sampled arguments engage each other.
+
+A closer look at Abortion, the topic with the most extensions, shows what the
+multiple positions look like. All four preferred extensions share the grounded
+core of seven arguments and differ only on the undecided core of nine. Notably,
+the extensions do not split cleanly along the pro and con labels of the corpus.
+One extension combines several con arguments about ending abortion through
+legislation with a pro argument that concedes state regulation after fetal
+viability, while another accepts only additional pro arguments. The formal
+layer thus recovers positions that are finer-grained than the binary stance
+annotation, separating, for instance, a legally framed camp from a
+morally framed one. At the same time, two of the undecided arguments are
+defective atoms in the sense of Section~\ref{sec:evaluation:errors}, so part of
+the multiplicity on this topic rests on atoms that a cleaner atomization would
+have removed. Both faces of the result, genuinely finer positions and
+inflation through defective atoms, recur throughout the error analysis.
+
+\begin{table}[tb]
+  \centering
+  \caption{Composition of the accepted attacks per topic. ``Reb'', ``Und'', and
+  ``Cut'' count edges labelled rebuttal, undermining, and undercutting,
+  including symmetrized reverse edges. ``Sym'' is the number of edges added by
+  rebuttal symmetrization and is contained in ``Reb''. ``Ver'' counts
+  candidates that were accepted only after verification. ``Extract'' is the
+  wall-clock extraction time in seconds. The three type counts per topic sum
+  to the Acc column of Table~\ref{tab:evaluation:crosstopic}.}
+  \label{tab:evaluation:types}
+  \input{tables/tab-types}
+\end{table}
+
+Table~\ref{tab:evaluation:types} breaks the accepted attacks down by type.
+Undermining is the most common label overall, which fits the corpus, since many
+UKP sentences report evidence and statistics that target the premises of
+opposing claims rather than negating their conclusions outright. Undercutting
+is the rarest label on most topics. The distribution varies strongly by topic.
+Abortion and Marijuana Legalization are rebuttal-heavy, and on Abortion 15 of
+the 41 edges exist only through symmetrization, which foreshadows the error
+analysis in Section~\ref{sec:evaluation:errors}. Verification adds few edges.
+Across all eight topics, 68 of the 1603 queried pairs were routed to the
+verifier, which rejected 62 of them and confirmed six, so the extractor's
+confidence scores separate clear accepts from
+clear rejects for about 96 percent of the queried pairs. Extraction takes between
+two and eight minutes per topic and is dominated by API latency, while solving
+all three semantics takes under half a second per topic thanks to the
+grounded-first reduction.
+
+\section{The LLM-Generated Setting}
+\label{sec:evaluation:llm}
+
+The second setting feeds twenty LLM-generated arguments on autonomous vehicles
+through the same extraction and solving stages. Of the 190 queried pairs, 37
+are accepted as attacks, an acceptance rate of 19.5 percent that lies within
+the range of the UKP topics in Table~\ref{tab:evaluation:crosstopic}. The
+resulting framework is cyclic, yet the grounded extension already accepts or
+attacks every argument, so all three semantics coincide on a single extension
+of ten arguments. It contains eight of the ten con arguments but only the two
+pro arguments that participate in no attack at all, so the extraction judges
+the con side dominant on this generated argument set. The setting is a
+qualitative check rather than a second evaluation, since the arguments, the
+attacks, and the confidence scores all originate from the same model and the
+run predates the final prompt revision. It shows that the pipeline runs
+end-to-end on generated input and that generated argument sets, which are cleaner and
+more uniform than corpus sentences, tend to be decided completely by the
+grounded extension.
 
 \section{Typed versus Binary Prompting}
 \label{sec:evaluation:ablation}
 
-% ==================================================================
-% PLATZHALTER: dieses Experiment ist noch nicht durchgefuehrt (RQ2).
-% Inhalt nach Durchfuehrung: zweiter binaerer Extraktions-Arm auf
-% identischer Atom-Menge, Jaccard der Attack-Mengen (vor und nach
-% Symmetrisierung), Effekt auf #grounded/#preferred/#stable je Topic,
-% aggregierte Tabelle ueber die acht Themen.
-% ==================================================================
-
 This section measures whether the typed attack prompting of
-Section~\ref{sec:method:extraction}, which the paper advertises as its central
-contribution, actually produces different or more reliable attacks than plain
-binary prompting. A second extraction arm runs the identical atomized argument
-set $\mathcal{A}'$ through a binary prompt that asks only whether an attack
-exists, without the attack type and without the Pollock definitions. The two
-resulting attack sets are compared per topic by their Jaccard similarity, both on
-the raw directed edges before symmetrization and on the final edges, and both
-frameworks are solved to compare the numbers of grounded, preferred, and stable
-extensions.
+Section~\ref{sec:method:extraction} actually produces different attack
+relations than plain binary prompting, and what the difference does to the
+resulting frameworks. A second extraction arm runs the identical frozen atom
+set $\mathcal{A}'$ of every topic through a binary prompt that asks only
+whether an attack exists and in which direction, without the attack type,
+without the type definitions of Section~\ref{sec:foundations:typology}, and
+without the two rebuttal rules of Section~\ref{sec:method:extraction}. Since the binary arm produces no type
+labels, no rebuttal symmetrization is possible there. To separate the effect of
+the categorization from the effect of symmetrization, a third arm is evaluated
+that takes the typed attack set but drops the symmetrized reverse edges. This
+arm, called typed-raw, requires no additional extraction, only a second solver
+run on the reduced edge set.
 
-\emph{This experiment is planned and not yet carried out. Results and the
-corresponding table will be added here.}
+The overlap of two edge sets $E_1$ and $E_2$ is measured by their
+\emph{Jaccard similarity}
+\begin{equation*}
+J(E_1, E_2) = \frac{|E_1 \cap E_2|}{|E_1 \cup E_2|},
+\end{equation*}
+which is 1 for identical and 0 for disjoint sets. It is computed twice, once
+on the directed edges and once on undirected conflict pairs, where each edge
+is collapsed to the unordered pair of its endpoints. The undirected variant
+asks the weaker question whether the two arms mark the same pairs as
+conflicting at all, regardless of the asserted direction.
 
-\section{Attack Quality against a Gold Standard}
+\begin{table}[tb]
+  \centering
+  \caption{Typed versus binary prompting on identical atom sets. ``$|E|$''
+  columns give the number of accepted directed edges for the typed arm, the
+  typed arm without symmetrized edges (raw), and the binary arm.
+  ``$J$'' columns give the Jaccard similarity of typed-raw and binary edge
+  sets, directed and undirected. \#Pr counts preferred extensions per arm, and
+  the numbers of stable extensions are identical to \#Pr in every cell.
+  ``Same-st.'' counts accepted attacks between arguments of the same stance,
+  for the typed arm on the final edge set including symmetrized edges.}
+  \label{tab:evaluation:ablation}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \input{tables/tab-ablation}
+\end{table}
+
+Table~\ref{tab:evaluation:ablation} summarises the comparison. Three findings
+emerge.
+
+\paragraph{The two prompts extract substantially different attack sets.}
+The directed Jaccard similarity between the typed-raw and binary edge sets
+ranges from 0.08 to 0.71 with a mean around 0.4. Even on Death Penalty, the
+topic with the highest agreement, more than a quarter of the union of both edge
+sets is found by only one arm. On Abortion the two arms are nearly disjoint,
+with only five shared edges out of 26 typed-raw and 39 binary edges. The typed
+arm accepts more raw edges on five of the eight topics, the two arms tie on
+Gun Control, and the binary arm
+accepts more on Abortion and School Uniforms. Asking for the attack type
+therefore changes which conflicts the model asserts rather than rephrasing the
+same judgment.
+
+\paragraph{Multiple extensions come from symmetrization, not from typing
+itself.}
+On the final typed frameworks, five of eight topics admit several preferred
+extensions. On the typed-raw frameworks, every topic collapses to exactly one
+preferred and one stable extension, the same count as the binary arm. The
+multiplicity of positions that Section~\ref{sec:evaluation:crosstopic} reports
+is thus produced entirely by the mutual attack edges that rebuttal
+symmetrization adds, a mechanism that is only available when the extraction
+knows which edges are rebuttals. What this dependence on one modelling
+decision means for the value of the formal layer is discussed in
+Section~\ref{sec:discussion:value}.
+
+\paragraph{The arms differ in their characteristic false positives.}
+Without a manual reference annotation, edge counts alone cannot say which arm judges more
+accurately, but the accepted same-stance attacks give a diagnostic signal.
+Attacks between arguments of the same stance are possible in principle, yet
+they should be rare in balanced debate samples. The binary arm accepts 14
+same-stance attacks on Abortion and 10 on Minimum Wage, among them a cluster in
+which two statistical claims about abortion frequency attack seven separate
+contra claims about post-abortion experiences, an implausible pattern within
+one stance camp. The typed arm accepts far fewer same-stance attacks on those
+topics, which suggests that forcing the model to name the attack type filters
+out part of this over-triggering. The signal is not uniform, though. On
+Cloning the relation reverses, with seven typed against one binary same-stance
+attack, so the same-stance count is a topic-dependent indicator rather than a
+general proof of the typed advantage. The typed arm has its own failure mode, as
+Section~\ref{sec:evaluation:errors} shows, since several of its Abortion edges
+attack atoms that are not genuine arguments in the first place. Which of the
+two error profiles weighs heavier is exactly the question the manual annotation of
+the next section is designed to answer.
+
+\section{Attack Quality against a Manual Reference Annotation}
 \label{sec:evaluation:gold}
 
-% ==================================================================
-% PLATZHALTER: dieses Experiment ist noch nicht durchgefuehrt (RQ3).
-% Inhalt nach Durchfuehrung: ein Topic, ~100 manuell annotierte Paare,
-% Precision/Recall/F1 der Attack-Detektion, ggf. getrennt nach Typ,
-% Einordnung gegen die ~67% F1 aus Kramer et al.
-% ==================================================================
+The ablation shows that typed and binary prompting extract different attack
+sets, but it cannot decide which set is closer to the truth. To answer that, a
+manually annotated reference set is constructed on the Nuclear Energy topic. The frozen
+atom set of the canonical run, 21 atoms, yields 201 argument pairs after
+excluding pairs that share a source argument, exactly the pair set the
+extraction judges. Every pair is annotated by hand with one of four labels,
+namely no attack, A attacks B, B attacks A, or mutual attack, following written
+guidelines based on the attack definitions of Pollock and
+ASPIC+~\cite{pollock1992, modgil2014}. A validation script checks that the
+annotated pair set matches the queried pair set exactly and that all labels are
+well-formed. The annotation records only the existence and direction of an
+attack, not its type. Assigning types by hand would have required
+premise-level judgments for every pair from a single annotator, and the
+reference is meant to measure attack detection, on which the typed and the
+binary arm can be compared directly, rather than type assignment.
 
-To move from feasibility to a measurable quality statement, one topic is
-annotated by hand at the level of argument pairs, and the pipeline's attack
-decisions are scored against this gold standard in terms of precision, recall,
-and F1. The result is placed next to the F1 around 67 percent reported by
-Kramer et al.~\cite{kramer2021} on the same corpus.
+The guidelines instruct the annotator to settle the attack question before the
+direction question and to judge every claim for the object it names as
+written. A safety claim about one subsystem, for example waste storage, is not
+read as a claim about the whole nuclear operation, so a conflict that only
+arises after widening a claim to an object it does not name is labelled as no
+attack. An attack may rest on a minimal implicit premise, but not on such an
+object switch. Borderline decisions are recorded in a note column and revisited
+for consistency before the labels are frozen. The final annotation labels 190
+pairs as no attack, 6 pairs as one-directional attacks, and 5 pairs as mutual
+attacks, which yields 16 directed reference edges and 11 undirected conflict pairs.
+Genuine conflicts are therefore rare, only about one pair in eighteen carries
+an attack at all, and this sparsity is worth keeping in mind when reading the
+scores, since every single reference edge moves recall by six points.
 
-\emph{This experiment is planned and not yet carried out. Results will be added
-here.}
+Both extraction arms are then scored against the reference labels, so that the
+reference annotation simultaneously provides the quality measurement for RQ3 and the
+missing reliability comparison for RQ2. An extracted attack that the reference
+annotation confirms is a true positive (TP), an extracted attack that the reference
+annotation rejects is a false positive (FP), and an annotated attack that the
+extraction misses is a false negative (FN). The evaluation reports
 
-\section{Case Study: Nuclear Energy}
+\begin{equation*}
+\text{precision} = \frac{TP}{TP + FP}, \qquad
+\text{recall} = \frac{TP}{TP + FN}, \qquad
+\text{F1} = \frac{2 \cdot \text{precision} \cdot \text{recall}}
+                 {\text{precision} + \text{recall}},
+\end{equation*}
+
+\noindent
+that is, the share of extracted attacks that are genuine, the share of genuine
+attacks that are found, and their harmonic mean. All three are computed on the
+attack class, both for directed edges and for undirected conflict pairs.
+Following the metric argument of Section~\ref{sec:related:ukp}, accuracy is
+deliberately not reported. About 46 percent of the 201 pairs connect arguments
+of the same stance, and since genuine same-stance attacks are rare, a majority
+of easy negatives would inflate accuracy without saying anything about the
+quality of the extracted attacks. Precision, recall, and F1 do not contain the
+true negatives in their formulas, so including the same-stance pairs makes the
+evaluation stricter rather than more lenient, because every accepted
+same-stance attack that the reference annotation rejects counts as a false positive.
+
+The scored predictions come from a dedicated evaluation run that executes both
+extraction arms on the identical frozen atom set with the final revision of
+the typed and verifier prompts. This revision, made after the ablation batch
+of Section~\ref{sec:evaluation:ablation}, adds an explicit test that two
+claims which can both be true without tension do not attack each other,
+whatever their stances, and it requires an undermining attack to name the
+premise it hits. The typed arm accepts 23
+directed edges in this run against 43 in the ablation batch, which is why the
+edge counts differ from the Nuclear Energy row of
+Table~\ref{tab:evaluation:ablation}. The binary prompt is identical in both
+batches, and its count still moves from 27 to 32 edges through the
+run-to-run nondeterminism discussed in Section~\ref{sec:evaluation:setup}.
+The first difference illustrates the prompt sensitivity and the second the
+residual nondeterminism that Section~\ref{sec:discussion:threats} discusses
+among the limitations. Scoring happens on
+three levels. The directed final level compares all accepted edges including
+the symmetrized reverse edges against the 16 directed reference edges. The directed
+raw level drops the symmetrized edges and asks how well the model asserts
+directions on its own. The undirected level collapses edges to conflict pairs
+and compares them against the 11 reference pairs. Since the binary arm produces no
+type labels, its raw and final edge sets coincide.
+Table~\ref{tab:evaluation:gold} shows the results.
+
+\begin{table}[tb]
+  \centering
+  \caption{Precision, recall, and F1 of both extraction arms against the
+  manual reference annotation on Nuclear Energy. ``$n$'' is the number of predicted edges or
+  pairs, TP the number of true positives. The reference annotation contains 16
+  directed edges and 11 undirected conflict pairs.}
+  \label{tab:evaluation:gold}
+  \small
+  \input{tables/tab-gold}
+\end{table}
+
+\paragraph{Overall performance.}
+The reference evaluation resolves the question that the ablation left open. The typed
+arm outperforms the binary arm on every level, with a directed F1 of 0.615
+against 0.458. The difference is driven by precision. The binary arm finds
+every annotated conflict pair, a recall of 1.000 on the undirected level, but it
+asserts almost three times as many conflict pairs as the reference annotation
+contains, so the 11 genuine conflicts are buried among 21 spurious ones. The
+typed arm asserts fewer edges and a larger share of them is genuine. This
+confirms by direct measurement what the same-stance diagnostic of
+Section~\ref{sec:evaluation:ablation} could only suggest, namely that requiring
+the model to name an attack type acts as a precision filter. The symmetrized
+rebuttal edges also earn their place, since they lift the typed directed F1
+from 0.514 to 0.615 by supplying reverse directions of mutual conflicts that
+the model does not assert on its own. The binary arm has no access to this
+mechanism, and all five of its missed directed edges are reverse directions
+of mutual reference pairs whose forward direction it does assert.
+
+\paragraph{False positives.}
+The false positives of both arms follow one dominant pattern. The model
+accepts attacks between claims that belong to different sub-topics of the
+debate. A
+representative case is the accepted undermining attack from the atom
+``building a plant with 100\,\% security is technically impossible'' on the
+atom ``storage is safe and secure''. The first claim concerns reactor
+operation and the second waste storage, so under the strict object reading of
+the guidelines the pair is compatible, and an attack only arises after
+widening the security claim to the whole nuclear operation. The same widening
+connects the water-consumption claims to the claim that nuclear is very
+competitive once external costs are accounted. These false positives carry
+confidences up to 90, so raising the acceptance threshold would not remove
+them without also removing genuine attacks. The verification stage, in
+contrast, works in the intended direction, since both candidates it rejected
+in the typed run are pairs that the reference annotation also rejects.
+
+\paragraph{Missed attacks.}
+All four missed directed edges of the typed arm belong to the two mutual reference
+pairs built on the atom ``alternative methods would yield much more
+climate-saving bang for our buck than nuclear power, according to some
+analysts''. The reference annotation treats this claim as directly contradicting
+the atoms ``nuclear is much cheaper than wind or photovoltaic systems'' and
+``if external costs are accounted, nuclear is very competitive'', but the
+model judges both pairs as compatible in every run. A plausible explanation is
+the hedged phrasing, which attributes the comparison to unnamed analysts, so
+the model reads the atom as a report rather than an asserted conclusion.
+Detecting rebuttals between hedged comparative claims is thus the clearest
+remaining recall gap.
+
+\paragraph{Stability and context.}
+Three repeated runs of the evaluated configuration on the frozen atom set yield
+typed directed F1 scores between 0.579 and 0.615, so the typed advantage over
+the binary arm, sixteen points on the evaluated run, clearly exceeds the run to
+run variation. For rough context, the scores lie in a similar range as the
+sentence-level F1 of 67 percent that the knowledge-based system discussed in
+Section~\ref{sec:related:ukp} reaches on the same corpus, on a task that is
+related but not directly comparable~\cite{kramer2021}. In answer to RQ3, the pipeline
+recovers three quarters of the manually annotated attacks with moderate
+precision, its errors are systematic rather than random, and the typed
+extraction arm is measurably closer to the manual annotation than the binary
+baseline.
+
+\section{Case Study and Error Analysis}
 \label{sec:evaluation:case}
+\label{sec:evaluation:errors}
 
-For greater comprehensibility a small nuclear-energy sample is analysed in
-detail. Starting from six balanced UKP arguments, atomization yields eight atomic
-arguments, three pro and five con. Only the sentence about meltdown statistics is
-split, into three separate claims. Of the $\binom{8}{2} = 28$ pairs, 25 are
-queried after skipping pairs of atoms that share a source argument. Six attacks
-are accepted. Rebuttal symmetrization adds two reverse edges, so the framework
-has eight directed attacks, four undermining and four rebuttals.
+To make the pipeline's behaviour and its typical failures concrete, this
+section first works through a deliberately small nuclear-energy sample in full
+detail and then collects the recurring error types that the case study, the
+ablation, and the reference evaluation surface. The sample is a separate illustrative run
+with three pro and three con arguments and is not part of the main
+configuration of Section~\ref{sec:evaluation:setup}, whose frameworks are too
+large to display as a readable graph. Starting from six balanced UKP arguments,
+atomization yields eight atomic arguments, three pro and five con. Only the
+sentence about meltdown statistics is split, into three separate claims, the
+case already shown in Section~\ref{sec:method:atomize}. Of the
+$\binom{8}{2} = 28$ pairs, 25 are queried after skipping pairs of atoms that
+share a source argument. Six attacks are accepted. Rebuttal symmetrization adds
+two reverse edges, so the framework has eight directed attacks, four
+undermining and four rebuttals.
 
-The graph centers on the argument that nuclear power merits support because it is
-virtually CO\textsubscript{2}-free, which the con side attacks from several
-directions. The symmetrized rebuttals make the framework cyclic, which suggests
-that several preferred and stable sets might exist. In this case, however, the
+The graph centers on the argument that nuclear power merits support because it
+is virtually free of CO\textsubscript{2} emissions, which the con side attacks
+from several directions. The symmetrized rebuttals make the framework cyclic, so several preferred
+and stable sets might be expected. In this case, however, the
 grounded extension already terminates by accepting all five con arguments and
 rejecting the entire pro side, so grounded, preferred, and stable coincide on a
 single extension.
 
-\begin{figure}[t]
+\begin{figure}[tb]
   \centering
   \begin{minipage}[c]{0.50\linewidth}
     \centering
@@ -175,7 +483,7 @@ single extension.
   \begin{minipage}[c]{0.48\linewidth}
     \scriptsize
     \begin{tabular}{@{}l@{\ }p{0.76\linewidth}@{}}
-      \texttt{pro4:}   & nuclear is $\text{CO}_2$-free, merits support \\
+      \texttt{pro4:}   & nuclear is $\text{CO}_2$ emission-free, merits support \\
       \texttt{pro82:}  & waste storage is safe and secure \\
       \texttt{pro15:}  & spent-fuel storage is robust \\
       \texttt{con63:}  & nuclear waste is a terrorism risk \\
@@ -192,25 +500,57 @@ single extension.
   \label{fig:evaluation:nuclear}
 \end{figure}
 
-\section{Error Analysis}
-\label{sec:evaluation:errors}
+Beyond this small sample, three recurring error types stand out across the
+experiments, each originating in a different stage of the pipeline.
 
-The case study surfaces two recurring limitations, each from a different stage of
-the pipeline.
-
-First, the attack-type classification can mislabel a premise-directed attack as a
+\paragraph{Rebuttal mislabeling creates unjustified cycles.}
+The attack-type classification can mislabel a premise-directed attack as a
 rebuttal. Since rebuttals are symmetrized into mutual attacks while undermining
 attacks stay directed, a false rebuttal label introduces a bidirectional
-conflict and therefore an unjustified cycle. The meltdown-fatality claims, for
-instance, attack the CO\textsubscript{2} argument as rebuttals, although they
-question its safety premise rather than directly negating its support
-conclusion. An undermining label would have been more suitable and would not have
-added a reverse edge.
+conflict and therefore an unjustified cycle. In the case study, the
+meltdown-fatality claims attack the CO\textsubscript{2} argument as rebuttals,
+although they question its safety premise rather than directly negating its
+support conclusion. An undermining label would have been more suitable and
+would not have added a reverse edge. The reference evaluation run of
+Section~\ref{sec:evaluation:gold} shows both faces of this mechanism on the
+same topic. Three of the four symmetrized edges in that run are confirmed by
+the reference annotation, while the fourth turns a one-directional attack among the
+cost claims into a spurious mutual conflict and enters
+Table~\ref{tab:evaluation:gold} as the false positive with the highest
+confidence of the run. The cost of this error type scales with
+the number of symmetrized edges, which
+Table~\ref{tab:evaluation:types} quantifies. Between 3 and 15 edges per topic
+exist only through symmetrization, and on the rebuttal-heavy Abortion topic
+more than a third of all edges are symmetrized reverse edges. Every unjustified
+mutual attack potentially splits the framework into additional extensions, so
+the multiplicity results of Section~\ref{sec:evaluation:crosstopic} must be
+read with this caveat in mind. The descriptive-versus-normative rule described
+in Section~\ref{sec:method:extraction} was added precisely to curb this error
+type, and its effect on the numbers is part of the prompt-sensitivity
+discussion in Section~\ref{sec:discussion:threats}.
 
-Second, atomization can produce atoms that, read in isolation, no longer carry a
-clear stance and end up neither attacking nor attacked. The claim that two of
-three meltdowns cause no deaths, for example, understates rather than opposes the
-pro side on its own and therefore stays isolated in the graph.
+\paragraph{Atomization produces defective atoms.}
+Atomization can produce atoms that, read in isolation, are not self-contained
+arguments. Three variants occur. Some atoms lose their stance, such as the
+claim that two out of three meltdowns would cause no deaths, which understates
+rather than opposes the pro side and stays isolated in the graph. Some atoms keep an
+unresolved reference despite the self-containment rule, such as the Abortion
+atom ``not all abortions are unjustified according to this argument''. Some
+atoms are not argumentative at all, such as a sentence that merely cites the
+introduction of a legislative act. Table~\ref{tab:evaluation:crosstopic} gives
+an upper bound on the harmless variant, since between 1 and 6 atoms per topic
+end up isolated. The harmful variant is when a defective atom does participate
+in attacks. On Abortion, several edges found only by the typed arm attack
+exactly the two defective atoms above, so extraction errors and atomization
+errors compound.
 
-% TODO: nach dem Gold-Standard die Haeufigkeit dieser Fehlertypen quantifizieren
-% und ueber mehrere Themen statt nur am Nuclear-Beispiel zeigen.
+\paragraph{Binary prompting over-triggers within one stance camp.}
+The third error type is specific to the binary arm. Without the type
+definitions, the model accepts attacks between same-stance arguments far more
+liberally, most visibly in the Abortion cluster already described in
+Section~\ref{sec:evaluation:ablation}, a pattern that the typed prompt largely
+suppresses on the affected topics. This asymmetry of error profiles, spurious
+cycles and defective targets on the typed side against same-stance
+over-triggering on the binary side, is why edge counts alone could not settle
+the comparison, and why the verdict of Section~\ref{sec:evaluation:gold} rests
+on the manual annotation rather than on a metric chosen in either arm's favour.

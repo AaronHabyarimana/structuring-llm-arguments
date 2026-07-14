@@ -6,44 +6,67 @@
 \section{Motivation}
 \label{sec:intro:motivation}
 
-Human argumentation is hard to capture by machines because it does not follow
-the rules of classical logic. Instead of deriving truth from fixed premises, a
-debate consists of arguments and counter-arguments, and evidence enters weighted
-or by comparison with other evidence rather than as a pure fact that is true or
-false. This resembles a verdict that rests on aggravating and mitigating
-circumstances rather than on a single decisive proof. The problem is not narrow
-or merely technical. It connects to deeper questions such as algorithmic
-fairness, the reasoning behaviour of neural models, and the hallucinations of
-language models.
+Human argumentation is hard to capture with classical, deductive logic.
+Instead of deriving truth from fixed premises, a debate proceeds
+through arguments and counter-arguments, where a claim can be accepted or
+defeated depending on which other claims stand against it rather than being
+simply true or false. The same difficulty reappears wherever an automated
+system must decide which of several conflicting claims can be held together,
+most visibly in language models, whose fluent output can assert a conclusion
+that the reasons given do not support.
+
+A concrete debate makes the difficulty tangible. Asked about nuclear energy,
+people argue that nuclear power is nearly carbon-free, that meltdowns are
+statistically rare, that waste storage remains an unresolved safety problem,
+that plants are potential terrorism targets, and that subsidies for nuclear
+power crowd out investment in renewables. These claims attack
+each other in specific and directed ways, and typically more than one
+internally coherent position survives, such as a pro camp built around climate
+benefits and a contra camp built around catastrophic risk. Which claims can be
+held together consistently is a structural question about the debate, and
+answering it requires making the attack relationships explicit.
 
 One established way to formalise arguments is the logic of
 argumentation~\cite{krause1995logic}, which provides a language for representing
-the structure of reasons that support or undercut a line of reasoning. While
-this approach is useful and valid, several open questions remain. In particular,
-it is not clear where arguments and counter-arguments come from in practical
-applications and how they are in fact related. The examples in the literature
-often appear constructed, and providing the arguments frequently seems harder
-than the reasoning over them.
+the structure of reasons that support or undercut a line of reasoning. What
+such formalisms leave open is where the arguments and their relations come
+from in practice, since the examples in the literature often appear
+constructed and providing the arguments frequently seems harder than the
+reasoning over them.
 
-Large language models (LLMs) sit at the opposite end. They can produce reasons
-for or against a cause in fluent natural language, but they lack the formal
-structure that would allow any systematic analysis of how those reasons relate.
-A standalone LLM can be asked to summarise a debate, yet its answer is another
-ungrounded generation without a guarantee of internal consistency. The proposal
-of this thesis is to use the LLM for what it is good at, namely producing
-arguments and identifying their attacks, and to hand the resulting structure to
-a formal layer that is good at reasoning about consistency. The formal layer
-reconstructs deeply layered argumentations and makes explicit which sets of
-arguments can be jointly accepted, a property that the raw LLM output leaves
-implicit.
+Large language models (LLMs) approach the problem from the opposite side. Where
+formal argumentation offers structure without content, LLMs produce content
+without structure. They can generate reasons for or against a cause in fluent
+natural language, but they lack the formal scaffolding that would allow any
+systematic analysis of how those reasons relate. A standalone LLM can be asked
+to summarise the positions in a debate, yet its answer is another ungrounded
+generation without a guarantee of internal consistency. The proposal of this
+thesis is to combine the two sides, using the LLM for what it is good at,
+namely producing arguments and identifying their attacks, and handing the
+resulting structure to a formal layer that is good at reasoning about
+consistency. The formal layer makes explicit which sets of arguments can be jointly
+accepted, a property that the raw LLM output leaves implicit.
 
-\section{Problem Statement and Research Questions}
+The natural target of such a pipeline is argument sets produced by an LLM or
+by any other source, since the pipeline itself is agnostic to where the
+arguments come from. The evaluation
+nonetheless draws its main argument sets from an annotated corpus rather than
+from generation. The reason is methodological. If the same model produced the
+arguments and also made the attacks between them explicit, the input would
+itself be an artefact of the model, and there would be no independent
+reference against which the extracted structure could be checked. Corpus
+arguments fix the input independently of the model and make the comparison
+against a manual annotation possible. A second setting on
+LLM-generated arguments then shows that the same pipeline runs end-to-end on
+generated input.
+
+\section{Research Questions and Contributions}
 \label{sec:intro:rqs}
 
 This thesis builds and evaluates an end-to-end pipeline that turns
-natural-language debate text into a formally evaluated Abstract Argumentation
-Framework (AAF) in the sense of Dung~\cite{dung1995}. An LLM proposes
-categorized attack candidates between arguments, a confidence filter routes them
+natural-language debate text into a formally evaluated abstract argumentation
+framework (AF) in the sense of Dung~\cite{dung1995}. An LLM proposes
+typed attack candidates between arguments, a confidence filter routes them
 to acceptance, rejection, or verification, and a Prolog solver computes grounded,
 preferred, and stable extensions over the accepted attacks.
 
@@ -52,67 +75,51 @@ The work is guided by four research questions.
 \begin{description}
   \item[RQ1 (Feasibility).] Can an end-to-end pipeline be built that turns
     natural-language arguments into formal Dung extensions through LLM-based
-    attack extraction and a symbolic solver, and what do the resulting
-    frameworks look like across a range of debate topics?
+    attack extraction and a symbolic solver?
   \item[RQ2 (Typed vs.\ binary extraction).] Does \emph{typed} attack prompting,
     which forces the model to name the attack type and justify it, produce
     different or more reliable attack relations than plain \emph{binary}
     prompting, and how does this affect the resulting frameworks?
   \item[RQ3 (Extraction quality).] How well do the extracted attacks match a
-    manual gold annotation in terms of precision, recall, and F1, and which
-    error types dominate?
+    manual reference annotation in terms of precision, recall, and F1 score,
+    and which error types dominate?
   \item[RQ4 (Argumentative structure).] What argumentative structures do the
-    formal semantics reveal across the eight UKP topics, in particular regarding
-    cycles and multiple extensions, and when does the formal layer add
+    formal semantics reveal across the eight topics of the UKP corpus
+    (Table~\ref{tab:evaluation:crosstopic}), in particular regarding
+    multiple extensions, and when does the formal layer add
     information beyond the grounded extension?
 \end{description}
 
-\section{Contributions}
-\label{sec:intro:contributions}
+Along these questions the thesis makes four contributions: a complete and
+reproducible implementation of the pipeline, from the atomization of compound
+sentences into single claims through typed attack extraction and confidence
+filtering to a Prolog solver (RQ1), an empirical analysis of the resulting
+frameworks over eight topics of the UKP Sentential Argument Mining
+Corpus~\cite{stab2018} (RQ4), an ablation that compares typed against
+binary attack prompting on identical argument sets and separates the effect of
+the categorization from the effect of rebuttal symmetrization (RQ2), and an
+evaluation of the attack detection against a validated manual
+annotation of all 201 argument pairs of one topic (RQ3).
 
-The thesis makes the following contributions.
-
-\begin{itemize}
-  \item A complete and reproducible pipeline that connects LLM-based argument
-    mining with Dung's abstract argumentation, from atomization through
-    categorized attack extraction and confidence filtering to a Prolog solver.
-  \item An empirical analysis of the resulting frameworks over eight topics of
-    the UKP Sentential Argument Mining Corpus~\cite{stab2018}, reporting
-    framework size, cycles, and the number of grounded, preferred, and stable
-    extensions (RQ1, RQ4).
-  \item An ablation that compares typed against binary attack prompting on an
-    identical argument set, isolating the effect of the categorization that the
-    underlying paper advertises but does not measure (RQ2).
-  \item A small manually annotated gold standard that yields precision, recall,
-    and F1 for the attack detection on one topic (RQ3).
-\end{itemize}
-
-\noindent
 A condensed version of the pipeline and the cross-topic evaluation has been
-submitted to IJCLR. This thesis extends that work with explicit research
-questions, an expanded background, and the two additional experiments for RQ2
-and RQ3.
+submitted to the International Joint Conference on Learning and Reasoning
+(IJCLR 2026). In addition to the material of that submission, this thesis
+contributes explicit research
+questions, an expanded background, the typed-versus-binary ablation, which the
+submission motivates but does not measure, and the manual reference evaluation for
+RQ3.
 
-\section{Thesis Structure}
-\label{sec:intro:structure}
-
-\textbf{Chapter \ref{sec:foundations}} introduces the formal background, namely
-Dung's abstract argumentation frameworks and their semantics, the attack
-typology of Pollock and ASPIC+, and the basics of argument mining and language
-models.
-
-\textbf{Chapter \ref{sec:related}} reviews related work on LLM-based
-argumentation pipelines and positions the thesis against it.
-
-\textbf{Chapter \ref{sec:method}} describes the pipeline in detail, step by step,
-together with the design decisions behind it.
-
-\textbf{Chapter \ref{sec:evaluation}} presents the experimental setup and
-results, including the cross-topic evaluation, the typed-versus-binary ablation,
-the gold-standard evaluation, and a detailed case study.
-
-\textbf{Chapter \ref{sec:discussion}} discusses what the formal layer adds,
-the threats to validity, and the main design trade-offs.
-
-\textbf{Chapter \ref{sec:conclusion}} summarises the answers to the research
-questions and outlines future work.
+The remainder of the thesis is structured as follows.
+Chapter~\ref{sec:foundations} introduces the formal background, namely Dung's
+abstract argumentation frameworks and their semantics, the attack typology of
+Pollock and ASPIC+, and the basics of argument mining and language models.
+Chapter~\ref{sec:related} reviews related work on LLM-based argumentation
+pipelines and positions the thesis against it. Chapter~\ref{sec:method}
+describes the pipeline step by step, together with the design decisions behind
+it. Chapter~\ref{sec:evaluation} presents the experimental setup and results,
+including the cross-topic evaluation, the typed-versus-binary ablation, the
+evaluation against a manually annotated reference, and a case study with an
+analysis of the recurring error types. Chapter~\ref{sec:discussion} discusses what the formal layer
+adds, the limitations of the study, and the main design trade-offs, before
+Chapter~\ref{sec:conclusion} summarises the answers to the research questions
+and outlines future work.

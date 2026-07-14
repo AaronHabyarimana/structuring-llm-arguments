@@ -3,12 +3,12 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Running example of a small argumentation framework. To be replaced with a TikZ figure and a step-by-step computation of the grounded, preferred, and stable extensions.}}{6}{figure.caption.3}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Two small argumentation frameworks. Left: the running example $AF_1$ with a mutual attack between $a$ and $b$. Filled nodes form the grounded extension $\{d, e\}$, and the two preferred extensions $\{a, d, e\}$ and $\{b, d, e\}$ extend it in incompatible ways. Right: the odd-length cycle $AF_2$, whose only complete extension is the empty set and which has no stable extension.}}{6}{figure.caption.4}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Overview of the pipeline, from raw debate text to formally evaluated Dung extensions in five steps.}}{14}{figure.caption.4}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Overview of the pipeline, from raw debate text to formally evaluated Dung extensions in five steps.}}{16}{figure.caption.5}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Attack graph of the small nuclear-energy sample, eight atoms and eight directed edges. Red double arrows are symmetric rebuttals, blue arrows denote undermining attacks. Filled nodes form the grounded extension, which here coincides with the unique preferred and stable extension.}}{19}{figure.caption.6}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Attack graph of the small nuclear-energy sample, eight atoms and eight directed edges. Red double arrows are symmetric rebuttals, blue arrows denote undermining attacks. Filled nodes form the grounded extension, which here coincides with the unique preferred and stable extension.}}{33}{figure.caption.25}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

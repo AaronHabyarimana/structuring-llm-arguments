@@ -1,6 +1,4 @@
-% **************************************************
-% Document Class Definition
-% **************************************************
+
 \documentclass[%
     paper=A4,               % paper size --> A4 is default in Germany
     twoside=true,           % onesite or twoside printing
@@ -18,8 +16,7 @@
     draft=false,            % value for draft version
 ]{scrreprt}%
 
-% \usepackage[utf8]{inputenc} 
-% ! important for correct colors (embeds icc profile used for logos and stuff, otherwise colors wont match)
+
 \usepackage[x-4]{pdfx}%
 \setRGBcolorprofile{FOGRA29_ISOuncoated.icc}{FOGRA29}{cmyk}%
 
@@ -92,16 +89,14 @@
 \setcounter{page}{1}			% set page counter
 \pagestyle{scrheadings}			% header and footer style
 
-%% Uncomment the following lines using the \part command
-%% to add part sections
-%\part{Example Part}
-\input{content/chapter-introduction}   % INCLUDE: introduction
-\input{content/chapter-foundations}    % INCLUDE: background and foundations
-\input{content/chapter-related-work}   % INCLUDE: related work
-\input{content/chapter-method}         % INCLUDE: method / pipeline
-\input{content/chapter-evaluation}     % INCLUDE: evaluation
-\input{content/chapter-discussion}     % INCLUDE: discussion
-\input{content/chapter-conclusion}     % INCLUDE: conclusion
+
+\input{content/chapter-introduction}   
+\input{content/chapter-foundations}    
+\input{content/chapter-related-work}  
+\input{content/chapter-method}         
+\input{content/chapter-evaluation}    
+\input{content/chapter-discussion}   
+\input{content/chapter-conclusion}    
 
 % --------------------------
 % Back matter
@@ -124,11 +119,8 @@
 \listoftables
 \cleardoublepage
 
-\lstlistoflistings
-\cleardoublepage
-
 \appendix\cleardoublepage
-\input{content/chapter-appendix}       % INCLUDE: appendix
+\input{content/chapter-appendix}       
 
 \cleardoublepage
 \input{content/colophon}
@@ -140,7 +132,5 @@
 \newpage
 \mbox{}
 
-% **************************************************
-% End of Document CONTENT
-% **************************************************
+
 \end{document}

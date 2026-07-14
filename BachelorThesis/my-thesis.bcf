@@ -2377,23 +2377,37 @@
     <bcf:citekey order="3" intorder="1">stab2018</bcf:citekey>
     <bcf:citekey order="4" intorder="1">dung1995</bcf:citekey>
     <bcf:citekey order="5" intorder="1">dung1995</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">pollock1992</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">modgil2014</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">dung1995</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">pollock1992</bcf:citekey>
     <bcf:citekey order="8" intorder="1">modgil2014</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">lawrence2019argument</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">li2025large</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">argus</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">argLLMs</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">pirozelli2026llm</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">gorur2025relMining</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">pollock1992</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">stab2018</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">kramer2021</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">alfano2026</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">modgil2014</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">cerutti2014</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">stab2018</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">kramer2021</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">modgil2014</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">lawrence2019argument</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">li2025large</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">sclar2024</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">argus</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">argLLMs</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">pirozelli2026llm</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">gorur2025relMining</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">stab2018</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">kramer2021</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">alfano2026</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">modgil2014</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">cerutti2017</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">baroni2011</bcf:citekey>
+    <bcf:citekey order="22" intorder="2">charwat2015</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">baroni2011</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">baroni2011</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">swiprolog2012</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">stab2018</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">gptoss2025</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">pollock1992</bcf:citekey>
+    <bcf:citekey order="28" intorder="2">modgil2014</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">kramer2021</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">dung1995</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">argus</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">gorur2025relMining</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">argLLMs</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">gptoss2025</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
