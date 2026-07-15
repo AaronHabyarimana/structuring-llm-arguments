@@ -17,7 +17,7 @@ The pipeline combines a large language model with formal argumentation: the LLM 
 ## Requirements
 
 - Python 3.12
-- [SWI-Prolog](https://www.swi-prolog.org/) (the path to `swipl.exe` is set in `code/af_tool.py`)
+- [SWI-Prolog](https://www.swi-prolog.org/) (`swipl` on the PATH, or set the `SWIPL` environment variable to the binary)
 - Access to the JGU Mainz KI-Chat API (model: GPT OSS 120B)
 
 Install the Python dependencies:

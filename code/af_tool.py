@@ -11,13 +11,19 @@ Verwendung:
 """
 
 import json
+import os
 import re
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 CODE_DIR = Path(__file__).parent
-SWIPL = r"C:\Program Files\swipl\bin\swipl.exe"
+
+# SWI-Prolog-Binary: Env-Variable SWIPL > PATH > Windows-Standardpfad
+SWIPL = (os.environ.get("SWIPL")
+         or shutil.which("swipl")
+         or r"C:\Program Files\swipl\bin\swipl.exe")
 
 # Schranke fuer preferred/stable: NICHT die Gesamt-Argumentzahl n (irrelevant —
 # well-founded AFs mit n=60 loesen in 0,12s), sondern die Groesse des
