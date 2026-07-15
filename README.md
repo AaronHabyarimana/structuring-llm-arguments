@@ -40,6 +40,8 @@ The experiments use the UKP Sentential Argument Mining Corpus (Stab et al., 2018
 UKP_sentential_argument_mining/data/
 ```
 
+The run logs under `code/output/` contain the small per-topic samples of sentences drawn for the experiments, as part of the experimental record. The stance annotations included there are released by the corpus authors under a [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/) license (Stab et al., 2018).
+
 ## Usage
 
 All scripts are run from the `code/` directory.
