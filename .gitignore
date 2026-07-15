@@ -22,6 +22,5 @@ code/tmp*.pl
 *.xmpi
 texput.log
 
-# Nicht redistributierbar (Copyright), bleibt nur lokal
 UKP_sentential_argument_mining/
 paper/
