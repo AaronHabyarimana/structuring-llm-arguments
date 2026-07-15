@@ -4,13 +4,22 @@ Bachelor thesis, Johannes Gutenberg University Mainz.
 
 The pipeline combines a large language model with formal argumentation: the LLM extracts and atomizes arguments from debate texts and classifies pairwise attack relations, a Dung-style abstract argumentation framework is then solved with SWI-Prolog (grounded, preferred and stable semantics), and the LLM explains the result in natural language.
 
+## How it works
+
+1. **Argument extraction and atomization.** The LLM reads the sentences of a debate topic and turns them into short, self-contained arguments.
+2. **Attack classification.** For every pair of arguments the LLM decides whether one attacks the other (rebuttal, undermining or undercutting, reduced to a binary attack relation).
+3. **Formal evaluation.** The arguments and attacks form a Dung-style abstract argumentation framework, which is solved with SWI-Prolog under grounded, preferred and stable semantics.
+4. **Explanation.** The LLM translates the solver output (accepted and rejected arguments) back into a natural language summary.
+
+Every stage writes its artifacts to `code/output/runs/<run_id>/`, so each run is fully traceable from raw sentences to the final explanation.
+
 ## Repository layout
 
 | Path | Content |
 |---|---|
 | `code/` | Pipeline, experiment scripts and evaluation |
 | `code/output/` | Experiment runs, aggregates, gold evaluation and thesis tables |
-| `Bachelorthesis/` | LaTeX sources of the thesis |
+| `BachelorThesis/` | LaTeX sources of the thesis, compiled PDF at `BachelorThesis/my-thesis.pdf` |
 | `paper/` | Accompanying paper |
 | `UKP_sentential_argument_mining/` | Place the UKP corpus here (not included, see below) |
 
@@ -70,3 +79,14 @@ Further scripts:
 | `ablation_typed_binary.py` | Ablation: typed vs. binary attack prompts |
 | `make_thesis_tables.py` | Generates the LaTeX tables used in the thesis |
 | `gold_template.py` | Creates annotation templates for the gold standard |
+
+## Reproducing the thesis results
+
+The numbers reported in the thesis are produced by running the scripts in this order from `code/`:
+
+1. `python batch_run.py` runs the full pipeline over all eight UKP topics.
+2. `python aggregate.py` builds the cross-topic aggregate table over all runs.
+3. `python eval_gold.py --run <run_dir>` evaluates a run against the manual gold standard.
+4. `python make_thesis_tables.py` turns the results into the LaTeX tables used in the thesis.
+
+`python ablation_typed_binary.py` additionally reproduces the ablation comparing typed and binary attack prompts. The compiled thesis is included at `BachelorThesis/my-thesis.pdf`.
