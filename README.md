@@ -1,4 +1,4 @@
-# LLM-Based Argument Mining with Formal Argumentation
+# Structuring LLM Arguments: A Logic of Argumentation Based Approach
 
 Bachelor thesis, Johannes Gutenberg University Mainz.
 
