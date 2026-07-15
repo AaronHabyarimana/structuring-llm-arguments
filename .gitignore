@@ -3,3 +3,25 @@
 __pycache__/
 
 code/tmp*.pl
+
+# LaTeX-Build-Artefakte
+*.aux
+*.log
+*.bbl
+*.bcf
+*.blg
+*.fls
+*.fdb_latexmk
+*.toc
+*.lof
+*.lot
+*.lol
+*.out
+*.run.xml
+*.synctex.gz
+*.xmpi
+texput.log
+
+# Nicht redistributierbar (Copyright), bleibt nur lokal
+UKP_sentential_argument_mining/
+paper/
