@@ -41,6 +41,8 @@ Set the API key, either as an environment variable or in a `.env` file in `code/
 KI_API_KEY=<your key>
 ```
 
+An API key can be created at [ki-chat.uni-mainz.de](https://ki-chat.uni-mainz.de) under Settings, Account, create new key.
+
 ## Dataset
 
 The experiments use the UKP Sentential Argument Mining Corpus (Stab et al., 2018). For copyright reasons the corpus is **not** distributed with this repository. It can be requested from the UKP Lab at TU Darmstadt. After obtaining it, place the topic files (e.g. `nuclear_energy.tsv`, `abortion.tsv`, ...) in:
