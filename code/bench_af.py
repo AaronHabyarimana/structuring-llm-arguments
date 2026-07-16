@@ -1,7 +1,24 @@
+"""
+bench_af.py — Laufzeit-Benchmark des Prolog-Solvers auf synthetischen AFs.
+
+Misst, wie die Loesungszeit (grounded/preferred/stable via show_json_full_gf)
+mit der Framework-Groesse und der Zahl ungerichteter Konfliktkerne skaliert:
+  1) well-founded Ketten (U=0): haengt die Laufzeit von n ab?
+  2) k mutuelle 2-Zyklen: #preferred = 2^k (Effekt der Rebuttal-Symmetrisierung)
+  3) realistische Mischung: 35 Atome, Ketten-Mehrheit + kleiner Zyklus-Kern
+
+Kein LLM beteiligt, es wird nur SWI-Prolog aufgerufen. Die swipl-Binary wird
+wie in af_tool.py aufgeloest: Env-Variable SWIPL > PATH > Windows-Standardpfad.
+
+Aufruf (aus code/):
+    python bench_af.py
+
+Output: Tabelle auf der Konsole (Zeit, #preferred, #stable je Testfall).
+"""
 import subprocess, tempfile, time, os, sys, json
 from pathlib import Path
+from af_tool import SWIPL
 
-SWIPL=r"C:\Program Files\swipl\bin\swipl.exe"
 CODE=Path(".").resolve(); PROLOG=str(CODE/"prolog.pl").replace("\\","/")
 
 def run(n, edges, timeout=60):

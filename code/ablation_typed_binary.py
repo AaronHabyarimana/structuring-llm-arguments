@@ -1,11 +1,11 @@
 """
 ablation_typed_binary.py — RQ2-Ablation: typed vs. binary Attack-Prompting.
 
-Fragestellung: Liefert das *kategorisierte* Prompting (rebuttal/undercutting/
-undermining + Begruendung) andere bzw. zuverlaessigere Angriffe als reines
-*binaeres* Prompting (nur Angriff ja/nein + Richtung)?
+Fragestellung: Liefert das typed Prompting (rebuttal/undercutting/
+undermining + Begründung) andere bzw. zuverlässigere Angriffe als reines
+binäres Prompting (nur Angriff ja/nein + Richtung)?
 
-Methodischer Kern: Jedes Topic wird GENAU EINMAL atomisiert. Dieselbe Atom-Menge
+Methodischer Kern: Jedes Topic wird einmal atomisiert. Dieselbe Atom-Menge
 A' geht an beide Extraktions-Arme. Nur so misst der Vergleich den Effekt des
 Prompts und nicht den der Atomisierung.
 
@@ -23,7 +23,7 @@ Artefakte:
 
 Aufruf:
     python ablation_typed_binary.py                      # alle 8 UKP-Topics
-    python ablation_typed_binary.py nuclear_energy        # nur eines (Smoke-Test)
+    python ablation_typed_binary.py nuclear_energy        # nur eines
 """
 
 import csv
@@ -51,9 +51,8 @@ extract.BATCH_SIZE   = 10
 ABLATION_DIR = Path(__file__).parent / "output" / "ablation"
 
 
-# ---------------------------------------------------------------------------
+
 # Kantenmengen und Vergleichsmetriken
-# ---------------------------------------------------------------------------
 
 def _directed_edges(attacks: list[dict], include_symmetric: bool = True) -> set:
     """Gerichtete Kanten (attacker, target). include_symmetric=False blendet die
@@ -94,9 +93,7 @@ def _ext_counts(result: dict) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
 # Ein Arm (typed oder binary) auf gegebener Atom-Menge
-# ---------------------------------------------------------------------------
 
 def _run_arm(args: list[dict], topic_label: str, topic_file: str,
              group_dir: Path, typed: bool) -> dict:
@@ -252,9 +249,7 @@ def resume_topic(group_dir: Path) -> dict:
     return _compare_and_write(group_dir, topic_file, topic_label, atoms, typed, binary)
 
 
-# ---------------------------------------------------------------------------
 # Ein Topic: einmal atomisieren, beide Arme, vergleichen
-# ---------------------------------------------------------------------------
 
 def run_topic(topic_file: str, topic_label: str, ts: str,
               resume: bool = False) -> dict:
@@ -287,9 +282,7 @@ def run_topic(topic_file: str, topic_label: str, ts: str,
     return _compare_and_write(group_dir, topic_file, topic_label, atoms, typed, binary)
 
 
-# ---------------------------------------------------------------------------
 # Cross-Topic-Aggregation
-# ---------------------------------------------------------------------------
 
 def write_aggregate(rows: list[dict]) -> None:
     ABLATION_DIR.mkdir(parents=True, exist_ok=True)

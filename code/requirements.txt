@@ -1,2 +1,9 @@
+# Python 3.12
+#
+# details in the README:
+#   SWI-Prolog: swipl on the PATH, or SWIPL env var pointing to the binary
+#   KI_API_KEY: JGU Mainz KI-Chat API key, as env var or .env file in code/
+#   UKP corpus: place the topic .tsv files in UKP_sentential_argument_mining/data/
+
 openai==2.31.0
 python-dotenv==1.2.2

@@ -21,9 +21,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-# ---------------------------------------------------------------------------
 # Pfade & Run-ID
-# ---------------------------------------------------------------------------
 
 CODE_DIR = Path(__file__).parent
 RUNS_DIR = CODE_DIR / "output" / "runs"
@@ -47,7 +45,6 @@ def generate_run_id(topic_file: str, source: str, seed: int | None) -> str:
 
 # Minimaler JSON-Parser (Duplikat aus extract.py, hier um Zirkular-Import
 # zu vermeiden). Wird nur für best-effort parse_ok in calls.jsonl genutzt.
-# ---------------------------------------------------------------------------
 
 def _best_effort_parse(content: str):
     if not content:
@@ -69,8 +66,6 @@ def _best_effort_parse(content: str):
     return None
 
 
-# RunLogger
-
 class RunLogger:
     """
     Hält alle Run-Artefakte im Speicher UND schreibt sie inkrementell als
@@ -86,19 +81,18 @@ class RunLogger:
         self._lock = threading.Lock()
         self._call_counter = 0
 
-        # In-Memory-Akkumulation (für Report ohne Re-Parse)
+        #In-Memory-Akkumulation (für Report ohne Re-Parse)
         self.calls: list[dict] = []
         self.pair_decisions: list[dict] = []
         self.arguments: list[dict] = []
         self.attacks: list[dict] = []
 
-        # Dateipfade
+
         self.calls_path = self.dir / "calls.jsonl"
         self.pairs_path = self.dir / "pair_decisions.jsonl"
         self.args_path = self.dir / "arguments.jsonl"
         self.attacks_path = self.dir / "attacks.jsonl"
 
-    # -- low-level helpers ---------------------------------------------------
 
     def _append_jsonl(self, path: Path, record: dict) -> None:
         """Hängt ein JSON-Objekt thread-sicher als eine Zeile an (ensure_ascii=False)."""
@@ -190,9 +184,7 @@ class RunLogger:
         self._append_jsonl(self.args_path, record)
 
 
-# ---------------------------------------------------------------------------
-# Graph-Statistiken (Abschnitt 9)
-# ---------------------------------------------------------------------------
+# Graph-Statistiken 
 
 def _tarjan_scc(nodes: list[str], adj: dict[str, list[str]]) -> list[list[str]]:
     """
@@ -320,9 +312,7 @@ def compute_graph_stats(arguments: list[dict], attacks: list[dict]) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
-# Report-Generator (Abschnitt 10)
-# ---------------------------------------------------------------------------
+# Report-Generator
 
 def _decision_counts(decisions: list[dict]) -> dict:
     """Aggregiert Pair-Decisions nach outcome für den Report."""

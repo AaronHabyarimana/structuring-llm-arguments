@@ -1,6 +1,23 @@
+"""
+bench_gf.py — Benchmark: naive volle Enumeration vs. grounded-first-Strategie.
+
+Vergleicht die beiden Solver-Einstiege show_json_full (naiv) und
+show_json_full_gf (grounded-first) auf denselben synthetischen AFs wie
+bench_af.py: einmal Kette + 4 mutuelle 2-Zyklen (fester Konfliktkern U=8)
+ueber wachsendes n, einmal reine well-founded Kette (U=0) als Kontrast.
+
+Kein LLM beteiligt, es wird nur SWI-Prolog aufgerufen. Die swipl-Binary wird
+wie in af_tool.py aufgeloest: Env-Variable SWIPL > PATH > Windows-Standardpfad.
+
+Aufruf (aus code/):
+    python bench_gf.py
+
+Output: Vergleichstabelle auf der Konsole (Zeit naiv vs. grounded-first).
+"""
 import subprocess, tempfile, time, os, json
 from pathlib import Path
-SWIPL=r"C:\Program Files\swipl\bin\swipl.exe"; CODE=Path(".").resolve(); PROLOG=str(CODE/"prolog.pl").replace("\\","/")
+from af_tool import SWIPL
+CODE=Path(".").resolve(); PROLOG=str(CODE/"prolog.pl").replace("\\","/")
 def run(n, edges, goal, timeout=60):
     pl="\n".join([f"arg(a{i})." for i in range(n)]+[f"att(a{a},a{b})." for a,b in edges])
     f=tempfile.NamedTemporaryFile("w",suffix=".pl",dir=str(CODE),delete=False,encoding="utf-8"); f.write(pl); f.close(); af=Path(f.name).stem

@@ -4,12 +4,11 @@ eval_gold.py — RQ3: Extraktion gegen den Gold-Standard auswerten.
 Vergleicht die Attack-Kanten eines Ablations-Laufs (typed- und/oder binary-Arm)
 mit den von Hand annotierten Gold-Labels und berechnet Precision/Recall/F1
 gerichtet (final und roh, d.h. ohne symmetrisierte Rebuttal-Gegenkanten) sowie
-ungerichtet (Konfliktpaar erkannt ja/nein). Zusaetzlich werden alle falsch
+ungerichtet (Konfliktpaar erkannt ja/nein). Zusätzlich werden alle falsch
 positiven und falsch negativen Kanten gelistet (Fehleranalyse fuer die Thesis).
 
 Voraussetzung: Der Lauf verwendet dieselbe eingefrorene Atom-Menge A', aus der
 das Gold-Template erzeugt wurde (gold_template.py), sonst passen die Paare nicht.
-Das Skript prueft das und bricht bei Abweichungen ab.
 
 Aufruf:
     python eval_gold.py --run output/ablation/2026-07-02_1037_nuclear_energy_seed42

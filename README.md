@@ -70,17 +70,29 @@ python batch_run.py
 python batch_run.py nuclear_energy abortion
 ```
 
-Each run writes a folder `output/runs/<run_id>/` containing the run config, extracted arguments, attack decisions, the generated Prolog AF, solver results, graph statistics and a report.
+Each run writes a folder `output/runs/<run_id>/` with the full experimental record:
 
-Further scripts:
+- `report_<topic>.md` is the human readable summary of the run, this is the file to open first
+- `arguments.jsonl` holds the extracted and atomized arguments, `pair_decisions.jsonl` and `attacks.jsonl` hold the attack decision for every argument pair
+- the generated `.pl` file is the argumentation framework in Prolog syntax, `results.json` holds the solver output under all three semantics and `graph_stats.json` the graph statistics
+- `run_config.json`, `calls.jsonl` and `runtime.json` record the exact parameters, every single LLM call and the timing, so each run is fully traceable
 
-| Script | Purpose |
-|---|---|
-| `aggregate.py` | Cross-topic aggregate table over all runs |
-| `eval_gold.py --run <run_dir>` | Evaluation against the manual gold standard |
-| `ablation_typed_binary.py` | Ablation: typed vs. binary attack prompts |
-| `make_thesis_tables.py` | Generates the LaTeX tables used in the thesis |
-| `gold_template.py` | Creates annotation templates for the gold standard |
+### All runnable scripts
+
+`chat.py`, `batch_run.py` and `ablation_typed_binary.py` call the LLM and therefore need the API key. All other scripts only read existing run folders under `code/output/` and work without a key, so the included results can be inspected and re-evaluated immediately.
+
+| Script | Purpose | Output |
+|---|---|---|
+| `chat.py` | Interactive pipeline run with follow-up questions | `output/runs/<run_id>/` |
+| `batch_run.py [topics]` | Pipeline over all eight UKP topics or a subset | one `output/runs/<run_id>/` per topic |
+| `ablation_typed_binary.py` | Ablation: typed vs. binary attack prompts on a shared atomization | `output/ablation/<ts>_<topic>_seed<seed>/` |
+| `aggregate.py` | Cross-topic table over the latest run per topic | `output/aggregate.csv`, `output/aggregate_report.md` |
+| `eval_gold.py --run <run_dir>` | Precision, recall and F1 of a run against the manual gold standard, plus error lists | console and `<run_dir>/gold_eval.txt` |
+| `make_thesis_tables.py` | Recomputes every evaluation table of the thesis from the canonical runs | `output/thesis_tables.md`, `output/thesis_tables/tab-*.tex` |
+| `gold_template.py` | Creates or validates the annotation template for the gold standard | `output/gold/<sample>/gold_template.csv` |
+| `bench_af.py`, `bench_gf.py` | Solver runtime benchmarks on synthetic frameworks, no LLM involved | console |
+
+Each script also carries a docstring at the top of the file with details and further call variants.
 
 ## Reproducing the thesis results
 
@@ -88,7 +100,11 @@ The numbers reported in the thesis are produced by running the scripts in this o
 
 1. `python batch_run.py` runs the full pipeline over all eight UKP topics.
 2. `python aggregate.py` builds the cross-topic aggregate table over all runs.
-3. `python eval_gold.py --run <run_dir>` evaluates a run against the manual gold standard.
+3. `python eval_gold.py --run output/ablation/2026-07-05_r3_nuclear_energy_seed42` evaluates the canonical gold run against the manual gold standard. This is the run behind the gold table in the thesis, the same directory is hard-wired in `make_thesis_tables.py`.
 4. `python make_thesis_tables.py` turns the results into the LaTeX tables used in the thesis.
 
 `python ablation_typed_binary.py` additionally reproduces the ablation comparing typed and binary attack prompts. The compiled thesis is included at `BachelorThesis/my-thesis.pdf`.
+
+### Note on the gold standard
+
+The manually annotated gold standard is included at `code/output/gold/nuclear_energy_seed42/` and covers the nuclear energy topic. Its labels refer to the frozen argument set first produced by the run in `output/ablation/2026-07-02_1037_nuclear_energy_seed42` and reused by the canonical gold run `2026-07-05_r3_nuclear_energy_seed42`, so `eval_gold.py` is only meaningful for runs built on exactly that argument set. It prints a clear warning when the evaluated edges fall outside the gold pair set. Evaluating a newly generated run against gold therefore requires a new annotation round: create a template with `gold_template.py --args <run>/arguments.json`, fill in the labels by hand and pass the file via `--gold`.
